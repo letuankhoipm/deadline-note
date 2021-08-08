@@ -1,35 +1,46 @@
 @import "./_variables.scss";
 
 .btn-ps {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    border-width: 2px !important;
-    width: auto;
-    margin: 0;
-    font-family: "Ubuntu", sans-serif !important;
-    font-size: 15px !important;
-    line-height: 2.5REM !important;
-    font-weight: 500;
-    letter-spacing: .06em;
-    text-decoration: none;
-    text-transform: uppercase;
-    border-radius: 0 !important;
-    outline: 0;
-    transition: color .2s ease-out, background-color .2s ease-out, border-color .2s ease-out;
-    padding: 5px 50px !important;
-    cursor: pointer;
-    box-shadow: none !important;
-  }
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  border-width: 2px !important;
+  width: auto;
+  margin: 0;
+  font-family: "Ubuntu", sans-serif !important;
+  font-size: 15px !important;
+  line-height: 2.5rem !important;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 0 !important;
+  outline: 0;
+  transition: color .2s ease-out, background-color .2s ease-out, border-color .2s ease-out;
+  padding: 5px 30px !important;
+  cursor: pointer;
+  box-shadow: none !important;
+}
 
-  .btn-ps-outlined {
-    color: $primary !important;
-    border-color: $primary !important;
-    background-color: transparent;
-  }
+.btn-ps-outlined {
+  color: $primary !important;
+  border-color: $primary !important;
+  background-color: transparent;
+}
 
-  .btn-ps-raise {
-    color: white !important;
-    border-color: none !important;
-    background-color: $primary !important;
-  }
+.btn-ps-raise {
+  color: white !important;
+  border-color: none !important;
+  background-color: $primary !important;
+}
+
+.btn-ps-flat {
+  color: $primary !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.btn-ps-icon {
+  border: none !important;
+  color: white;
+}

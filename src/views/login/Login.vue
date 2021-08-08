@@ -1,25 +1,29 @@
 <template>
   <div class="ps-login">
-    <div class="container-fluid h-100">
-      <div class="row h-100">
-        <div class="col-3 p-0 ps-login-bg">
-          <img
-            class="w-75 ps-login-icon"
-            src="@/assets/images/w-icon.svg"
-            alt="icon"
-          />
+    <div class="container h-full">
+      <div class="grid grid-cols-9 h-full">
+        <div class="col-span-2 h-full text-center ps-login-bg">
+          <p class="text-center">
+            <img
+              class="ps-login-icon w-full p-20"
+              src="@/assets/images/w-icon.svg"
+              alt="icon"
+            />
+          </p>
           <p class="text-white">
             2021 Copyright © Deadline's Notes
             <br />
             All rights reserved
           </p>
         </div>
-        <div class="col-9 pt-4 mt-4">
-          <img
-            class="w-50 mt-4 p-4"
-            src="@/assets/images/logo.png"
-            alt="logo"
-          />
+        <div class="col-span-7 h-full text-center px-10">
+          <div class="object-center">
+            <img
+              class="p-20 mx-auto"
+              src="@/assets/images/logo.png"
+              alt="logo"
+            />
+          </div>
           <h3 class="font-weight-bold">
             Deadline's Notes helps teams and you moving up working as fast and
             furious.
@@ -30,53 +34,84 @@
             unique—accomplish it all with Trello.
           </p>
           <p>
-            <button class="btn-ps btn-ps-outlined btn m-4">get started!</button>
-            <button class="btn-ps btn-ps-raise btn m-4">get started!</button>
+            <button
+              @click="openRegisterModal(true)"
+              class="btn-ps btn-ps-raise btn m-4"
+            >get started!</button>
+            <button
+              @click="openLoginModal(true)"
+              class="btn-ps btn-ps-outlined btn m-4"
+            >sign in!</button>
           </p>
-          <p class="ps-sponsor">
-            <span class="font-weight-bold mx-2"> letuankhoi@designer </span>
+          <div class="grid grid-cols-7 mt-40">
+            <div></div>
+            <div></div>
             <img
-              class="ps-sponsor-logo mx-2"
+              style="width: 150px"
+              class="my-auto mx-auto"
               src="@/assets/images/google.svg"
               alt="google"
             />
             <img
-              class="mx-2"
+              class="my-auto mx-auto"
               style="width: 50px"
               src="@/assets/images/vue.png"
               alt="vue"
             />
             <img
-              class="mx-2"
+              class="my-auto mx-auto"
               style="width: 75px"
               src="@/assets/images/scss.png"
               alt="scss"
             />
             <img
-              class="ps-sponsor-logo mx-2"
+              class="ps-sponsor-logo my-auto mx-auto"
               src="@/assets/images/ts.png"
               alt="ts"
             />
             <img
-              class="mx-4"
-              style="width: 150px"
+              class="my-auto mx-auto"
+              style="width: 50px"
               src="@/assets/images/fa.png"
               alt="ts"
             />
-          </p>
+          </div>
         </div>
       </div>
+    </div>
+    <div v-if="loginVisibility">
+      <LoginModal @exit="openLoginModal(false)" />
+    </div>
+    <div v-if="registerVisibility">
+      <RegisterModal @exit="openRegisterModal(false)" />
     </div>
   </div>
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import LoginModal from "@/modals/login-modal/LoginModal.vue";
+import RegisterModal from "@/modals/register-modal/RegisterModal.vue";
 @Options({
   // Module
   props: {}, // Input
-  components: {}, // Import component
+  components: {
+    LoginModal,
+    RegisterModal,
+  }, // Import component
+  methods: {
+    openRegisterModal(state: boolean): void {
+      this.registerVisibility = state;
+    },
+  },
 })
-export default class Login extends Vue {}
+export default class Login extends Vue {
+  public loginVisibility = false;
+  public registerVisibility = false;
+
+  openLoginModal(state: boolean): void {
+    this.loginVisibility = state;
+  }
+}
 </script>
 <style lang="scss">
 @import "./Login.scss";

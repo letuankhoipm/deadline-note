@@ -1,17 +1,16 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <Navbar />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import Login from "@/views/login/Login.vue"; // @ is an alias to /src
+import Navbar from "@/components/navbar/Navbar.vue"; // @ is an alias to /src
 
 @Options({
   components: {
-    Login,
+    Navbar,
   },
 })
 export default class Home extends Vue {}
