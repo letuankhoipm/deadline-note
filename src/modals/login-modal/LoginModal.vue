@@ -35,13 +35,23 @@
                     <p class="text-sm text-gray-500">
                       Email
                     </p>
-                    <input type="email">
+                    <input
+                      id="login-email"
+                      v-model="loginReq.email"
+                      name="email"
+                      type="email"
+                    >
                   </div>
                   <div class="w-full my-4">
                     <p class="text-sm text-gray-500">
                       Password
                     </p>
-                    <input type="password">
+                    <input
+                      id="login-password"
+                      v-model="loginReq.password"
+                      name="password"
+                      type="password"
+                    >
                   </div>
                 </form>
               </div>
@@ -49,19 +59,47 @@
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button class="btn-ps btn-ps-raise btn my-2">next</button>
+          <button
+            @click="login()"
+            class="btn-ps btn-ps-raise btn my-2"
+          >next</button>
           <button class="btn-ps btn-ps-flat btn my-2">forgot password</button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import AuthService from "@/services/auth.service";
+import { LoginRequest } from "@/models/login-request.model";
 @Options({
-  // Module
-  props: {}, // Input
-  components: {}, // Import component
+  props: {},
+  components: {},
+  methods: {
+    login(): void {
+      const req = {
+        email: this.loginReq.email,
+        password: this.loginReq.password
+      }
+      AuthService.login(req)
+        .then((res: any) => {
+          console.log(res);
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
+  },
+  data() {
+    return {
+      loginReq: {
+        email: null,
+        password: "",
+      } as unknown as LoginRequest,
+    };
+  },
 })
 export default class LoginModal extends Vue {}
 </script>
