@@ -1,0 +1,19 @@
+.vue-toastr {
+    position: fixed;
+    top: 20px;
+    width: 20%;
+    right: 20px;
+    z-index: 9999;
+}
+
+.vue-toastr-before {
+    transform: translateX(130%);
+    transition-duration: .5s;
+    opacity: 0;
+}
+
+.vue-toastr-after {
+    transform: translateX(0);
+    transition-duration: .3s;
+    opacity: 1;
+}

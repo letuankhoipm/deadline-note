@@ -1,5 +1,4 @@
 <template>
-  <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
@@ -74,21 +73,25 @@
 import { Options, Vue } from "vue-class-component";
 import AuthService from "@/services/auth.service";
 import { LoginRequest } from "@/models/login-request.model";
+import Toastr from "@/components/toastr/Toastr.vue";
+import ToastrService from "@/services/toastr.service";
+
 @Options({
   props: {},
-  components: {},
+  components: { Toastr },
   methods: {
     login(): void {
       const req = {
         email: this.loginReq.email,
-        password: this.loginReq.password
-      }
+        password: this.loginReq.password,
+      };
       AuthService.login(req)
         .then((res: any) => {
           console.log(res);
         })
         .catch((err: any) => {
-          console.log(err);
+          // ToastrService.toastrSubject$.next(true);
+          ToastrService.error("Http Request", err.message);
         });
     },
   },

@@ -6,6 +6,7 @@
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import MainLayout from "@/layouts/main-layout/MainLayout.vue";
+
 @Options({
   components: { MainLayout },
   props: {},

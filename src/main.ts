@@ -7,4 +7,7 @@ import "@/assets/scss/_main.scss"
 // import "bootstrap"
 // import "bootstrap/dist/css/bootstrap.min.css"
 
-createApp(App).use(store).use(router).mount("#app");
+createApp(App)
+    .use(store)
+    .use(router)
+    .mount("#app");
