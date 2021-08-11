@@ -87,11 +87,14 @@ import ToastrService from "@/services/toastr.service";
       };
       AuthService.login(req)
         .then((res: any) => {
+          ToastrService.success("Notification", "Login Successfully!");
+          this.$router.push('/main-layout');
+          AuthService.routing();
           console.log(res);
         })
         .catch((err: any) => {
-          // ToastrService.toastrSubject$.next(true);
-          ToastrService.error("Http Request", err.message);
+
+ToastrService.error("Error Request", err.message);
         });
     },
   },

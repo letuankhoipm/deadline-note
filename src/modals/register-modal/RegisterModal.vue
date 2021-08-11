@@ -35,19 +35,28 @@
                     <p class="text-sm text-gray-500">
                       Full-name
                     </p>
-                    <input type="text">
+                    <input
+                      v-model="regisForm.fullname"
+                      type="text"
+                    >
                   </div>
                   <div class="w-full my-4">
                     <p class="text-sm text-gray-500">
                       Email
                     </p>
-                    <input type="email">
+                    <input
+                      v-model="regisForm.email"
+                      type="email"
+                    >
                   </div>
                   <div class="w-full my-4">
                     <p class="text-sm text-gray-500">
                       Password
                     </p>
-                    <input type="password">
+                    <input
+                      v-model="regisForm.password"
+                      type="password"
+                    >
                   </div>
                 </form>
               </div>
@@ -55,7 +64,10 @@
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button class="btn-ps btn-ps-raise btn my-2">sign-up</button>
+          <button
+            @click="register()"
+            class="btn-ps btn-ps-raise btn my-2"
+          >sign-up</button>
         </div>
       </div>
     </div>
@@ -63,10 +75,41 @@
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import AuthService from "@/services/auth.service";
+import ToastrService from "@/services/toastr.service";
+import { RegisterRequest } from "@/models/login-request.model";
 @Options({
   // Module
   props: {}, // Input
-  components: {}, // Import component
+  components: {},
+  methods: {
+    register(): void {
+      const req: RegisterRequest = {
+        fullname: this.regisForm.fullname,
+        email: this.regisForm.email,
+        password: this.regisForm.password,
+      };
+      AuthService.register(req)
+        .then((res: any) => {
+          console.log(res);
+          ToastrService.success("Notification", "Register Successfully!");
+          this.$emit('exit', true);
+        })
+        .catch((err: any) => {
+          // ToastrService.toastrSubject$.next(true);
+          ToastrService.error("Error", err.message);
+        });
+    },
+  },
+  data() {
+    return {
+      regisForm: {
+        fullname: null,
+        email: null,
+        password: null,
+      } as unknown as RegisterRequest,
+    };
+  },
 })
 export default class RegisterModal extends Vue {}
 </script>

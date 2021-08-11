@@ -122,7 +122,7 @@ export default class Toastr extends Vue {
   public onDisappear(): void {
     setTimeout(() => {
       this.isAppear = false;
-    }, 2000);
+    }, 5000);
   }
 }
 </script>

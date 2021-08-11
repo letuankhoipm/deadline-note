@@ -2,8 +2,10 @@
   <div
     v-if="isVisibility"
     id="nav"
+    class="h-screen"
   >
     <Navbar />
+    <Sidebar />
   </div>
   <Toastr type="error" />
   <router-view />
@@ -13,14 +15,23 @@
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import Navbar from "@/components/navbar/Navbar.vue";
+import Sidebar from "@/components/sidebar/Sidebar.vue";
 import Toastr from "@/components/toastr/Toastr.vue";
+import AuthService from "@/services/auth.service";
 
 @Options({
-  components: { Navbar, Toastr },
+  components: { Navbar, Toastr, Sidebar },
   props: {},
   created() {
     this.getUrl();
+    this.onListenRouting();
   },
+  // data() {
+  //   return {
+  //     currentUrl: null,
+  //     isVisibility: null,
+  //   };
+  // },
 })
 export default class MainLayout extends Vue {
   public currentUrl: any | null = null;
@@ -31,6 +42,13 @@ export default class MainLayout extends Vue {
     if (this.currentUrl === "/") {
       this.isVisibility = false;
     }
+  }
+
+  public onListenRouting(): void {
+    AuthService.routeSubject$.subscribe((res: any) => {
+      console.log(res);
+      res ? (this.isVisibility = true) : (this.isVisibility = false);
+    });
   }
 }
 </script>
