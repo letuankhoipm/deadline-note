@@ -5,10 +5,21 @@
     class="h-screen"
   >
     <Navbar />
-    <Sidebar />
+    <div
+      v-if="isVisibility"
+      class="grid grid-cols-6"
+    >
+      <div class="col-span-1">
+        <Sidebar />
+      </div>
+      <div class="col-span-5">
+        <router-view />
+      </div>
+    </div>
   </div>
+
+  <router-view v-if="!isVisibility" />
   <Toastr type="error" />
-  <router-view />
 
 </template>
 

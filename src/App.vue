@@ -1,5 +1,8 @@
 <template>
-  <div id="app" class="h-screen">
+  <div
+    id="app"
+    class="h-screen"
+  >
     <MainLayout />
   </div>
 </template>
@@ -18,4 +21,8 @@ export default class App extends Vue {}
 @import url("https://use.fontawesome.com/releases/v5.4.1/css/all.css");
 @import "./assets/scss/_button.scss";
 @import "./assets/scss/_input.scss";
+
+* {
+  font-family: "Ubuntu", sans-serif !important;
+}
 </style>

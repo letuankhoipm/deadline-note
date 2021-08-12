@@ -88,7 +88,7 @@ import ToastrService from "@/services/toastr.service";
       AuthService.login(req)
         .then((res: any) => {
           ToastrService.success("Notification", "Login Successfully!");
-          this.$router.push('/main-layout');
+          this.$router.push('/home');
           AuthService.routing();
           console.log(res);
         })
