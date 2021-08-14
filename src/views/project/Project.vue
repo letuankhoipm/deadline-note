@@ -29,7 +29,7 @@
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import ProjectCard from "@/components/project-card/ProjectCard.vue";
-import IProject from "@/models/project.model";
+import { IProject } from "@/models/project.model";
 @Options({
   components: { ProjectCard },
   props: {},

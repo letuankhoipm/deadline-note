@@ -15,5 +15,5 @@ export default class Badge extends Vue {}
 </script>
 
 <style lang="scss">
-@import "";
+@import "./Name.scss";
 </style>

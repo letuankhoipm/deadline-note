@@ -12,59 +12,30 @@
       </div>
       <hr class="my-4">
       <div class="ps-project-detail-content">
-        <div class="grid grid-cols-3">
-          <div class="col-span-2">
-            <div class="w-full ps-about-project">
+        <div class="ps-pd-header">
+          <div class="grid grid-cols-3">
+            <div class="col-span-3">
               <div class="p-2">
-                <div class="bg-gray-50 p-6 hover:bg-gray-100 cursor-pointer shadow-lg transition duration-500">
-                  <div class="mt-4">
-                    <h1 class="text-lg text-gray-700 font-semibold">
-                      About this project
-                    </h1>
-                    <div class="flex justify-between items-center">
-                      <p class="mt-4 max-w-2xl text-sm text-gray-500">
-                        Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <nav class="flex flex-col sm:flex-row">
+
+                  <button
+                    v-for="item in listTabs"
+                    :key="item.id"
+                    @click="onChangeTabs(item.id)"
+                    v-bind:class="{'text-green-500 duration-200 font-medium border-green-500': activeTab === item.id}"
+                    class=" rounded-none text-gray-600 py-2 px-6 border-transparent border-b-2 block hover:text-green-500 focus:outline-none  "
+                  >
+                    {{item.name}}
+                  </button>
+
+                </nav>
               </div>
             </div>
           </div>
-          <div class="col-span-1">
-            <div class="w-full ps-about-project">
-              <div class="p-2">
-                <div class="bg-gray-50 p-6 hover:bg-gray-100 cursor-pointer shadow-lg transition duration-500">
-                  <div class="mt-4">
-                    <h1 class="text-lg text-gray-700 font-semibold">
-                      Project stats
-                    </h1>
-                    <div class="flex justify-between items-center">
-                      <p class="mt-4 max-w-2xl text-sm text-gray-500">
-                        Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="w-full ps-about-project">
-              <div class="p-2">
-                <div class="bg-gray-50 p-6 hover:bg-gray-100 cursor-pointer shadow-lg transition duration-500">
-                  <div class="mt-4">
-                    <h1 class="text-lg text-gray-700 font-semibold">
-                      Member
-                    </h1>
-                    <div class="flex justify-between items-center">
-                      <p class="mt-4 max-w-2xl text-sm text-gray-500">
-                        Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div class="ps-pd-body">
+          <ProjectOverview v-if="activeTab === 0" />
+          <ProjectBoard v-if="activeTab === 1" />
         </div>
       </div>
     </div>
@@ -73,15 +44,57 @@
 
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
+import { ProjectTabs } from "@/models/tabs.model";
+import ProjectOverview from "@/components/project-overview/ProjectOverview.vue";
+import ProjectBoard from "@/components/project-board/ProjectBoard.vue";
 @Options({
-  components: {},
+  components: { ProjectOverview, ProjectBoard },
   props: {},
   methods: {},
   data() {
     return {};
   },
 })
-export default class ProjectDetail extends Vue {}
+export default class ProjectDetail extends Vue {
+  public activeTab = 0;
+  public listTabs = [
+    {
+      id: 0,
+      name: "Overview",
+    },
+    {
+      id: 1,
+      name: "Boards",
+    },
+    {
+      id: 2,
+      name: "Wiki",
+    },
+    {
+      id: 3,
+      name: "Settings",
+    },
+  ];
+
+  public onChangeTabs(tab: ProjectTabs) {
+    switch (tab) {
+      case ProjectTabs.OVERVIEW:
+        this.activeTab = ProjectTabs.OVERVIEW;
+        break;
+      case ProjectTabs.BOARDS:
+        this.activeTab = ProjectTabs.BOARDS;
+        break;
+      case ProjectTabs.WIKI:
+        this.activeTab = ProjectTabs.WIKI;
+        break;
+      case ProjectTabs.SETTINGS:
+        this.activeTab = ProjectTabs.SETTINGS;
+        break;
+      default:
+        break;
+    }
+  }
+}
 </script>
 
 <style lang="scss">
