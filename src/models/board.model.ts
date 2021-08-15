@@ -7,6 +7,7 @@ export interface IBoard {
 
 export interface IList {
     listTicket: ITicket[];
+    listName: string;
 }
 
 export interface ITicket {
@@ -15,5 +16,8 @@ export interface ITicket {
     content: string;
     member: IUser[];
     date: string;
-    label: number;
+    label: {
+        id: number,
+        name: string
+    };
 }

@@ -13,8 +13,11 @@
 
 .ps-board {
   overflow-x: auto;
+  height: calc(100vh - 64px);
 
   .ps-board-card {
     width: 300px;
+    height: calc(100vh - 100px);
+
   }
 }
