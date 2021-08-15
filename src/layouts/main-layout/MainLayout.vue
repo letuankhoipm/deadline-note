@@ -21,6 +21,11 @@
   <router-view v-if="!isVisibility" />
   <Toastr type="error" />
 
+  <component
+    :is="modalComponent"
+    :input="inputObj"
+  ></component>
+
 </template>
 
 <script lang="ts">
@@ -29,6 +34,7 @@ import Navbar from "@/components/navbar/Navbar.vue";
 import Sidebar from "@/components/sidebar/Sidebar.vue";
 import Toastr from "@/components/toastr/Toastr.vue";
 import AuthService from "@/services/auth.service";
+import NgvModalService from "@/services/ngv-modal.service";
 
 @Options({
   components: { Navbar, Toastr, Sidebar },
@@ -36,17 +42,15 @@ import AuthService from "@/services/auth.service";
   created() {
     this.getUrl();
     this.onListenRouting();
+    this.onListenModal();
   },
-  // data() {
-  //   return {
-  //     currentUrl: null,
-  //     isVisibility: null,
-  //   };
-  // },
 })
 export default class MainLayout extends Vue {
   public currentUrl: any | null = null;
   public isVisibility = true;
+
+  public modalComponent = null;
+  public inputObj = {};
 
   public getUrl(): void {
     this.currentUrl = window.location.pathname;
@@ -59,6 +63,16 @@ export default class MainLayout extends Vue {
     AuthService.routeSubject$.subscribe((res: any) => {
       console.log(res);
       res ? (this.isVisibility = true) : (this.isVisibility = false);
+    });
+  }
+
+  public onListenModal(): void {
+    NgvModalService.ngv$.subscribe((res: any) => {
+      if (res) {
+        this.modalComponent = res.component;
+        this.inputObj = res.inputObj;
+        console.log(res);
+      }
     });
   }
 }

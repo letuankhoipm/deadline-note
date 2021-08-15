@@ -16,7 +16,7 @@
                   <h1
                     style="font-size: 25px"
                     class="font-bold uppercase"
-                  >New Project</h1>
+                  >New Project </h1>
                 </div>
                 <div class="col-span text-right">
                   <i
@@ -72,7 +72,7 @@
             class="btn-ps btn-ps-raise btn my-2"
           >create</button>
           <button
-            @click="$emit('exit', true)"
+            @click="cancel()"
             class="btn-ps btn-ps-flat btn my-2"
           >cancel</button>
         </div>
@@ -83,9 +83,11 @@
 
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
+import NgvModalService from "@/services/ngv-modal.service";
+
 @Options({
   components: {},
-  props: {},
+  props: ["input"],
   methods: {},
   data() {
     return {};
@@ -94,6 +96,10 @@ import { Vue, Options } from "vue-class-component";
 export default class NewProject extends Vue {
   public create(): void {
     return;
+  }
+
+  public cancel(): void {
+    NgvModalService.close('ahiih');
   }
 }
 </script>

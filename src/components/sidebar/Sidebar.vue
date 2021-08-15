@@ -48,18 +48,21 @@
   <div v-if="newProjectVisibilty">
     <NewProject @exit="switchNewProjectModal(false)" />
   </div>
+
 </template>
 
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import { CubeIcon, CogIcon } from "@heroicons/vue/outline";
 import NewProject from "@/modals/new-project/NewProject.vue";
+import NgvModalService from "@/services/ngv-modal.service";
+
 @Options({
   components: { CubeIcon, CogIcon, NewProject },
   props: {},
   methods: {
     showListProject(): void {
-      this.$router.push('/home');
+      this.$router.push("/home");
     },
   },
 })
@@ -67,7 +70,19 @@ export default class Sidebar extends Vue {
   public newProjectVisibilty = false;
 
   public switchNewProjectModal(state: boolean): void {
-    this.newProjectVisibilty = state;
+    // this.newProjectVisibilty = state;
+    const modalRef = NgvModalService.open(NewProject, {
+      name: "khoi",
+      age: "22",
+    });
+    modalRef.then(
+      (result) => {
+        console.log(result);
+      },
+      (reason) => {
+        console.log(reason);
+      }
+    );
   }
 }
 </script>
