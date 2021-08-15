@@ -1,12 +1,20 @@
 .column-width {
-    min-width: 320px;
-    width: 320px;
+  min-width: 320px;
+  width: 320px;
 }
 
 /* Unfortunately @apply cannot be setup in codesandbox, 
   but you'd use "@apply border opacity-50 border-blue-500 bg-gray-200" here */
 .ghost-card {
-    opacity: 0.5;
-    background: #F7FAFC;
-    border: 1px solid #4299e1;
+  opacity: 0.5;
+  background: #F7FAFC;
+  border: 1px solid #4299e1;
+}
+
+.ps-board {
+  overflow-x: auto;
+
+  .ps-board-card {
+    width: 300px;
+  }
 }

@@ -35,11 +35,11 @@
           </p>
           <p>
             <button
-              @click="openRegisterModal(true)"
+              @click="openRegisterModal()"
               class="btn-ps btn-ps-raise btn m-4"
             >get started!</button>
             <button
-              @click="openLoginModal(true)"
+              @click="openLoginModal()"
               class="btn-ps btn-ps-outlined btn m-4"
             >sign in!</button>
           </p>
@@ -79,37 +79,29 @@
         </div>
       </div>
     </div>
-    <div v-if="loginVisibility">
-      <LoginModal @exit="openLoginModal(false)" />
-    </div>
-    <div v-if="registerVisibility">
-      <RegisterModal @exit="openRegisterModal(false)" />
-    </div>
   </div>
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import LoginModal from "@/modals/login-modal/LoginModal.vue";
 import RegisterModal from "@/modals/register-modal/RegisterModal.vue";
+import NgvModalService from "@/services/ngv-modal.service";
+
 @Options({
-  // Module
-  props: {}, // Input
+  props: {},
   components: {
     LoginModal,
     RegisterModal,
-  }, // Import component
-  methods: {
-    openRegisterModal(state: boolean): void {
-      this.registerVisibility = state;
-    },
   },
+  methods: {},
 })
 export default class Login extends Vue {
-  public loginVisibility = false;
-  public registerVisibility = false;
+  public openLoginModal(): void {
+    const modalRef = NgvModalService.open(LoginModal);
+  }
 
-  openLoginModal(state: boolean): void {
-    this.loginVisibility = state;
+  public openRegisterModal(): void {
+    const modalRef = NgvModalService.open(RegisterModal);
   }
 }
 </script>

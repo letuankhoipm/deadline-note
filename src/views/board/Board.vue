@@ -1,65 +1,52 @@
 <template>
-  <div class="flex justify-center">
-    <div class="flex mx-10">
-      <div class="card1 w-64 flex justify-center px-5">
-        <draggable
-          class="dragArea list-group w-full"
-          :list="list1"
-          :group="{ name: 'people' }"
-          :sort="false"
-          @change="log"
-          :move="checkMove"
-        >
-          <div
-            class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center"
-            v-for="element in list1"
-            :key="element.name"
-          >
-            {{ element.name }}
+  <div class="ps-board p-4">
+    <div class="grid grid-flow-col auto-cols-max">
+      <div
+        v-for="board in listBoard"
+        :key="board.group"
+        class="ps-board-card shadow-lg rounded-none p-4 mx-2 border-t-4 border-green-600 "
+      >
+        <div class="grid grid-cols-2">
+          <div class="col-span">
+            <h1 class="font-bold">Lorem ipsum</h1>
           </div>
-        </draggable>
-      </div>
-      <div class="card1 w-64 flex justify-center">
-        <draggable
-          class="dragArea list-group w-full"
-          :list="list2"
-          group="people"
-          @change="log"
-          :move="checkMove"
-        >
-          <div
-            class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center"
-            v-for="element in list2"
-            :key="element.name"
-          >
-            {{ element.name }}
+          <div class="col-span flex flex-row-reverse items-center cursor-pointer">
+            <DotsVerticalIcon class="h-5 w-5" />
           </div>
-        </draggable>
+        </div>
+        <div class="ps-board-content">
+          <draggable
+            class="dragArea list-group w-full"
+            :list="board.data"
+            :group="board.group"
+            :sort="true"
+            @change="log"
+            :move="checkMove"
+          >
+            <div
+              class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center"
+              v-for="element in board.data"
+              :key="element.name"
+            >
+              {{ element.name }}
+            </div>
+          </draggable>
+        </div>
       </div>
-    </div>
-
-    <div class="flex justify-between">
-      <TaskCard
-        class="w-64 mr-1"
-        :value="list1"
-      />
-      <TaskCard
-        class="w-64"
-        :value="list2"
-      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
-import draggable from "vuedraggable";
 import TaskCard from "@/components/task-card/TaskCard.vue";
 import { VueDraggableNext } from "vue-draggable-next";
+import { DotsVerticalIcon } from "@heroicons/vue/outline";
 @Options({
   components: {
     TaskCard,
     draggable: VueDraggableNext,
+    DotsVerticalIcon,
   },
   props: {
     color: {
@@ -69,135 +56,27 @@ import { VueDraggableNext } from "vue-draggable-next";
   },
 })
 export default class Board extends Vue {
-  public columns = [
+  enabled = true;
+  listBoard = [
     {
-      title: "Backlog",
-      tasks: [
-        {
-          id: 1,
-          title: "Add discount code to checkout page",
-          date: "Sep 14",
-          type: "Feature Request",
-        },
-        {
-          id: 2,
-          title: "Provide documentation on integrations",
-          date: "Sep 12",
-        },
-        {
-          id: 3,
-          title: "Design shopping cart dropdown",
-          date: "Sep 9",
-          type: "Design",
-        },
-        {
-          id: 4,
-          title: "Add discount code to checkout page",
-          date: "Sep 14",
-          type: "Feature Request",
-        },
-        {
-          id: 5,
-          title: "Test checkout flow",
-          date: "Sep 15",
-          type: "QA",
-        },
+      data: [
+        { name: "Juan", id: 5 },
+        { name: "Edgard", id: 6 },
+        { name: "Johnson", id: 7 },
       ],
+      group: "ac",
     },
     {
-      title: "In Progress",
-      tasks: [
-        {
-          id: 6,
-          title: "Design shopping cart dropdown",
-          date: "Sep 9",
-          type: "Design",
-        },
-        {
-          id: 7,
-          title: "Add discount code to checkout page",
-          date: "Sep 14",
-          type: "Feature Request",
-        },
-        {
-          id: 8,
-          title: "Provide documentation on integrations",
-          date: "Sep 12",
-          type: "Backend",
-        },
+      data: [
+        { name: "John", id: 1 },
+        { name: "Joao", id: 2 },
+        { name: "Jean", id: 3 },
+        { name: "Gerard", id: 4 },
       ],
-    },
-    {
-      title: "Review",
-      tasks: [
-        {
-          id: 9,
-          title: "Provide documentation on integrations",
-          date: "Sep 12",
-        },
-        {
-          id: 10,
-          title: "Design shopping cart dropdown",
-          date: "Sep 9",
-          type: "Design",
-        },
-        {
-          id: 11,
-          title: "Add discount code to checkout page",
-          date: "Sep 14",
-          type: "Feature Request",
-        },
-        {
-          id: 12,
-          title: "Design shopping cart dropdown",
-          date: "Sep 9",
-          type: "Design",
-        },
-        {
-          id: 13,
-          title: "Add discount code to checkout page",
-          date: "Sep 14",
-          type: "Feature Request",
-        },
-      ],
-    },
-    {
-      title: "Done",
-      tasks: [
-        {
-          id: 14,
-          title: "Add discount code to checkout page",
-          date: "Sep 14",
-          type: "Feature Request",
-        },
-        {
-          id: 15,
-          title: "Design shopping cart dropdown",
-          date: "Sep 9",
-          type: "Design",
-        },
-        {
-          id: 16,
-          title: "Add discount code to checkout page",
-          date: "Sep 14",
-          type: "Feature Request",
-        },
-      ],
+      group: "ac",
     },
   ];
 
-  enabled = true;
-  list1 = [
-    { name: "John", id: 1 },
-    { name: "Joao", id: 2 },
-    { name: "Jean", id: 3 },
-    { name: "Gerard", id: 4 },
-  ];
-  list2 = [
-    { name: "Juan", id: 5 },
-    { name: "Edgard", id: 6 },
-    { name: "Johnson", id: 7 },
-  ];
   dragging = false;
 
   add() {

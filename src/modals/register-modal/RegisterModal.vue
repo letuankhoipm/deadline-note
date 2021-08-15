@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-span text-right">
                   <i
-                    @click="$emit('exit', true)"
+                    @click="cancel()"
                     style="line-height: 2.5"
                     class="fas fa-times cursor-pointer"
                   ></i>
@@ -78,6 +78,8 @@ import { Options, Vue } from "vue-class-component";
 import AuthService from "@/services/auth.service";
 import ToastrService from "@/services/toastr.service";
 import { RegisterRequest } from "@/models/login-request.model";
+import NgvModalService from "@/services/ngv-modal.service";
+
 @Options({
   // Module
   props: {}, // Input
@@ -93,7 +95,7 @@ import { RegisterRequest } from "@/models/login-request.model";
         .then((res: any) => {
           console.log(res);
           ToastrService.success("Notification", "Register Successfully!");
-          this.$emit('exit', true);
+          this.$emit("exit", true);
         })
         .catch((err: any) => {
           // ToastrService.toastrSubject$.next(true);
@@ -111,5 +113,9 @@ import { RegisterRequest } from "@/models/login-request.model";
     };
   },
 })
-export default class RegisterModal extends Vue {}
+export default class RegisterModal extends Vue {
+  public cancel(): void {
+    NgvModalService.close();
+  }
+}
 </script>

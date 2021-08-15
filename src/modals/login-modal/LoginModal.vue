@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-span text-right">
                   <i
-                    @click="$emit('exit', true)"
+                    @click="cancel()"
                     style="line-height: 2.5"
                     class="fas fa-times cursor-pointer"
                   ></i>
@@ -75,6 +75,7 @@ import AuthService from "@/services/auth.service";
 import { LoginRequest } from "@/models/login-request.model";
 import Toastr from "@/components/toastr/Toastr.vue";
 import ToastrService from "@/services/toastr.service";
+import NgvModalService from "@/services/ngv-modal.service";
 
 @Options({
   props: {},
@@ -88,13 +89,13 @@ import ToastrService from "@/services/toastr.service";
       AuthService.login(req)
         .then((res: any) => {
           ToastrService.success("Notification", "Login Successfully!");
-          this.$router.push('/home');
+          NgvModalService.dismiss();
+          this.$router.push("/home");
           AuthService.routing();
           console.log(res);
         })
         .catch((err: any) => {
-
-ToastrService.error("Error Request", err.message);
+          ToastrService.error("Error Request", err.message);
         });
     },
   },
@@ -107,5 +108,9 @@ ToastrService.error("Error Request", err.message);
     };
   },
 })
-export default class LoginModal extends Vue {}
+export default class LoginModal extends Vue {
+  public cancel(): void {
+    NgvModalService.close("ahiih");
+  }
+}
 </script>
