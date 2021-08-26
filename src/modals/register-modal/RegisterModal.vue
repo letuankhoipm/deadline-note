@@ -8,7 +8,9 @@
       <span
         class="hidden sm:inline-block sm:align-middle sm:h-screen"
         aria-hidden="true"
-      >&#8203;</span>
+      >
+        <i class="fas fa-times"></i>
+      </span>
 
       <div class="inline-block align-bottom bg-white overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">

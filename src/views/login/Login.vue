@@ -86,6 +86,7 @@ import { Options, Vue } from "vue-class-component";
 import LoginModal from "@/modals/login-modal/LoginModal.vue";
 import RegisterModal from "@/modals/register-modal/RegisterModal.vue";
 import NgvModalService from "@/services/ngv-modal.service";
+import { mapGetters } from "vuex";
 
 @Options({
   props: {},
@@ -94,6 +95,12 @@ import NgvModalService from "@/services/ngv-modal.service";
     RegisterModal,
   },
   methods: {},
+  computed: {
+     ...mapGetters(["user"]),
+  },
+  created() {
+    console.log(this.user);
+  },
 })
 export default class Login extends Vue {
   public openLoginModal(): void {
