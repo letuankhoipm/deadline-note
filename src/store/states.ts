@@ -1,3 +1,3 @@
 export default {
-    user: { name: 'tuan khoi' },
+    s_user: {},
 }

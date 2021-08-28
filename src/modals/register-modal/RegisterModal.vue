@@ -24,11 +24,10 @@
                   >Registration</h1>
                 </div>
                 <div class="col-span text-right">
-                  <i
+                  <XIcon
                     @click="cancel()"
-                    style="line-height: 2.5"
-                    class="fas fa-times cursor-pointer"
-                  ></i>
+                    class="h-5 w-5 float-right leading-8 seft-center cursor-pointer"
+                  />
                 </div>
               </div>
               <div class="mt-2">
@@ -81,11 +80,12 @@ import AuthService from "@/services/auth.service";
 import ToastrService from "@/services/toastr.service";
 import { RegisterRequest } from "@/models/login-request.model";
 import NgvModalService from "@/services/ngv-modal.service";
+import { XIcon } from "@heroicons/vue/outline";
 
 @Options({
   // Module
   props: {}, // Input
-  components: {},
+  components: { XIcon },
   methods: {
     register(): void {
       const req: RegisterRequest = {

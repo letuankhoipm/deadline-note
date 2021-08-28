@@ -1,3 +1,3 @@
 export default {
-    user: (state: any) => state.user,
+    g_user: (state: any) => state.s_user,
 }

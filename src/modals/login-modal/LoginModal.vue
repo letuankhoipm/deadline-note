@@ -8,7 +8,7 @@
         class="hidden sm:inline-block sm:align-middle sm:h-screen"
         aria-hidden="true"
       >
-        <i class="fas fa-times"></i>
+
       </span>
 
       <div class="inline-block align-bottom bg-white overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
@@ -23,11 +23,10 @@
                   >Login</h1>
                 </div>
                 <div class="col-span text-right">
-                  <i
+                  <XIcon
                     @click="cancel()"
-                    style="line-height: 2.5"
-                    class="fas fa-times cursor-pointer"
-                  ></i>
+                    class="h-5 w-5 float-right leading-8 seft-center cursor-pointer"
+                  />
                 </div>
               </div>
               <div class="mt-2">
@@ -78,27 +77,47 @@ import { LoginRequest } from "@/models/login-request.model";
 import Toastr from "@/components/toastr/Toastr.vue";
 import ToastrService from "@/services/toastr.service";
 import NgvModalService from "@/services/ngv-modal.service";
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import { IUser } from "@/models/user.modal";
+import { XIcon } from "@heroicons/vue/outline";
 
 @Options({
   props: {},
-  components: { Toastr },
+  components: { Toastr, XIcon },
+  computed: {
+    ...mapGetters(["g_user"]),
+  },
   methods: {
+    ...mapActions(["a_login"]),
+    ...mapMutations(["m_setUser"]),
+
     login(): void {
       const req = {
         email: this.loginReq.email,
         password: this.loginReq.password,
       };
-      AuthService.login(req)
-        .then((res: any) => {
-          ToastrService.success("Notification", "Login Successfully!");
-          NgvModalService.dismiss();
-          this.$router.push("/home");
-          AuthService.routing();
-          console.log(res);
-        })
-        .catch((err: any) => {
-          ToastrService.error("Error Request", err.message);
-        });
+      this.a_login(req).then((res: any) => {
+        console.log(res);
+        if (res?.data?.token) {
+          this.onLoginSuccess(res.data.user, res.data.token);
+          console.log(this.g_user);
+        } else {
+          this.onLoginFailed(res.data.message);
+        }
+      });
+    },
+
+    onLoginSuccess(user: IUser, token: string): void {
+      ToastrService.success("Notification", "Login Successfully!");
+      NgvModalService.dismiss();
+      this.$router.push("/home");
+      this.m_setUser(user);
+      localStorage.setItem("ACCESS_TOKEN", token);
+      AuthService.routing();
+    },
+
+    onLoginFailed(msg: string): void {
+      ToastrService.error("Error", msg);
     },
   },
   data() {

@@ -65,7 +65,7 @@
             <div>
               <MenuButton class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <span class="sr-only">Open user menu</span>
-                 <UserIcon class="h-6 w-6 text-white" />
+                <UserIcon class="h-6 w-6 text-white" />
               </MenuButton>
             </div>
             <transition
@@ -145,7 +145,7 @@ import {
   PlusIcon,
   HomeIcon,
   ViewBoardsIcon,
-  UserIcon
+  UserIcon,
 } from "@heroicons/vue/outline";
 @Options({
   // Module
@@ -165,7 +165,7 @@ import {
     AnnotationIcon,
     HomeIcon,
     ViewBoardsIcon,
-    UserIcon
+    UserIcon,
   }, // Import component
 })
 export default class Navbar extends Vue {}
