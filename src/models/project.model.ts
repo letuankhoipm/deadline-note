@@ -1,7 +1,7 @@
 export interface IProject {
     title: string;
     shortDescription: string;
-    imageUrl: string;
+    imageUrl?: string;
 }
 
 export interface IBoard {
