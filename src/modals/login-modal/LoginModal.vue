@@ -96,15 +96,17 @@ import { XIcon } from "@heroicons/vue/outline";
         email: this.loginReq.email,
         password: this.loginReq.password,
       };
-      this.a_login(req).then((res: any) => {
-        console.log(res);
-        if (res?.data?.token) {
+      this.a_login(req).then(
+        (res: any) => {
+          console.log(res);
+          
           this.onLoginSuccess(res.data.user, res.data.token);
           console.log(this.g_user);
-        } else {
-          this.onLoginFailed(res.data.message);
+        },
+        (err: any) => {          
+          this.onLoginFailed(`Email or password incorrect!`);
         }
-      });
+      );
     },
 
     onLoginSuccess(user: IUser, token: string): void {
@@ -131,7 +133,7 @@ import { XIcon } from "@heroicons/vue/outline";
 })
 export default class LoginModal extends Vue {
   public cancel(): void {
-    NgvModalService.close("ahiih");
+    NgvModalService.close(true);
   }
 }
 </script>

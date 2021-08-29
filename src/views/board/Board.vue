@@ -53,93 +53,93 @@ import { IBoard } from "@/models/board.model";
 })
 export default class Board extends Vue {
   enabled = true;
-  demoBoard: IBoard = {
-    listItem: [
-      {
-        listTicket: [
-          {
-            id: 0,
-            ticketName: "Drawing Portugal Church",
-            content:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            member: [{ name: "John" }, { name: "Henry" }],
-            date: "12-01-2021 12:00 AM",
-            label: {
-              id: 1,
-              name: "Higth Priority",
-            },
-          },
-          {
-            id: 0,
-            ticketName: "Drawing Portugal Church",
-            content:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            member: [{ name: "John" }, { name: "Henry" }],
-            date: "12-01-2021 12:00 AM",
-            label: {
-              id: 0,
-              name: "In Progress",
-            },
-          },
-          {
-            id: 0,
-            ticketName: "Drawing Portugal Church",
-            content:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            member: [{ name: "John" }, { name: "Henry" }],
-            date: "12-01-2021 12:00 AM",
-            label: {
-              id: 2,
-              name: "Done",
-            },
-          },
-        ],
-        listName: "To-do",
-      },
-      {
-        listTicket: [
-          {
-            id: 0,
-            ticketName: "Drawing Portugal Church",
-            content:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            member: [{ name: "John" }, { name: "Henry" }],
-            date: "12-01-2021 12:00 AM",
-            label: {
-              id: 1,
-              name: "Higth Priority",
-            },
-          },
-          {
-            id: 0,
-            ticketName: "Drawing Portugal Church",
-            content:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            member: [{ name: "John" }, { name: "Henry" }],
-            date: "12-01-2021 12:00 AM",
-            label: {
-              id: 0,
-              name: "In Progress",
-            },
-          },
-          {
-            id: 0,
-            ticketName: "Drawing Portugal Church",
-            content:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            member: [{ name: "John" }, { name: "Henry" }],
-            date: "12-01-2021 12:00 AM",
-            label: {
-              id: 2,
-              name: "Done",
-            },
-          },
-        ],
-        listName: "In progress",
-      },
-    ],
-    boardName: "Design",
-  };
+  // demoBoard: IBoard = {
+  //   listItem: [
+  //     {
+  //       listTicket: [
+  //         {
+  //           id: 0,
+  //           ticketName: "Drawing Portugal Church",
+  //           content:
+  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  //           member: [{ name: "John" }, { name: "Henry" }],
+  //           date: "12-01-2021 12:00 AM",
+  //           label: {
+  //             id: 1,
+  //             name: "Higth Priority",
+  //           },
+  //         },
+  //         {
+  //           id: 0,
+  //           ticketName: "Drawing Portugal Church",
+  //           content:
+  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  //           member: [{ name: "John" }, { name: "Henry" }],
+  //           date: "12-01-2021 12:00 AM",
+  //           label: {
+  //             id: 0,
+  //             name: "In Progress",
+  //           },
+  //         },
+  //         {
+  //           id: 0,
+  //           ticketName: "Drawing Portugal Church",
+  //           content:
+  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  //           member: [{ name: "John" }, { name: "Henry" }],
+  //           date: "12-01-2021 12:00 AM",
+  //           label: {
+  //             id: 2,
+  //             name: "Done",
+  //           },
+  //         },
+  //       ],
+  //       listName: "To-do",
+  //     },
+  //     {
+  //       listTicket: [
+  //         {
+  //           id: 0,
+  //           ticketName: "Drawing Portugal Church",
+  //           content:
+  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  //           member: [{ name: "John" }, { name: "Henry" }],
+  //           date: "12-01-2021 12:00 AM",
+  //           label: {
+  //             id: 1,
+  //             name: "Higth Priority",
+  //           },
+  //         },
+  //         {
+  //           id: 0,
+  //           ticketName: "Drawing Portugal Church",
+  //           content:
+  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  //           member: [{ name: "John" }, { name: "Henry" }],
+  //           date: "12-01-2021 12:00 AM",
+  //           label: {
+  //             id: 0,
+  //             name: "In Progress",
+  //           },
+  //         },
+  //         {
+  //           id: 0,
+  //           ticketName: "Drawing Portugal Church",
+  //           content:
+  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  //           member: [{ name: "John" }, { name: "Henry" }],
+  //           date: "12-01-2021 12:00 AM",
+  //           label: {
+  //             id: 2,
+  //             name: "Done",
+  //           },
+  //         },
+  //       ],
+  //       listName: "In progress",
+  //     },
+  //   ],
+  //   boardName: "Design",
+  // };
 
   dragging = false;
 

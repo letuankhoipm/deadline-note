@@ -76,33 +76,24 @@
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import AuthService from "@/services/auth.service";
-import ToastrService from "@/services/toastr.service";
 import { RegisterRequest } from "@/models/login-request.model";
 import NgvModalService from "@/services/ngv-modal.service";
 import { XIcon } from "@heroicons/vue/outline";
+import { mapActions } from "vuex";
 
 @Options({
   // Module
   props: {}, // Input
   components: { XIcon },
   methods: {
+    ...mapActions(["a_register"]),
     register(): void {
       const req: RegisterRequest = {
         fullname: this.regisForm.fullname,
         email: this.regisForm.email,
         password: this.regisForm.password,
       };
-      AuthService.register(req)
-        .then((res: any) => {
-          console.log(res);
-          ToastrService.success("Notification", "Register Successfully!");
-          this.$emit("exit", true);
-        })
-        .catch((err: any) => {
-          // ToastrService.toastrSubject$.next(true);
-          ToastrService.error("Error", err.message);
-        });
+      this.a_register(req);
     },
   },
   data() {
