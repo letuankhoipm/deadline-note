@@ -33,11 +33,11 @@
               alt="Workflow"
             />
           </div>
-          <!-- <div class="sm:block sm:ml-6">
-            <div class="flex space-x-4">
-              <router-link class="text-white mt-2" to="/">Home</router-link>
-            </div>
-          </div> -->
+          <div class="sm:block sm:ml-6 w-full self-center">
+            <span class="text-white float-right">
+              {{g_user?.fullname}}
+            </span>
+          </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <button class="btn-ps-icon mx-4">
@@ -147,6 +147,7 @@ import {
   ViewBoardsIcon,
   UserIcon,
 } from "@heroicons/vue/outline";
+import { mapGetters } from "vuex";
 @Options({
   // Module
   props: {}, // Input
@@ -167,6 +168,13 @@ import {
     ViewBoardsIcon,
     UserIcon,
   }, // Import component
+  computed: {
+    ...mapGetters(["g_user"])
+  },
+  created() {
+    console.log(this.g_user);
+    
+  }
 })
 export default class Navbar extends Vue {}
 </script>

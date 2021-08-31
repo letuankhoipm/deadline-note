@@ -88,7 +88,7 @@ import { XIcon } from "@heroicons/vue/outline";
     ...mapGetters(["g_user"]),
   },
   methods: {
-    ...mapActions(["a_login"]),
+    ...mapActions(['a_login', 'a_setUser']),
     ...mapMutations(["m_setUser"]),
 
     login(): void {
@@ -113,7 +113,7 @@ import { XIcon } from "@heroicons/vue/outline";
       ToastrService.success("Notification", "Login Successfully!");
       NgvModalService.dismiss();
       this.$router.push("/home");
-      this.m_setUser(user);
+      this.a_setUser(user); 
       localStorage.setItem("ACCESS_TOKEN", token);
       AuthService.routing();
     },
@@ -130,6 +130,10 @@ import { XIcon } from "@heroicons/vue/outline";
       } as unknown as LoginRequest,
     };
   },
+  created() {
+    console.log(this.g_user);
+    
+  }
 })
 export default class LoginModal extends Vue {
   public cancel(): void {

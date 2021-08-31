@@ -1,6 +1,6 @@
 <template>
   <div class="ps-board p-4">
-    <div class="grid grid-flow-col auto-cols-max">
+    <!-- <div class="grid grid-flow-col auto-cols-max">
       <div
         v-for="item in demoBoard.listItem"
         :key="item.listName"
@@ -33,7 +33,7 @@
           </draggable>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -43,13 +43,21 @@ import { VueDraggableNext } from "vue-draggable-next";
 import { DotsVerticalIcon } from "@heroicons/vue/outline";
 import Ticket from "@/components/ticket/Ticket.vue";
 import { IBoard } from "@/models/board.model";
+import { mapGetters } from "vuex";
 @Options({
   components: {
     Ticket,
     draggable: VueDraggableNext,
     DotsVerticalIcon,
   },
+  computed: {
+    ...mapGetters(['g_user'])
+  },
   props: {},
+  created() {
+    console.log(this.g_user, 'ahihi');
+    
+  }
 })
 export default class Board extends Vue {
   enabled = true;

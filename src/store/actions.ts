@@ -1,3 +1,4 @@
+import { IUser } from '@/models/user.modal';
 import { LoginRequest, RegisterRequest } from '@/models/login-request.model';
 import AuthService from "@/services/auth.service";
 import ToastrService from "@/services/toastr.service";
@@ -25,5 +26,8 @@ export default {
             .catch((err: any) => {
                 ToastrService.error("Error", err.message);
             });
+    },
+    a_setUser({commit}: any, user: IUser): void {
+        commit("m_setUser", user);
     }
 }

@@ -1,8 +1,16 @@
 import { IUser } from './user.modal';
 
 export interface IBoard {
-    listItem: IList[];
+    title: string;
+    shortDescription: string;
+    boardId?: string;
+    type: string;
+    projectId?: string;
+}
+
+export interface IBoardDetail {
     boardName: string;
+    listItem: IList[];
 }
 
 export interface IList {
