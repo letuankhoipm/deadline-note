@@ -35,7 +35,6 @@
         </div>
         <div class="ps-pd-body">
           <ProjectOverview v-if="activeTab === 0" />
-          <ProjectBoard v-if="activeTab === 1" />
         </div>
       </div>
     </div>
@@ -46,9 +45,8 @@
 import { Vue, Options } from "vue-class-component";
 import { ProjectTabs } from "@/models/tabs.model";
 import ProjectOverview from "@/components/project-overview/ProjectOverview.vue";
-import ProjectBoard from "@/components/project-board/ProjectBoard.vue";
 @Options({
-  components: { ProjectOverview, ProjectBoard },
+  components: { ProjectOverview },
   props: {},
   methods: {},
   data() {
@@ -64,7 +62,7 @@ export default class ProjectDetail extends Vue {
     },
     {
       id: 1,
-      name: "Boards",
+      name: "Repo",
     },
     {
       id: 2,

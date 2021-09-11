@@ -1,5 +1,4 @@
-<template>
-</template>
+<template src="./NewProject.html"></template>
 
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";

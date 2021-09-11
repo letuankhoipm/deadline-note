@@ -9,7 +9,8 @@ export interface IBoard {
 }
 
 export interface IBoardDetail {
-    boardName: string;
+    boardName?: string;
+    boardId: string;
     listItem: IList[];
 }
 

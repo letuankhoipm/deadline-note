@@ -112,7 +112,7 @@ import { XIcon } from "@heroicons/vue/outline";
     onLoginSuccess(user: IUser, token: string): void {
       ToastrService.success("Notification", "Login Successfully!");
       NgvModalService.dismiss();
-      this.$router.push("/home");
+      this.$router.push("/trel");
       this.a_setUser(user); 
       localStorage.setItem("ACCESS_TOKEN", token);
       AuthService.routing();

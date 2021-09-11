@@ -27,8 +27,18 @@
             <div class="flex items-center">
               <span
                 @click="switchNewProjectModal(true)"
-                class="text-sm font-bold"
+              class="text-sm font-bold"
               >New project</span>
+            </div>
+          </li>
+          <li class="flex w-full justify-between hover:text-gray-500 cursor-pointer items-center py-2">
+            <div class="flex items-center">
+              <span
+                @click="gotoTeamwork()"
+                class="text-sm font-bold"
+              >
+                Task Management
+              </span>
             </div>
           </li>
         </ul>
@@ -64,6 +74,9 @@ import NgvModalService from "@/services/ngv-modal.service";
     showListProject(): void {
       this.$router.push("/home");
     },
+    gotoTeamwork(): void {
+      this.$router.push("/teamwork")
+    }
   },
 })
 export default class Sidebar extends Vue {
