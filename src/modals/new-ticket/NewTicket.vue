@@ -2,12 +2,23 @@
 
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
-import { XIcon, CreditCardIcon, UserIcon } from "@heroicons/vue/outline";
+import {
+  XIcon,
+  CreditCardIcon,
+  UserIcon,
+  PencilIcon,
+} from "@heroicons/vue/outline";
 import NgvModalService from "@/services/ngv-modal.service";
 import Multiselect from "@vueform/multiselect";
 
 @Options({
-  components: { XIcon, CreditCardIcon, Multiselect, UserIcon },
+  components: {
+    XIcon,
+    CreditCardIcon,
+    Multiselect,
+    UserIcon,
+    PencilIcon,
+  },
   props: ["input"],
   methods: {
     onCreate(): void {

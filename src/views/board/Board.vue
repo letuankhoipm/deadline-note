@@ -3,9 +3,9 @@
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import { VueDraggableNext } from "vue-draggable-next";
-import { DotsVerticalIcon } from "@heroicons/vue/outline";
+import { DotsVerticalIcon, PlusIcon } from "@heroicons/vue/outline";
 import Ticket from "@/components/ticket/Ticket.vue";
-import { IBoard, IBoardDetail } from "@/models/board.model";
+import { IBoardDetail } from "@/models/board.model";
 import { mapGetters } from "vuex";
 import NgvModalService from "@/services/ngv-modal.service";
 import NewTicket from "@/modals/new-ticket/NewTicket.vue";
@@ -15,6 +15,7 @@ import NewTicket from "@/modals/new-ticket/NewTicket.vue";
     draggable: VueDraggableNext,
     NewTicket,
     DotsVerticalIcon,
+    PlusIcon
   },
   computed: {
     ...mapGetters(["g_user"]),
@@ -268,6 +269,10 @@ export default class Board extends Vue {
   //=============================================================
   public onCreateTicket(listInfo: any): void {
     const modalRef = NgvModalService.open(NewTicket, listInfo);
+  }
+
+  public onTicketDetail(): void {
+    const modalRef = NgvModalService.open(NewTicket);
   }
 }
 </script>

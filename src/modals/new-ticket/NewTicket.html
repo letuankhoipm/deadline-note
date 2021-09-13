@@ -44,7 +44,7 @@
                                                 <div class="col-span mr-2">
                                                     <div class="form-group">
                                                         <p class="text-sm text-gray-500">
-                                                            Member
+                                                            Assignment
                                                         </p>
                                                         <Multiselect mode="tags" :closeOnSelect="false"
                                                             :searchable="true" :options="[
@@ -94,6 +94,16 @@
                                             <div class="comment-content  form-group">
                                                 <div class="grid grid-cols-12">
                                                     <div class="col-span-1">
+                                                        <PencilIcon class="h-5 w-5 leading-8 seft-center" />
+                                                    </div>
+                                                    <div class="col-span-11">
+                                                        <input class="text-sm text-gray-400 form-control" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="comment-content  form-group">
+                                                <div class="grid grid-cols-12">
+                                                    <div class="col-span-1">
                                                         <UserIcon class="h-5 w-5 leading-8 seft-center" />
                                                     </div>
                                                     <div class="col-span-11">
@@ -133,6 +143,7 @@
                                     </div>
                                 </div>
                                 <div class="col-span-1 ml-2">
+                                    <button class="btn-ps btn-ps-outlined btn my-2 w-full">join card</button>
                                 </div>
                             </div>
                         </div>
