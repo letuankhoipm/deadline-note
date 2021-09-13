@@ -23,7 +23,7 @@
                                     :ticket="ticket" />
 
                                 <div class="create-ticket">
-                                    <button class="btn-ps btn-ps-action w-full">
+                                    <button @click="onCreateTicket(element.listName)" class="btn-ps btn-ps-action w-full">
                                         add new card
                                     </button>
                                 </div>

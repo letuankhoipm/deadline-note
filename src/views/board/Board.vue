@@ -7,10 +7,13 @@ import { DotsVerticalIcon } from "@heroicons/vue/outline";
 import Ticket from "@/components/ticket/Ticket.vue";
 import { IBoard, IBoardDetail } from "@/models/board.model";
 import { mapGetters } from "vuex";
+import NgvModalService from "@/services/ngv-modal.service";
+import NewTicket from "@/modals/new-ticket/NewTicket.vue";
 @Options({
   components: {
     Ticket,
     draggable: VueDraggableNext,
+    NewTicket,
     DotsVerticalIcon,
   },
   computed: {
@@ -97,7 +100,7 @@ export default class Board extends Vue {
             date: "12-01-2021 12:00 AM",
             label: {
               id: 0,
-              name: "In Progress",
+              name: "Bugs",
             },
           },
           {
@@ -138,7 +141,7 @@ export default class Board extends Vue {
             date: "12-01-2021 12:00 AM",
             label: {
               id: 0,
-              name: "In Progress",
+              name: "Resolve",
             },
           },
           {
@@ -154,7 +157,7 @@ export default class Board extends Vue {
             },
           },
         ],
-        listName: "In progress",
+        listName: "Resolve",
       },
       {
         listTicket: [
@@ -195,7 +198,7 @@ export default class Board extends Vue {
             },
           },
         ],
-        listName: "In progress",
+        listName: "Fixed",
       },
       {
         listTicket: [
@@ -236,18 +239,11 @@ export default class Board extends Vue {
             },
           },
         ],
-        listName: "In progress",
+        listName: "Close",
       },
     ],
     boardName: "ahihi",
   };
-
-  listCol = [
-    { name: "col1" },
-    { name: "col2" },
-    { name: "col3" },
-    { name: "col4" },
-  ];
 
   dragging = false;
 
@@ -267,6 +263,11 @@ export default class Board extends Vue {
     const { moved, added } = event;
     if (moved) console.log("moved", moved);
     if (added) console.log("added", added, added.element);
+  }
+
+  //=============================================================
+  public onCreateTicket(listInfo: any): void {
+    const modalRef = NgvModalService.open(NewTicket, listInfo);
   }
 }
 </script>
