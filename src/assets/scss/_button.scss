@@ -21,7 +21,7 @@
 }
 
 .btn-ps-outlined {
-  color: $primary !important;
+  color: $primary;
   border-color: $primary !important;
   background-color: transparent;
 }
@@ -33,7 +33,7 @@
 }
 
 .btn-ps-flat {
-  color: $primary !important;
+  color: $primary;
   border: none !important;
   background-color: transparent !important;
 }
@@ -52,4 +52,13 @@
     border-color: $primary !important;
   }
 
+}
+
+.btn-ps-text-icon {
+  line-height: 2rem !important;
+  display: inline-flex !important;
+}
+
+.btn-danger {
+  color: red !important;
 }

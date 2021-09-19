@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center">
     <div class="p-2 w-full">
-      <div @click="goToDetail()" class="bg-gray-50 max-w-xl p-6 hover:bg-gray-100 cursor-pointer shadow-lg transition duration-500">
+      <div @click="goToDetail(project.id)" class="bg-gray-50 max-w-xl p-6 hover:bg-gray-100 cursor-pointer shadow-lg transition duration-500">
         <div class="text-center h-20">
           <!-- <img
             class="h-full mx-auto object-contain"
@@ -40,8 +40,9 @@ import { Vue, Options } from "vue-class-component";
   },
 })
 export default class ProjectCard extends Vue {
-    public goToDetail(): void {
-    this.$router.push("/project-detail");
+    public goToDetail(projectId: string): void {
+    // this.$router.push("/project-detail");
+    this.$router.push(`/project-detail/${projectId}`);
   }
 }
 </script>

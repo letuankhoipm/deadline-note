@@ -1,10 +1,15 @@
 <template>
   <div class="ps-project p-4">
 
-    <div class="grid grid-cols-1">
+    <div
+      v-if="projectDetail"
+      class="grid grid-cols-1"
+    >
       <div class="col-span-1">
         <div>
-          <h1 class="text-base text-xl mt-4 text-green-600 font-semibold tracking-wide uppercase">assassin's creed</h1>
+          <h1 class="text-base text-xl mt-4 text-green-600 font-semibold tracking-wide uppercase">
+            {{projectDetail.name}}
+          </h1>
           <p class="mt-4 max-w-2xl text-sm text-gray-500">
             Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.
           </p>
@@ -35,6 +40,8 @@
         </div>
         <div class="ps-pd-body">
           <ProjectOverview v-if="activeTab === 0" />
+          <ProjectBoard v-if="activeTab === 1" />
+          <ProjectSettings v-if="activeTab === 3" />
         </div>
       </div>
     </div>
@@ -45,16 +52,36 @@
 import { Vue, Options } from "vue-class-component";
 import { ProjectTabs } from "@/models/tabs.model";
 import ProjectOverview from "@/components/project-overview/ProjectOverview.vue";
+import ProjectBoard from "@/components/project-board/ProjectBoard.vue";
+import ProjectSettings from "@/components/project-settings/ProjectSettings.vue";
+import projectService from "@/services/project.service";
 @Options({
-  components: { ProjectOverview },
+  components: { ProjectOverview, ProjectBoard, ProjectSettings },
   props: {},
-  methods: {},
+  methods: {
+    getDetail(): void {
+      this.projectId = this.$route.params.id;
+      console.log(this.projectId);
+      projectService
+        .getById(this.projectId)
+        .then((res: any) => {
+          console.log(res.data);
+          this.projectDetail = res.data;
+        })
+        .catch((err) => console.log(err));
+    },
+  },
   data() {
     return {};
+  },
+  created() {
+    this.getDetail();
   },
 })
 export default class ProjectDetail extends Vue {
   public activeTab = 0;
+  public projectId = "";
+  public projectDetail = null;
   public listTabs = [
     {
       id: 0,
@@ -62,7 +89,7 @@ export default class ProjectDetail extends Vue {
     },
     {
       id: 1,
-      name: "Repo",
+      name: "Boards",
     },
     {
       id: 2,
