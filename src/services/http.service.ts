@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 
-const prodURL = "http://167.99.70.196/";
+const prodURL = "http://134.209.101.116/";
 const devURL = "http://localhost:8000/";
 const ACCESS_TOKEN = localStorage.getItem("ACCESS_TOKEN");
 

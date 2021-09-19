@@ -1,3 +1,4 @@
+import { IInvite } from './../models/project.model';
 import { IBoard } from '@/models/project.model';
 import { IProject } from '@/models/project.model';
 import http from "./http.service";
@@ -18,6 +19,10 @@ class ProjectService {
     }
 
     public create(data: IProject): Promise<IProject> {
+        return http.post(this._projectUrl, data);
+    }
+
+    public invite(data: IInvite): Promise<any> {
         return http.post(this._projectUrl, data);
     }
 }

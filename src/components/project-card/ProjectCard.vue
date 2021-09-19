@@ -1,17 +1,22 @@
 <template>
   <div class="flex items-center justify-center">
-    <div class="p-2">
+    <div class="p-2 w-full">
       <div @click="goToDetail()" class="bg-gray-50 max-w-xl p-6 hover:bg-gray-100 cursor-pointer shadow-lg transition duration-500">
         <div class="text-center h-20">
-          <img
+          <!-- <img
             class="h-full mx-auto object-contain"
             :src="project.imageUrl"
+            alt="project-logo"
+          > -->
+          <img
+            class="h-full mx-auto object-contain"
+            src="https://logos-world.net/wp-content/uploads/2020/06/Assassins-Creed-Logo-2007-2010.png"
             alt="project-logo"
           >
         </div>
         <div class="mt-4">
           <h1 class="text-lg text-gray-700 font-semibold">
-            {{project.title}}
+            {{project.name}}
           </h1>
           <div class="flex justify-between items-center">
             <p class="mt-4 max-w-2xl text-sm text-gray-500">

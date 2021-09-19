@@ -7,6 +7,7 @@ import { Vue, Options } from "vue-class-component";
 import NgvModalService from "@/services/ngv-modal.service";
 import { IProject } from "@/models/project.model";
 import { XIcon } from "@heroicons/vue/outline";
+import projectService from "@/services/project.service";
 
 @Options({
   components: { XIcon },
@@ -15,7 +16,7 @@ import { XIcon } from "@heroicons/vue/outline";
     return {
       previewImg: null,
       projectForm: {
-        title: null,
+        name: null,
         shortDescription: null,
         imageUrl: null,
       } as unknown as IProject,
@@ -49,6 +50,13 @@ import { XIcon } from "@heroicons/vue/outline";
     },
     create(): void {
       console.log(this.projectForm);
+      projectService
+        .create(this.projectForm)
+        .then((res) => {
+          console.log(res);
+          NgvModalService.close("create done")
+        })
+        .catch((err) => console.log(err));
     },
   },
 })

@@ -1,8 +1,8 @@
 // import { IBoard } from './board.model';
 import { IUser } from './user.modal';
 export interface IProject {
-    title: string;
-    shortDescription: string;
+    name: string;
+    shortDescription?: string;
     imageUrl?: string;
 }
 
@@ -32,4 +32,9 @@ export interface IBoard {
     title: string;
     shortDescription: string;
     type: string;
+}
+
+export interface IInvite {
+    projectId: string;
+    userIds: string[];
 }

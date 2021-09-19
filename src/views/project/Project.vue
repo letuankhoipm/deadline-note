@@ -30,6 +30,7 @@
 import { Vue, Options } from "vue-class-component";
 import ProjectCard from "@/components/project-card/ProjectCard.vue";
 import { IProject } from "@/models/project.model";
+import projectService from "@/services/project.service";
 @Options({
   components: { ProjectCard },
   props: {},
@@ -37,21 +38,34 @@ import { IProject } from "@/models/project.model";
   data() {
     return {};
   },
+  created() {
+    this.getProjects();
+  }
 })
 export default class Project extends Vue {
   public listProject: IProject[] = [
     {
-      title: "Assassin's Creed",
+      name: "Assassin's Creed",
       imageUrl:
         "https://logos-world.net/wp-content/uploads/2020/06/Assassins-Creed-Logo-2007-2010.png",
       shortDescription: "Lorem ipsum dolor sit amet consect adipisicing elit.",
     },
     {
-      title: "Fifa Online 3",
+      name: "Fifa Online 3",
       imageUrl: "https://upload.wikimedia.org/wikipedia/vi/3/36/Logo_fo3.png",
       shortDescription: "Lorem ipsum dolor sit amet consect adipisicing elit.",
     },
   ];
+
+  public getProjects(): void {
+    projectService
+      .getAll()
+      .then((res: any) => {
+        console.log(res);
+        this.listProject = res.data;
+      })
+      .catch((err) => console.log(err));
+  }
 }
 </script>
 
