@@ -61,7 +61,6 @@ import projectService from "@/services/project.service";
   methods: {
     getDetail(): void {
       this.projectId = this.$route.params.id;
-      console.log(this.projectId);
       projectService
         .getById(this.projectId)
         .then((res: any) => {

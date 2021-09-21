@@ -3,15 +3,20 @@
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import { XIcon } from "@heroicons/vue/outline";
+import ngvModalService from "@/services/ngv-modal.service";
 @Options({
-  components: {},
+  components: { XIcon },
   props: {},
   methods: {},
   data() {
     return {};
   },
 })
-export default class Badge extends Vue {}
+export default class Badge extends Vue {
+  public onCancel(): void {
+    ngvModalService.dismiss();
+  }
+}
 </script>
 
 <style lang="scss">

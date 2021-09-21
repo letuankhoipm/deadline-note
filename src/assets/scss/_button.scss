@@ -55,10 +55,17 @@
 }
 
 .btn-ps-text-icon {
-  line-height: 2rem !important;
+  line-height: 1.5rem !important;
   display: inline-flex !important;
 }
 
 .btn-danger {
   color: red !important;
+}
+
+.btn-setting {
+  color: #4b5563;
+  background: transparent;
+  border: none;
+  outline: none;
 }
