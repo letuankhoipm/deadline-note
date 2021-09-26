@@ -22,29 +22,26 @@
                     </div>
 
                     <div class="col-span-2">
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Title" id="title" name="title" type="text">
-                            <p class="hint text-sm text-left">
-                                in project
-                                <strong class="underline">
-                                    {{input}}
-                                </strong>
-                            </p>
-                            <div class="card text-left my-2">
-                                <h5 class="font-bold text-md">
-                                    This Workspace has 5 of 10 free boards
-                                </h5>
-                                <p class="text-sm">
-                                    This guide only exists as a reference for people who need to or would like to
-                                    integrate Tailwind with a preprocessor for one reason or another.
-                                </p>
+                        <form>
+                            <div class="form-group">
+                                <input class="form-control" v-model="newBoardForm.name" placeholder="Title" id="title"
+                                    name="title" type="text">
+                                <div class="card text-left my-2">
+                                    <h5 class="font-bold text-md">
+                                        This Workspace has 5 of 10 free boards
+                                    </h5>
+                                    <p class="text-sm">
+                                        This guide only exists as a reference for people who need to or would like to
+                                        integrate Tailwind with a preprocessor for one reason or another.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button class="btn-ps btn-ps-raise btn my-2">create board</button>
+                <button @click="onCreateBoard()" class="btn-ps btn-ps-raise btn my-2">create board</button>
                 <button class="btn-ps btn-ps-flat btn my-2">dismiss</button>
             </div>
         </div>

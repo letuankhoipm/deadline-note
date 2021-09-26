@@ -40,7 +40,11 @@
         </div>
         <div class="ps-pd-body">
           <ProjectOverview v-if="activeTab === 0" />
-          <ProjectBoard v-if="activeTab === 1" />
+          <ProjectBoard
+            :projectDetail="projectDetail"
+            :projectId="projectId"
+            v-if="activeTab === 1"
+          />
           <ProjectSettings v-if="activeTab === 3" />
         </div>
       </div>

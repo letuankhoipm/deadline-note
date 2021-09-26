@@ -29,10 +29,13 @@ import ngvModalService from "@/services/ngv-modal.service";
 import NewBoard from "@/modals/new-board/NewBoard.vue";
 @Options({
   components: { BoardCard, CreateBoardCard },
-  props: {},
+  props: ["projectDetail", "projectId"],
   methods: {},
   data() {
     return {};
+  },
+  created() {
+    console.log(this.projectId);
   },
 })
 export default class ProjectBoard extends Vue {
