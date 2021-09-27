@@ -8,7 +8,7 @@
             <CreateBoardCard @click="onCreatBoard()" />
           </div>
           <div
-            v-for="board in listBoards"
+            v-for="board in projectDetail.boards"
             :key="board.title"
             class="col-span-1"
           >
@@ -40,28 +40,7 @@ import NewBoard from "@/modals/new-board/NewBoard.vue";
 })
 export default class ProjectBoard extends Vue {
   public projectId = "";
-  public listBoards: IBoard[] = [
-    {
-      title: "Design Achitecture",
-      shortDescription: "Lorem ipsum dolor sit amet consect adipisicing elit.",
-      type: "design",
-    },
-    {
-      title: "Programing UI",
-      shortDescription: "Lorem ipsum dolor sit amet consect adipisicing elit.",
-      type: "programing",
-    },
-    {
-      title: "Ship",
-      shortDescription: "Lorem ipsum dolor sit amet consect adipisicing elit.",
-      type: "design",
-    },
-    {
-      title: "Ship",
-      shortDescription: "Lorem ipsum dolor sit amet consect adipisicing elit.",
-      type: "design",
-    },
-  ];
+  public listBoard: IBoard[] = [];
 
   public onCreatBoard(projectName: string): void {
     const input = {

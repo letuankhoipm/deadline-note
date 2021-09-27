@@ -1,37 +1,56 @@
 <div class="ps-board pt-3 px-2">
     <div class="draggable">
         <div class="dragged-list">
-            <div>
-                <draggable class="dragArea list-group flex" :list="demoBoard.listItem" :group="'col'" :sort="true"
-                    @change="log" :move="checkMove">
-                    <div class="col-span ps-board-card shadow-md bg-gray-50 rounded-none p-4 mx-2 border-t-4 border-green-600 overflow-y-auto"
-                        v-for="element in demoBoard.listItem" :key="element.listName">
+            <div class="flex">
+                <div class="col-span">
+                    <draggable class="dragArea list-group flex" :list="demoBoard.listItem" :group="'col'" :sort="true"
+                        @change="log" :move="checkMove">
+                        <div class="col-span ps-board-card shadow-md bg-gray-50 rounded-none p-4 mx-2 border-t-4 border-green-600 overflow-y-auto"
+                            v-for="element in demoBoard.listItem" :key="element.listName">
+                            <div class="mb-2 grid grid-cols-2">
+                                <div class="col-span">
+                                    <h1 class="font-bold cursor-move">
+                                        {{element.listName}}
+                                    </h1>
+                                </div>
+                                <div class="col-span flex flex-row-reverse items-center cursor-pointer cursor-move">
+                                    <DotsVerticalIcon class="h-5 w-5" />
+                                </div>
+                            </div>
+                            <div class="ps-board-content">
+                                <draggable class="dragArea list-group w-full" :list="element.listTicket"
+                                    :group="demoBoard.boardId" :sort="true" @change="log" :move="checkMove">
+                                    <Ticket v-for="ticket in element.listTicket" :key="ticket.ticketName"
+                                        :ticket="ticket" @click="onTicketDetail()" />
+
+                                    <div class="create-ticket">
+                                        <button @click="onCreateTicket(element.listName)"
+                                            class="btn-ps btn-ps-action w-full text-center">
+                                            <PlusIcon class="h-5 w-5 inline" />
+                                        </button>
+                                    </div>
+                                </draggable>
+                            </div>
+                        </div>
+                    </draggable>
+                </div>
+                <div class="col-span">
+                    <div
+                        class="col-span ps-new-list shadow-md bg-gray-50 rounded-none p-4 mx-2 border-t-4 overflow-y-auto">
                         <div class="mb-2 grid grid-cols-2">
                             <div class="col-span">
-                                <h1 class="font-bold cursor-move">
-                                    {{element.listName}}
-                                </h1>
                             </div>
-                            <div class="col-span flex flex-row-reverse items-center cursor-pointer cursor-move">
-                                <DotsVerticalIcon class="h-5 w-5" />
+                            <div class="col-span flex flex-row-reverse items-center cursor-pointer">
+                                <PlusIcon @click="onCreateList()" class="h-5 w-5 btn-ps-action" />
                             </div>
-                        </div>
-                        <div class="ps-board-content">
-                            <draggable class="dragArea list-group w-full" :list="element.listTicket"
-                                :group="demoBoard.boardId" :sort="true" @change="log" :move="checkMove">
-                                <Ticket v-for="ticket in element.listTicket" :key="ticket.ticketName"
-                                    :ticket="ticket" @click="onTicketDetail()" />
-
-                                <div class="create-ticket">
-                                    <button @click="onCreateTicket(element.listName)"
-                                        class="btn-ps btn-ps-action w-full text-center">
-                                        <PlusIcon class="h-5 w-5 inline" />
-                                    </button>
-                                </div>
-                            </draggable>
+                            <div class="col-span-2 mt-2">
+                                <form>
+                                    <input v-model="newListName" class="m-0 w-full p-0" placeholder="Add another list" type="text">
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </draggable>
+                </div>
             </div>
         </div>
     </div>

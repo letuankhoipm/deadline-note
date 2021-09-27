@@ -41,7 +41,6 @@ import { Vue, Options } from "vue-class-component";
 })
 export default class ProjectCard extends Vue {
     public goToDetail(projectId: string): void {
-    // this.$router.push("/project-detail");
     this.$router.push(`/project-detail/${projectId}`);
   }
 }

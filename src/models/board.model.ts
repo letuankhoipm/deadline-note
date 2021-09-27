@@ -8,10 +8,9 @@ export interface IBoard {
     lists: IList[];
     updatedAt: string;
     userBoards: IUser[];
-    title?: string;
     shortDescription?: string;
     boardId?: string;
-    type: string;
+    type?: string;
     projectId?: string;
 }
 
@@ -41,4 +40,10 @@ export interface ITicket {
 export interface IBoardRequest {
     name: string;
     projectId: string;
+}
+
+export interface IListRequest {
+    name: string;
+    pos: string;
+    boardId: string;
 }

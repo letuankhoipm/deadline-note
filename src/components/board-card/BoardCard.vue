@@ -1,9 +1,9 @@
 <template>
   <div class="flex items-center justify-center">
-    <div class="p-2">
+    <div class="p-2 w-full">
       <div
-        @click="goToDetail()"
-        class="bg-gray-50 max-w-xl p-6 hover:bg-gray-100 cursor-pointer shadow-lg transition duration-500"
+        @click="goToDetail(board.id)"
+        class="bg-gray-50 max-w-xl p-6 board-card hover:bg-gray-100 cursor-pointer shadow-lg transition duration-500"
       >
         <div class="text-right">
           <span
@@ -15,11 +15,12 @@
         </div>
         <div class="mt-4">
           <h1 class="text-lg text-gray-700 font-semibold">
-            {{board.title}}
+            {{board.name}}
           </h1>
           <div class="flex justify-between items-center">
             <p class="mt-4 max-w-2xl text-sm text-gray-500">
               {{board.shortDescription}}
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
             </p>
           </div>
         </div>
@@ -37,13 +38,18 @@ import { Vue, Options } from "vue-class-component";
   data() {
     return {};
   },
+  created() {
+    this.board.type = "design";
+    console.log(this.board);
+  },
 })
 export default class BoardCard extends Vue {
-  public goToDetail(): void {
-    this.$router.push("/board-detail");
+  public goToDetail(boardId: string): void {
+    this.$router.push(`/board-detail/${boardId}`);
   }
 }
 </script>
 
 <style lang="scss">
+@import "./BoardCard.scss";
 </style>

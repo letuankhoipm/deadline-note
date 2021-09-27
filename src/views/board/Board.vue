@@ -5,27 +5,46 @@ import { Vue, Options } from "vue-class-component";
 import { VueDraggableNext } from "vue-draggable-next";
 import { DotsVerticalIcon, PlusIcon } from "@heroicons/vue/outline";
 import Ticket from "@/components/ticket/Ticket.vue";
-import { IBoardDetail } from "@/models/board.model";
+import { IBoardDetail, IListRequest } from "@/models/board.model";
 import { mapGetters } from "vuex";
 import NgvModalService from "@/services/ngv-modal.service";
 import NewTicket from "@/modals/new-ticket/NewTicket.vue";
+import boardService from "@/services/board.service";
+import listService from "@/services/list.service";
 @Options({
   components: {
     Ticket,
     draggable: VueDraggableNext,
     NewTicket,
     DotsVerticalIcon,
-    PlusIcon
+    PlusIcon,
   },
   computed: {
     ...mapGetters(["g_user"]),
   },
   props: {},
+  methods: {
+    getDetail(): void {
+      this.boardId = this.$route.params.id;
+      console.log(this.boardId);
+
+      boardService
+        .getById(this.boardId)
+        .then((res: any) => {
+          console.log(res.data);
+          this.projectDetail = res.data;
+        })
+        .catch((err) => console.log(err));
+    },
+  },
   created() {
-    console.log(this.g_user, "ahihi");
+    this.getDetail();
   },
 })
 export default class Board extends Vue {
+  public boardId = "";
+  public boardDetail: any;
+  public newListName = "";
   enabled = true;
   demoBoard: IBoardDetail = {
     boardId: "board-1",
@@ -273,6 +292,22 @@ export default class Board extends Vue {
 
   public onTicketDetail(): void {
     const modalRef = NgvModalService.open(NewTicket);
+  }
+
+  public onCreateList(): void {
+    const listReq: IListRequest = {
+      name: this.newListName,
+      pos: "null",
+      boardId: this.boardId,
+    };
+    listService
+      .create(listReq)
+      .then((res: any) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 </script>
