@@ -58,7 +58,7 @@ export default class Board extends Vue {
               "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
             member: [
               {
-                fullname: "John Terry",
+                username: "John Terry",
                 email: "terry@gmail.com",
                 id: "uid",
                 createAt: "iso string",

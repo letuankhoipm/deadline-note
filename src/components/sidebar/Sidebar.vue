@@ -27,17 +27,22 @@
             <div class="flex items-center">
               <span
                 @click="switchNewProjectModal(true)"
-              class="text-sm font-bold"
+                class="text-sm font-bold"
               >New project</span>
             </div>
           </li>
           <li class="flex w-full justify-between hover:text-gray-500 cursor-pointer items-center py-2">
             <div class="flex items-center">
-              <span
-                @click="gotoTeamwork()"
-                class="text-sm font-bold"
-              >
+              <span class="text-sm font-bold">
                 Task Management
+              </span>
+            </div>
+          </li>
+          <li class="flex w-full justify-between hover:text-gray-500 cursor-pointer items-center py-2">
+            <div class="flex items-center">
+              <UserAddIcon class="h-6 w-6" />
+              <span class="text-sm ml-2">
+                Invite user
               </span>
             </div>
           </li>
@@ -63,20 +68,20 @@
 
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
-import { CubeIcon, CogIcon } from "@heroicons/vue/outline";
+import { CubeIcon, CogIcon, UserAddIcon } from "@heroicons/vue/outline";
 import NewProject from "@/modals/new-project/NewProject.vue";
 import NgvModalService from "@/services/ngv-modal.service";
 
 @Options({
-  components: { CubeIcon, CogIcon, NewProject },
+  components: { CubeIcon, CogIcon, NewProject, UserAddIcon },
   props: {},
   methods: {
     showListProject(): void {
       this.$router.push("/home");
     },
     gotoTeamwork(): void {
-      this.$router.push("/teamwork")
-    }
+      this.$router.push("/teamwork");
+    },
   },
 })
 export default class Sidebar extends Vue {

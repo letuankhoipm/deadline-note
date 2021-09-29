@@ -24,7 +24,8 @@
                                     <p class="text-sm text-gray-500">
                                         Search users
                                     </p>
-                                    <Multiselect mode="tags" :closeOnSelect="false" :searchable="true" :options="users" />
+                                    <Multiselect v-model="userInvite" mode="tags" @search-change="onTyping($event)"
+                                        :closeOnSelect="false" :searchable="true" :options="users" />
                                 </div>
                             </form>
                         </div>
@@ -32,7 +33,7 @@
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button class="btn-ps btn-ps-raise btn my-2">send</button>
+                <button @click="onInvite()" class="btn-ps btn-ps-raise btn my-2">send</button>
                 <button @click="onCancel()" class="btn-ps btn-ps-flat btn my-2">cancel</button>
             </div>
         </div>
