@@ -3,14 +3,14 @@
         <div class="dragged-list">
             <div class="flex">
                 <div class="col-span">
-                    <draggable class="dragArea list-group flex" :list="demoBoard.listItem" :group="'col'" :sort="true"
+                    <draggable class="dragArea list-group flex" :list="boardDetail?.lists" :group="'col'" :sort="true"
                         @change="log" :move="checkMove">
                         <div class="col-span ps-board-card shadow-md bg-gray-50 rounded-none p-4 mx-2 border-t-4 border-green-600 overflow-y-auto"
-                            v-for="element in demoBoard.listItem" :key="element.listName">
+                            v-for="element in boardDetail.lists" :key="element.name">
                             <div class="mb-2 grid grid-cols-2">
                                 <div class="col-span">
                                     <h1 class="font-bold cursor-move">
-                                        {{element.listName}}
+                                        {{element.name}}
                                     </h1>
                                 </div>
                                 <div class="col-span flex flex-row-reverse items-center cursor-pointer cursor-move">
@@ -18,13 +18,13 @@
                                 </div>
                             </div>
                             <div class="ps-board-content">
-                                <draggable class="dragArea list-group w-full" :list="element.listTicket"
-                                    :group="demoBoard.boardId" :sort="true" @change="log" :move="checkMove">
-                                    <Ticket v-for="ticket in element.listTicket" :key="ticket.ticketName"
-                                        :ticket="ticket" @click="onTicketDetail()" />
+                                <draggable class="dragArea list-group w-full" :list="element.tickets"
+                                    :group="boardDetail.id" :sort="true" @change="log" :move="checkMove">
+                                    <Ticket v-for="ticket in element.tickets" :key="ticket.ticketName" :ticket="ticket"
+                                        @click="onTicketDetail()" />
 
                                     <div class="create-ticket">
-                                        <button @click="onCreateTicket(element.listName)"
+                                        <button @click="onCreateTicket(element.name)"
                                             class="btn-ps btn-ps-action w-full text-center">
                                             <PlusIcon class="h-5 w-5 inline" />
                                         </button>
@@ -45,7 +45,8 @@
                             </div>
                             <div class="col-span-2 mt-2">
                                 <form>
-                                    <input v-model="newListName" class="m-0 w-full p-0" placeholder="Add another list" type="text">
+                                    <input v-model="newListName" class="m-0 w-full p-0" placeholder="Add another list"
+                                        type="text">
                                 </form>
                             </div>
                         </div>

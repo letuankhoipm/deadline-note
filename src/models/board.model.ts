@@ -1,4 +1,4 @@
-import { IUser } from './user.modal';
+import { IUser } from '@/models/user.modal';
 
 export interface IBoard {
     id: string;
@@ -15,14 +15,19 @@ export interface IBoard {
 }
 
 export interface IBoardDetail {
-    boardName?: string;
-    boardId: string;
-    listItem: IList[];
+    createAt: string;
+    id: string;
+    lists: IList[],
+    members: IUser[],
+    name: string;
 }
 
 export interface IList {
-    listTicket: ITicket[];
-    listName: string;
+    pos: string;
+    boardId: string;
+    createAt: string;
+    id: string;
+    tickets: ITicket[];
 }
 
 export interface ITicket {
