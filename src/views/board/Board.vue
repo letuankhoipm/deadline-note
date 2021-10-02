@@ -28,7 +28,7 @@ import calcPosition from "@/utils/calc-pos";
   methods: {
     getDetail(): void {
       this.boardId = this.$route.params.id;
-      this.callApisBoard(this.boardId);
+      this.getBoardDetail(this.boardId);
     },
   },
   created() {
@@ -266,6 +266,12 @@ export default class Board extends Vue {
   // };
   dragging = false;
 
+  private _imListBefore = "";
+  private _imListAfter = "";
+  private _currListIndex = 0;
+  private _currListPos = "";
+  private _currListId = "";
+
   add() {
     console.log("add");
   }
@@ -275,13 +281,47 @@ export default class Board extends Vue {
   }
 
   checkMove(event: any) {
-    console.log("checkMove", event);
+    // console.log("checkMove", event);
   }
 
   log(event: any) {
     const { moved, added } = event;
-    if (moved) console.log("moved", moved);
+    if (moved) {
+      console.log(this.boardDetail.lists);
+      console.log("moved", moved);
+    }
     if (added) console.log("added", added, added.element);
+  }
+
+  //=============================================================
+
+  public onMoveList(event: any): void {
+    if (!this.boardDetail.lists) {
+      return;
+    }
+    
+    const listLen = this.boardDetail.lists.length;
+    this._currListIndex = event.moved.newIndex;
+
+    if (this._currListIndex === 0) {
+      this._imListBefore = "";
+      this._imListAfter = this.boardDetail.lists[this._currListIndex + 1].pos;
+    } else if (this._currListIndex === listLen - 1) {
+      this._imListBefore = this.boardDetail.lists[this._currListIndex - 1].pos;
+      this._imListAfter = "";
+    } else {
+      this._imListBefore = this.boardDetail.lists[this._currListIndex - 1].pos;
+      this._imListAfter = this.boardDetail.lists[this._currListIndex + 1].pos;
+    }
+
+    this._currListPos = calcPosition(this._imListBefore, this._imListAfter);
+    this._currListId = this.boardDetail.lists[this._currListIndex].id;
+    listService
+      .move({ pos: this._currListPos }, this._currListId)
+      .then((res: any) => {
+        this.boardDetail.lists[this._currListIndex].pos = res?.data;
+      })
+      .catch((err) => console.log(err));
   }
 
   //=============================================================
@@ -302,7 +342,7 @@ export default class Board extends Vue {
     listService
       .create(listReq)
       .then((res: any) => {
-        this.callApisBoard(this.boardId);
+        this.getBoardDetail(this.boardId);
         this.newListName = "";
       })
       .catch((err) => {
@@ -321,7 +361,7 @@ export default class Board extends Vue {
       });
   }
 
-  public callApisBoard(boardId: string): void {
+  public getBoardDetail(boardId: string): void {
     boardService
       .getById(boardId)
       .then((res: any) => {

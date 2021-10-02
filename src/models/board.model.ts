@@ -28,6 +28,7 @@ export interface IList {
     createAt: string;
     id: string;
     tickets: ITicket[];
+    title: string;
 }
 
 export interface ITicket {
@@ -51,4 +52,8 @@ export interface IListRequest {
     name: string;
     pos: string;
     boardId: string;
+}
+
+export interface IListMoveRequest {
+    pos: string;
 }
