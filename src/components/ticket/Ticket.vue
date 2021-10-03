@@ -6,15 +6,15 @@
         class="bg-white max-w-xl p-2 hover:bg-gray-100 cursor-pointer shadow transition duration-200"
       >
         <div class="text-left mb-1">
-          <span
+          <!-- <span
             v-bind:class="{'bg-blue-500': ticket.label.id === 0, 'bg-yellow-500': ticket.label.id === 1, 'bg-green-500': ticket.label.id === 2}"
             class="w-14 inline-flex items-center uppercase justify-center px-2 py-1 text-xs font-bold leading-none text-white"
           >
-          </span>
+          </span> -->
         </div>
         <div class="">
           <h1 class="text-sm text-gray-700">
-            {{ticket.ticketName}}
+            {{ticket.title}}
           </h1>
         </div>
         <div class="grid grid-cols-2">

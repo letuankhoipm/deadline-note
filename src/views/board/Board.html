@@ -21,10 +21,10 @@
                                 <draggable class="dragArea list-group w-full" :list="element.tickets"
                                     :group="boardDetail.id" :sort="true" @change="log" :move="checkMove">
                                     <Ticket v-for="ticket in element.tickets" :key="ticket.ticketName" :ticket="ticket"
-                                        @click="onTicketDetail()" />
+                                        @click="onTicketDetail(element.id)" />
 
                                     <div class="create-ticket">
-                                        <button @click="onCreateTicket(element.name)"
+                                        <button @click="onCreateTicket(element)"
                                             class="btn-ps btn-ps-action w-full text-center">
                                             <PlusIcon class="h-5 w-5 inline" />
                                         </button>

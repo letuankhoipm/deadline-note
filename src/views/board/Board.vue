@@ -299,7 +299,7 @@ export default class Board extends Vue {
     if (!this.boardDetail.lists) {
       return;
     }
-    
+
     const listLen = this.boardDetail.lists.length;
     this._currListIndex = event.moved.newIndex;
 
@@ -326,7 +326,14 @@ export default class Board extends Vue {
 
   //=============================================================
   public onCreateTicket(listInfo: any): void {
-    const modalRef = NgvModalService.open(NewTicket, listInfo);
+    const modalRef = NgvModalService.open(NewTicket, { ...listInfo }).then(
+      (res: any) => {
+        if (res) {
+          console.log("res modal");
+          this.getBoardDetail(this.boardId);
+        }
+      }
+    );
   }
 
   public onTicketDetail(): void {

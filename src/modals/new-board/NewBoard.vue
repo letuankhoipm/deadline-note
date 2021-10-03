@@ -23,7 +23,7 @@ import { IBoardRequest } from "@/models/board.model";
   data() {
     return {
       newBoardForm: {
-        name: null,
+        title: null,
         projectId: null,
       } as unknown as IBoardRequest,
     };

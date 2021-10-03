@@ -41,6 +41,7 @@ export interface ITicket {
         id: number,
         name: string
     };
+    pos: string;
 }
 
 export interface IBoardRequest {
@@ -52,6 +53,14 @@ export interface IListRequest {
     name: string;
     pos: string;
     boardId: string;
+}
+
+export interface ITicketRequest {
+    title: string;
+    description: string;
+    pos: string;
+    listId: string;
+    memberIds: string[];
 }
 
 export interface IListMoveRequest {

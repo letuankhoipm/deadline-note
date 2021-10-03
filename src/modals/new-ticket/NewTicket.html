@@ -25,12 +25,12 @@
 
                                 <div class="col-span-2">
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Title" id="title" name="title"
-                                            type="text">
+                                        <input class="form-control" v-model="newTicketForm.title" placeholder="Title"
+                                            id="title" name="title" type="text">
                                         <p class="hint text-sm">
                                             in list
                                             <strong class="underline">
-                                                {{input}}
+                                                {{input?.title}}
                                             </strong>
                                         </p>
                                     </div>
@@ -46,12 +46,9 @@
                                                         <p class="text-sm text-gray-500">
                                                             Assignment
                                                         </p>
-                                                        <Multiselect mode="tags" :closeOnSelect="false"
-                                                            :searchable="true" :options="[
-                                                      { value: 'batman', label: 'Batman' },
-                                                      { value: 'robin', label: 'Robin' },
-                                                      { value: 'joker', label: 'Joker' },
-                                                    ]" />
+                                                        <Multiselect v-model="newTicketForm.memberIds" mode="tags"
+                                                            @search-change="onTyping($event)" :closeOnSelect="false"
+                                                            :searchable="true" :options="users" />
                                                     </div>
                                                 </div>
                                                 <div class="col-span ml-2">
@@ -79,15 +76,10 @@
                                                 <p class="text-sm text-gray-500">
                                                     Description
                                                 </p>
-                                                <p class="text-sm">
-                                                    Lorem Ipsum is simply dummy text of the printing and
-                                                    typesetting industry.
-                                                </p>
-                                                <textarea hidden class="p-0" name="" id="" cols="20" rows="5">
-                                                </textarea>
+                                                <input class="p-0" v-model="newTicketForm.description" name="" id="">
                                             </div>
                                         </div>
-                                        <div class="comment-section">
+                                        <div hidden class="comment-section">
                                             <p class="text-sm text-gray-500 mb-4">
                                                 Activity
                                             </p>
@@ -151,8 +143,8 @@
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button @click="onCreate()" class="btn-ps btn-ps-raise btn my-2">next</button>
-                <button class="btn-ps btn-ps-flat btn my-2">forgot password</button>
+                <button @click="onCreate()" class="btn-ps btn-ps-raise btn my-2">create</button>
+                <button @click="onCancel()" class="btn-ps btn-ps-flat btn my-2">cancel</button>
             </div>
         </div>
     </div>
