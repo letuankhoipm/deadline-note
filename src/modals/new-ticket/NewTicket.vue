@@ -78,6 +78,9 @@ export default class NewTicket extends Vue {
   public listDetail: any;
   public onSearch$ = new Subject<any>();
 
+  private _currListId = "";
+  private _currTicketId = "";
+
   public text =
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
@@ -89,6 +92,8 @@ export default class NewTicket extends Vue {
     const searchField = event;
     this.onSearch$.next(searchField);
   }
+
+  // ================================================================
 
   private _onSearching(): void {
     this.onSearch$.pipe(debounceTime(500)).subscribe((key: string) => {

@@ -32,16 +32,12 @@ export interface IList {
 }
 
 export interface ITicket {
-    id: number;
-    ticketName: string;
-    content: string;
-    member: IUser[];
-    date: string;
-    label: {
-        id: number,
-        name: string
-    };
+    id: string;
+    createAt: string;
+    description: string;
+    listId: string;
     pos: string;
+    title: string;
 }
 
 export interface IBoardRequest {

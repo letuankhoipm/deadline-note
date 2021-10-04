@@ -3,15 +3,21 @@
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import { VueDraggableNext } from "vue-draggable-next";
-import { DotsVerticalIcon, PlusIcon } from "@heroicons/vue/outline";
+import { DotsVerticalIcon, PlusIcon, TrashIcon } from "@heroicons/vue/outline";
 import Ticket from "@/components/ticket/Ticket.vue";
-import { IBoardDetail, IListRequest } from "@/models/board.model";
+import {
+  IBoardDetail,
+  IList,
+  IListRequest,
+  ITicket,
+} from "@/models/board.model";
 import { mapGetters } from "vuex";
 import NgvModalService from "@/services/ngv-modal.service";
 import NewTicket from "@/modals/new-ticket/NewTicket.vue";
 import boardService from "@/services/board.service";
 import listService from "@/services/list.service";
 import calcPosition from "@/utils/calc-pos";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 
 @Options({
   components: {
@@ -20,6 +26,11 @@ import calcPosition from "@/utils/calc-pos";
     NewTicket,
     DotsVerticalIcon,
     PlusIcon,
+    TrashIcon,
+    MenuItem,
+    MenuItems,
+    Menu,
+    MenuButton,
   },
   computed: {
     ...mapGetters(["g_user"]),
@@ -45,232 +56,28 @@ export default class Board extends Vue {
     name: "",
   };
   public newListName = "";
-  enabled = true;
-  // demoBoard: IBoardDetail = {
-  //   boardId: "board-1",
-  //   listItem: [
-  //     {
-  //       listTicket: [
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [
-  //             {
-  //               username: "John Terry",
-  //               email: "terry@gmail.com",
-  //               id: "uid",
-  //               createAt: "iso string",
-  //             },
-  //           ],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 1,
-  //             name: "Higth Priority",
-  //           },
-  //         },
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 0,
-  //             name: "In Progress",
-  //           },
-  //         },
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 2,
-  //             name: "Done",
-  //           },
-  //         },
-  //       ],
-  //       listName: "To-do",
-  //     },
-  //     {
-  //       listTicket: [
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 1,
-  //             name: "Higth Priority",
-  //           },
-  //         },
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 0,
-  //             name: "Bugs",
-  //           },
-  //         },
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 2,
-  //             name: "Done",
-  //           },
-  //         },
-  //       ],
-  //       listName: "In progress",
-  //     },
-  //     {
-  //       listTicket: [
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 1,
-  //             name: "Higth Priority",
-  //           },
-  //         },
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 0,
-  //             name: "Resolve",
-  //           },
-  //         },
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 2,
-  //             name: "Done",
-  //           },
-  //         },
-  //       ],
-  //       listName: "Resolve",
-  //     },
-  //     {
-  //       listTicket: [
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 1,
-  //             name: "Higth Priority",
-  //           },
-  //         },
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 0,
-  //             name: "In Progress",
-  //           },
-  //         },
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 2,
-  //             name: "Done",
-  //           },
-  //         },
-  //       ],
-  //       listName: "Fixed",
-  //     },
-  //     {
-  //       listTicket: [
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 1,
-  //             name: "Higth Priority",
-  //           },
-  //         },
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 0,
-  //             name: "In Progress",
-  //           },
-  //         },
-  //         {
-  //           id: 0,
-  //           ticketName: "Drawing Portugal Church",
-  //           content:
-  //             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  //           member: [],
-  //           date: "12-01-2021 12:00 AM",
-  //           label: {
-  //             id: 2,
-  //             name: "Done",
-  //           },
-  //         },
-  //       ],
-  //       listName: "Close",
-  //     },
-  //   ],
-  //   boardName: "ahihi",
-  // };
-  dragging = false;
+  public enabled = true;
+  public dragging = false;
+
+  // ====================================================
+  // List variables
+  // ====================================================
 
   private _imListBefore = "";
   private _imListAfter = "";
   private _currListIndex = 0;
   private _currListPos = "";
   private _currListId = "";
+
+  // ====================================================
+  // Ticket variables
+  // ====================================================
+
+  private _imTicketBefore = "";
+  private _imTicketAfter = "";
+  private _currTicketIndex = 0;
+  private _currTicketPos = "";
+  private _currTicketId = "";
 
   add() {
     console.log("add");
@@ -322,6 +129,36 @@ export default class Board extends Vue {
         this.boardDetail.lists[this._currListIndex].pos = res?.data;
       })
       .catch((err) => console.log(err));
+  }
+
+  public onChangeTicket(event: any, list: ITicket[], listId: string): void {
+    console.log(event, list);
+    const { moved, added } = event;
+    if (moved) {
+      if (!list) {
+        return;
+      }
+      const length = list.length;
+      this._currTicketIndex = moved.newIndex;
+
+      if (this._currTicketIndex === 0) {
+        this._imTicketBefore = "";
+        this._imTicketAfter = list[this._currTicketIndex + 1].pos;
+      } else if (this._currTicketIndex === length - 1) {
+        this._imTicketBefore = list[this._currTicketIndex - 1].pos;
+        this._imTicketAfter = "";
+      } else {
+        this._imTicketBefore = list[this._currTicketIndex - 1].pos;
+        this._imTicketAfter = list[this._currTicketIndex + 1].pos;
+      }
+
+      this._currTicketPos = calcPosition(
+        this._imTicketBefore,
+        this._imTicketAfter
+      );
+      this._currTicketId = list[this._currTicketIndex].id;
+      console.log(this._currTicketPos, "current ticket pos");
+    }
   }
 
   //=============================================================
