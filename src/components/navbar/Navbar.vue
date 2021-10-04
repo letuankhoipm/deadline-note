@@ -95,13 +95,6 @@
                 <router-link
                   :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                   class="text-white mt-2"
-                  to="/home"
-                >Help</router-link>
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                <router-link
-                  :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                  class="text-white mt-2"
                   to="/"
                 >Log out</router-link>
                 </MenuItem>
