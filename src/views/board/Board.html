@@ -46,7 +46,7 @@
                             <div class="ps-board-content">
                                 <draggable class="dragArea list-group w-full" :list="element.tickets"
                                     :group="boardDetail.id" :sort="true"
-                                    @change="onChangeTicket($event, element.tickets, element.id)" :move="checkMove">
+                                    @change="onChangeTicket($event, element.tickets, element.id, element)" :move="checkMove">
                                     <Ticket v-for="ticket in element.tickets" :key="ticket.title" :ticket="ticket"
                                         @click="onTicketDetail(element.id)" />
 
