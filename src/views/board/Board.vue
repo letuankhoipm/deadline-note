@@ -212,7 +212,7 @@ export default class Board extends Vue {
     const modalRef = NgvModalService.open(NewTicket, { ...listInfo }).then(
       (res: any) => {
         if (res) {
-          console.log("res modal")
+          console.log("res modal ahii")
           this.getBoardDetail(this.boardId)
         }
       }
