@@ -7,6 +7,8 @@ import projectService from "@/services/project.service";
 import { IInvite } from "@/models/project.model";
 import ngvModalService from "@/services/ngv-modal.service";
 import InviteModal from "@/modals/invite-modal/InviteModal.vue";
+import ConfirmModal from "@/modals/confirm-modal/ConfirmModal.vue";
+import toastrService from "@/services/toastr.service";
 @Options({
   components: { UserAddIcon, TrashIcon },
   props: {},
@@ -29,6 +31,26 @@ export default class ProjectSettings extends Vue {
   public onInvite(): void {
     ngvModalService.open(InviteModal, { projectId: this.projectId });
   }
+
+  public onConfirm(): void {
+    const modafRef = ngvModalService.open(ConfirmModal, { title: 'Delete Project', msg: 'Are you sure you want to delete this project?' });
+    modafRef.then(result => {
+      result && this.onDelete();
+      toastrService.success('Notification', 'Delete project succesffully!')
+      this.$router.push("/home");
+    }, reason => {
+      console.log(reason);
+    })
+  }
+
+  public onDelete(): void {
+    projectService.delete(this.projectId).then(result => {
+      console.log(result);
+    }, error => {
+      toastrService.error('Notification', error)
+    })
+  }
+
 }
 </script>
 

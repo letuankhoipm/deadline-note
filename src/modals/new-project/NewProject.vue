@@ -67,7 +67,7 @@ export default class NewProject extends Vue {
   }
 
   public cancel(): void {
-    NgvModalService.close("ahiih");
+    NgvModalService.close(true);
   }
 }
 </script>

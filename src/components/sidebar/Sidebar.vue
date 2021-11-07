@@ -13,37 +13,10 @@
           </li>
           <li class="flex w-full justify-between hover:text-gray-500 cursor-pointer items-center py-2">
             <div class="flex items-center">
-              <CubeIcon class="h-6 w-6" />
-              <span class="text-sm ml-2">Assassin's Creed</span>
-            </div>
-          </li>
-          <li class="flex w-full justify-between hover:text-gray-500 cursor-pointer items-center py-2">
-            <div class="flex items-center">
-              <CubeIcon class="h-6 w-6" />
-              <span class="text-sm ml-2">Fifa Online 3</span>
-            </div>
-          </li>
-          <li class="flex w-full justify-between hover:text-gray-500 cursor-pointer items-center py-2">
-            <div class="flex items-center">
               <span
                 @click="switchNewProjectModal(true)"
                 class="text-sm font-bold"
               >New project</span>
-            </div>
-          </li>
-          <li class="flex w-full justify-between hover:text-gray-500 cursor-pointer items-center py-2">
-            <div class="flex items-center">
-              <span class="text-sm font-bold">
-                Task Management
-              </span>
-            </div>
-          </li>
-          <li class="flex w-full justify-between hover:text-gray-500 cursor-pointer items-center py-2">
-            <div class="flex items-center">
-              <UserAddIcon class="h-6 w-6" />
-              <span class="text-sm ml-2">
-                Invite user
-              </span>
             </div>
           </li>
         </ul>
