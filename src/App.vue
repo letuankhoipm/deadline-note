@@ -1,14 +1,11 @@
 <template>
-  <div
-    id="app"
-    class="h-screen"
-  >
+  <div id="app" class="h-screen">
     <MainLayout />
   </div>
 </template>
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
-import MainLayout from "@/layouts/main-layout/MainLayout.vue";
+import { Vue, Options } from "vue-class-component"
+import MainLayout from "@/layouts/main-layout/MainLayout.vue"
 
 @Options({
   components: { MainLayout },

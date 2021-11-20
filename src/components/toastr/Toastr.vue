@@ -1,16 +1,21 @@
 <template>
   <div
-    v-bind:class="{'vue-toastr-before': !isAppear , 'vue-toastr-after': isAppear}"
+    v-bind:class="{
+      'vue-toastr-before': !isAppear,
+      'vue-toastr-after': isAppear,
+    }"
     class="flex flex-col jusctify-center vue-toastr"
   >
     <div
-      v-bind:class="{ 'bg-green-500 border-green-700': toastrObj.type === 'success', 'bg-blue-400 border-blue-700': toastrObj.type === 'info', 'bg-yellow-500 border-yellow-700': toastrObj.type === 'warning', 'bg-red-500 border-red-700': toastrObj.type === 'error'}"
+      v-bind:class="{
+        'bg-green-500 border-green-700': toastrObj.type === 'success',
+        'bg-blue-400 border-blue-700': toastrObj.type === 'info',
+        'bg-yellow-500 border-yellow-700': toastrObj.type === 'warning',
+        'bg-red-500 border-red-700': toastrObj.type === 'error',
+      }"
       class="flex items-center border-l-4 py-2 px-3 shadow-md mb-2"
     >
-      <div
-        @click="onAppear()"
-        class="mr-3 cursor-pointer"
-      >
+      <div @click="onAppear()" class="mr-3 cursor-pointer">
         <!-- ================================================= -->
         <svg
           v-if="toastrObj.type === 'success'"
@@ -36,12 +41,10 @@
           fill="white"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z" />
-          <circle
-            cx="8"
-            cy="4.5"
-            r="1"
+          <path
+            d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"
           />
+          <circle cx="8" cy="4.5" r="1" />
         </svg>
         <!-- ================================================= -->
         <svg
@@ -53,7 +56,9 @@
           fill="white"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+          <path
+            d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"
+          />
         </svg>
         <!-- ================================================= -->
         <svg
@@ -75,10 +80,10 @@
           />
         </svg>
       </div>
-      <div class="text-white max-w-xs ">
-        <h5 class="font-bold"> {{toastrObj.title}}</h5>
+      <div class="text-white max-w-xs">
+        <h5 class="font-bold">{{ toastrObj.title }}</h5>
         <p>
-          {{toastrObj.content}}
+          {{ toastrObj.content }}
         </p>
       </div>
     </div>
@@ -86,43 +91,46 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import ToastrService from "@/services/toastr.service";
-import { ToastrMessage } from "@/models/toastr.model";
+import { Options, Vue } from "vue-class-component"
+import ToastrService from "@/services/toastr.service"
+import { ToastrMessage } from "@/models/toastr.model"
 
 @Options({
   props: [],
   created() {
-    this.onSubscribe();
+    this.onSubscribe()
   },
 })
 export default class Toastr extends Vue {
-  public isAppear = false;
+  public isAppear = false
   public toastrObj: ToastrMessage = {
     title: "",
     content: "",
     type: "info",
-  };
+  }
 
-  public onAppear(obj: ToastrMessage): void {
+  public onAppear(obj?: ToastrMessage): void {
     setTimeout(() => {
-      this.toastrObj = obj;
-      this.isAppear = true;
-      this.onDisappear();
-    }, 1000);
+      if (!obj) {
+        return
+      }
+      this.toastrObj = obj
+      this.isAppear = true
+      this.onDisappear()
+    }, 1000)
   }
 
   public onSubscribe(): void {
     ToastrService.toastrSubject$.subscribe((res: any) => {
       if (res) {
-        this.onAppear(res);
+        this.onAppear(res)
       }
-    });
+    })
   }
   public onDisappear(): void {
     setTimeout(() => {
-      this.isAppear = false;
-    }, 5000);
+      this.isAppear = false
+    }, 5000)
   }
 }
 </script>

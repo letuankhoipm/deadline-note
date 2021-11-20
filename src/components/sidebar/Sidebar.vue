@@ -1,22 +1,53 @@
 <template>
   <div class="bg-gray-100 ps-sidebar">
-    <div class="w-64 absolute sm:relative bg-gray-200 shadow md:h-full flex-col justify-between hidden sm:flex">
+    <div
+      class="
+        w-64
+        absolute
+        sm:relative
+        bg-gray-200
+        shadow
+        md:h-full
+        flex-col
+        justify-between
+        hidden
+        sm:flex
+      "
+    >
       <div class="px-8">
         <ul class="mt-6">
-          <li class="flex w-full justify-between hover:text-gray-500 cursor-pointer items-center py-2">
+          <li
+            class="
+              flex
+              w-full
+              justify-between
+              hover:text-gray-500
+              cursor-pointer
+              items-center
+              py-2
+            "
+          >
             <div class="flex items-center">
-              <span
-                @click="showListProject()"
-                class="text-sm font-bold"
-              >List project</span>
+              <span @click="showList()" class="text-sm font-bold"
+                >List project</span
+              >
             </div>
           </li>
-          <li class="flex w-full justify-between hover:text-gray-500 cursor-pointer items-center py-2">
+          <li
+            class="
+              flex
+              w-full
+              justify-between
+              hover:text-gray-500
+              cursor-pointer
+              items-center
+              py-2
+            "
+          >
             <div class="flex items-center">
-              <span
-                @click="switchNewProjectModal(true)"
-                class="text-sm font-bold"
-              >New project</span>
+              <span @click="switchNewProjectModal()" class="text-sm font-bold"
+                >New project</span
+              >
             </div>
           </li>
         </ul>
@@ -34,46 +65,34 @@
     </div>
   </div>
   <div v-if="newProjectVisibilty">
-    <NewProject @exit="switchNewProjectModal(false)" />
+    <NewProject @exit="switchNewProjectModal()" />
   </div>
-
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
-import { CubeIcon, CogIcon, UserAddIcon } from "@heroicons/vue/outline";
-import NewProject from "@/modals/new-project/NewProject.vue";
-import NgvModalService from "@/services/ngv-modal.service";
+import { Vue, Options } from "vue-class-component"
+import { CubeIcon, CogIcon, UserAddIcon } from "@heroicons/vue/outline"
+import NewProject from "@/modals/new-project/NewProject.vue"
+import NgvModalService from "@/services/ngv-modal.service"
+import execService from "@/services/exec.service"
 
 @Options({
   components: { CubeIcon, CogIcon, NewProject, UserAddIcon },
-  props: {},
-  methods: {
-    showListProject(): void {
-      this.$router.push("/home");
-    },
-    gotoTeamwork(): void {
-      this.$router.push("/teamwork");
-    },
-  },
 })
 export default class Sidebar extends Vue {
-  public newProjectVisibilty = false;
+  public newProjectVisibilty = false
 
-  public switchNewProjectModal(state: boolean): void {
-    // this.newProjectVisibilty = state;
+  public switchNewProjectModal(): void {
     const modalRef = NgvModalService.open(NewProject, {
-      name: "khoi",
-      age: "22",
-    });
-    modalRef.then(
-      (result) => {
-        console.log(result);
-      },
-      (reason) => {
-        console.log(reason);
-      }
-    );
+      name: "New Project",
+    })
+    modalRef.then((result) => {
+      result && execService.refetch()
+    })
+  }
+
+  public showList(): void {
+    this.$router.push("/home")
   }
 }
 </script>

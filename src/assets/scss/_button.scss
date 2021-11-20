@@ -24,18 +24,33 @@
   color: $primary;
   border-color: $primary !important;
   background-color: transparent;
+
+  &:hover {
+    transition-duration: .4s;
+    background-color: rgb(238, 238, 238) !important;
+  }
 }
 
 .btn-ps-raise {
   color: white !important;
   border-color: none !important;
   background-color: $primary !important;
+
+  &:hover {
+    transition-duration: .4s;
+    background-color: darken($primary, 10%) !important
+  }
 }
 
 .btn-ps-flat {
   color: $primary;
   border: none !important;
   background-color: transparent !important;
+
+  &:hover {
+    transition-duration: .4s;
+    background-color: rgb(238, 238, 238) !important;
+  }
 }
 
 .btn-ps-icon {
