@@ -1,25 +1,23 @@
 <template src="./ConfirmModal.html"></template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
-import { XIcon } from "@heroicons/vue/outline";
-import ngvModalService from "@/services/ngv-modal.service";
+import { Vue, Options } from "vue-class-component"
+import ngvModalService from "@/services/ngv-modal.service"
 @Options({
   components: {},
   props: ["input"],
   methods: {},
   data() {
-    return {};
+    return {}
   },
 })
 export default class ConfirmModal extends Vue {
-
   public onConfirm(): void {
-    ngvModalService.close(true);
+    ngvModalService.close(true)
   }
 
   public onCancel(): void {
-    ngvModalService.dismiss(true);
+    ngvModalService.dismiss(true)
   }
 }
 </script>

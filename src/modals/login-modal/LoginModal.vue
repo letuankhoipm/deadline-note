@@ -53,7 +53,7 @@
                       w-5
                       float-right
                       leading-8
-                      seft-center
+                      self-center
                       cursor-pointer
                     "
                   />
@@ -121,9 +121,6 @@ import { XIcon } from "@heroicons/vue/outline"
         password: "",
       } as unknown as LoginRequest,
     }
-  },
-  created() {
-    console.log(this.g_user)
   },
 })
 export default class LoginModal extends Vue {

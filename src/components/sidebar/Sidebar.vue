@@ -64,7 +64,7 @@
       </div>
     </div>
   </div>
-  <div v-if="newProjectVisibilty">
+  <div v-if="newProjectVisibility">
     <NewProject @exit="switchNewProjectModal()" />
   </div>
 </template>
@@ -80,7 +80,7 @@ import execService from "@/services/exec.service"
   components: { CubeIcon, CogIcon, NewProject, UserAddIcon },
 })
 export default class Sidebar extends Vue {
-  public newProjectVisibilty = false
+  public newProjectVisibility = false
 
   public switchNewProjectModal(): void {
     const modalRef = NgvModalService.open(NewProject, {

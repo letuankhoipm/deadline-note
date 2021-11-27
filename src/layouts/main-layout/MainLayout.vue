@@ -50,7 +50,6 @@ export default class MainLayout extends Vue {
 
   public onListenRouting(): void {
     AuthService.routeSubject$.subscribe((res: any) => {
-      console.log(res)
       res ? (this.isVisibility = true) : (this.isVisibility = false)
     })
   }
@@ -60,7 +59,6 @@ export default class MainLayout extends Vue {
       if (res) {
         this.modalComponent = res.component
         this.inputObj = res.inputObj
-        console.log(res)
       }
     })
   }

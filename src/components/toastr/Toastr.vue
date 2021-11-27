@@ -4,7 +4,7 @@
       'vue-toastr-before': !isAppear,
       'vue-toastr-after': isAppear,
     }"
-    class="flex flex-col jusctify-center vue-toastr"
+    class="flex flex-col justify-center vue-toastr"
   >
     <div
       v-bind:class="{

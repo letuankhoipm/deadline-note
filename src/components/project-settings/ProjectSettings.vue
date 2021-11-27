@@ -14,7 +14,6 @@ import toastrService from "@/services/toastr.service"
   methods: {
     getProjectId(): void {
       this.projectId = this.$route.params.id
-      console.log(this.projectId)
     },
   },
   data() {
@@ -32,21 +31,20 @@ export default class ProjectSettings extends Vue {
   }
 
   public onConfirm(): void {
-    const modafRef = ngvModalService.open(ConfirmModal, {
+    const modalRef = ngvModalService.open(ConfirmModal, {
       title: "Delete Project",
       msg: "Are you sure you want to delete this project?",
     })
-    modafRef.then((result) => {
+    modalRef.then((result) => {
       result && this.onDelete()
     })
   }
 
   public onDelete(): void {
     projectService.delete(this.projectId).then(
-      (result) => {
-        toastrService.success("Notification", "Delete project succesffully!")
+      () => {
+        toastrService.success("Notification", "Delete project successfully!")
         this.$router.push("/home")
-        console.log(result)
       },
       (error) => {
         toastrService.error("Notification", error)

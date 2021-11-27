@@ -2,8 +2,16 @@
   <div class="flex items-center justify-center">
     <div class="py-2 w-full">
       <div
-        @click="goToDetail()"
-        class="bg-white max-w-xl p-2 hover:bg-gray-100 cursor-pointer shadow transition duration-200"
+        class="
+          bg-white
+          max-w-xl
+          p-2
+          hover:bg-gray-100
+          cursor-pointer
+          shadow
+          transition
+          duration-200
+        "
       >
         <div class="text-left mb-1">
           <!-- <span
@@ -14,19 +22,21 @@
         </div>
         <div class="">
           <h1 class="text-sm text-gray-700">
-            {{ticket.title}}
+            {{ ticket.title }}
           </h1>
         </div>
         <div class="grid grid-cols-2">
           <div class="col-span">
             <ChatAltIcon class="h-5 w-5 mt-3 text-gray-700" />
           </div>
-          <div class="col-span flex flex-row-reverse items-center cursor-pointer">
+          <div
+            class="col-span flex flex-row-reverse items-center cursor-pointer"
+          >
             <img
               class="rounded-full w-10"
               src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"
               alt="avt"
-            >
+            />
           </div>
         </div>
       </div>
@@ -34,12 +44,16 @@
   </div>
 </template>
 
-<script>
-import { Vue, Options } from "vue-class-component";
-import { ChatAltIcon } from "@heroicons/vue/outline";
+<script lang="ts">
+import { Vue, Options } from "vue-class-component"
+import { ChatAltIcon } from "@heroicons/vue/outline"
 @Options({
   components: { ChatAltIcon },
   props: ["ticket"],
 })
-export default class Ticket extends Vue {}
+export default class Ticket extends Vue {
+  get ticket(): any {
+    return this.ticket
+  }
+}
 </script>
