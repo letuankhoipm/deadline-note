@@ -7,11 +7,9 @@ import { DotsVerticalIcon, PlusIcon, TrashIcon } from "@heroicons/vue/outline"
 import Ticket from "@/components/ticket/Ticket.vue"
 import {
   IBoardDetail,
-  IList,
   IListRequest,
   ITicket,
   ITicketMoveRequest,
-  ITicketRequest,
 } from "@/models/board.model"
 import { mapGetters } from "vuex"
 import NgvModalService from "@/services/ngv-modal.service"
@@ -113,12 +111,7 @@ export default class Board extends Vue {
       .catch((err) => console.log(err))
   }
 
-  public onChangeTicket(
-    event: any,
-    list: ITicket[],
-    listId: string,
-    listDetail: any
-  ): void {
+  public onChangeTicket(event: any, list: ITicket[], listId: string): void {
     const { moved, added } = event
     if (moved) {
       if (!list) {
@@ -147,12 +140,12 @@ export default class Board extends Vue {
       )
       this._currTicketId = list[this._currTicketIndex].id
 
-      const reqest: ITicketMoveRequest = {
+      const request: ITicketMoveRequest = {
         pos: this._currTicketPos,
         boardId: this.boardId,
         listId: listId,
       }
-      ticketService.move(reqest, this._currTicketId).then((res: any) => {
+      ticketService.move(request, this._currTicketId).then((res: any) => {
         console.log(res)
       })
     }
@@ -209,18 +202,15 @@ export default class Board extends Vue {
 
   //=============================================================
   public onCreateTicket(listInfo: any): void {
-    const modalRef = NgvModalService.open(NewTicket, { ...listInfo }).then(
-      (res: any) => {
-        if (res) {
-          console.log("res modal ahii")
-          this.getBoardDetail(this.boardId)
-        }
+    NgvModalService.open(NewTicket, { ...listInfo }).then((res: any) => {
+      if (res) {
+        this.getBoardDetail(this.boardId)
       }
-    )
+    })
   }
 
   public onTicketDetail(): void {
-    const modalRef = NgvModalService.open(NewTicket)
+    NgvModalService.open(NewTicket)
   }
 
   public onCreateList(): void {
@@ -231,7 +221,7 @@ export default class Board extends Vue {
     }
     listService
       .create(listReq)
-      .then((res: any) => {
+      .then(() => {
         this.getBoardDetail(this.boardId)
         this.newListName = ""
       })

@@ -3,24 +3,49 @@
     <div class="p-2 w-full">
       <div
         @click="goToDetail(board.id)"
-        class="bg-gray-50 max-w-xl p-6 board-card hover:bg-gray-100 cursor-pointer shadow-lg transition duration-500"
+        class="
+          bg-gray-50
+          max-w-xl
+          p-6
+          board-card
+          hover:bg-gray-100
+          cursor-pointer
+          shadow-lg
+          transition
+          duration-500
+        "
       >
         <div class="text-right">
           <span
-            v-bind:class="{'bg-blue-500': board.type === 'design', 'bg-yellow-500': board.type === 'programing'}"
-            class="inline-flex items-center uppercase justify-center px-2 py-1 text-xs font-bold leading-none text-white"
+            v-bind:class="{
+              'bg-blue-500': board.type === 'design',
+              'bg-yellow-500': board.type === 'programing',
+            }"
+            class="
+              inline-flex
+              items-center
+              uppercase
+              justify-center
+              px-2
+              py-1
+              text-xs
+              font-bold
+              leading-none
+              text-white
+            "
           >
-            {{board.type}}
+            {{ board.type }}
           </span>
         </div>
         <div class="mt-4">
           <h1 class="text-lg text-gray-700 font-semibold">
-            {{board.name}}
+            {{ board.name }}
           </h1>
           <div class="flex justify-between items-center">
             <p class="mt-4 max-w-2xl text-sm text-gray-500">
-              {{board.shortDescription}}
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              {{ board.shortDescription }}
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
             </p>
           </div>
         </div>
@@ -30,22 +55,27 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
+import Board from "@/views/board/Board.vue"
+import { Vue, Options } from "vue-class-component"
 @Options({
   components: {},
   props: ["board"],
   methods: {},
   data() {
-    return {};
+    return {}
   },
   created() {
-    this.board.type = "design";
-    console.log(this.board);
+    this.board.type = "design"
+    console.log(this.board)
   },
 })
 export default class BoardCard extends Vue {
+  get board(): Board {
+    return this.board
+  }
+
   public goToDetail(boardId: string): void {
-    this.$router.push(`/board-detail/${boardId}`);
+    this.$router.push(`/board-detail/${boardId}`)
   }
 }
 </script>
