@@ -6,20 +6,10 @@ import { XIcon, CreditCardIcon } from "@heroicons/vue/outline"
 import ngvModalService from "@/services/ngv-modal.service"
 import boardService from "@/services/board.service"
 import { IBoardRequest } from "@/models/board.model"
+import toastrService from "@/services/toastr.service"
 @Options({
   components: { XIcon, CreditCardIcon },
   props: ["input"],
-  methods: {
-    onCreateBoard(): void {
-      console.log(this.newBoardForm)
-      boardService
-        .create(this.newBoardForm)
-        .then((res: any) => {
-          console.log(res.data)
-        })
-        .catch((err) => console.log(err))
-    },
-  },
   data() {
     return {
       newBoardForm: {
@@ -28,16 +18,38 @@ import { IBoardRequest } from "@/models/board.model"
       } as unknown as IBoardRequest,
     }
   },
-  created() {
+})
+export default class NewBoard extends Vue {
+  get input(): any {
+    return this.input
+  }
+
+  get newBoardForm(): IBoardRequest {
+    return this.newBoardForm
+  }
+
+  mounted(): void {
     if (this.input) {
       this.newBoardForm.projectId = this.input.projectId
     }
     console.log(this.input.projectId)
-  },
-})
-export default class NewBoard extends Vue {
+  }
+
   public onCancel(): void {
     ngvModalService.dismiss()
+  }
+
+  public onCreateBoard(): void {
+    boardService
+      .create(this.newBoardForm)
+      .then((res: any) => {
+        if (!res) {
+          return
+        }
+        toastrService.success("Notification", "Create board successfully!")
+        ngvModalService.close()
+      })
+      .catch((err) => console.log(err))
   }
 }
 </script>

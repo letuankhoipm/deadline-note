@@ -45,18 +45,14 @@ import projectService from "@/services/project.service"
 import execService from "@/services/exec.service"
 @Options({
   components: { ProjectCard },
-  props: {},
-  methods: {},
-  data() {
-    return {}
-  },
-  created() {
-    this.getProjects()
-    this.onListenFetch()
-  },
 })
 export default class Project extends Vue {
   public listProject: IProject[] = []
+
+  mounted(): void {
+    this.getProjects()
+    this.onListenFetch()
+  }
 
   public onListenFetch(): void {
     execService.refetch$.subscribe((res: any) => {

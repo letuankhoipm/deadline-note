@@ -39,7 +39,7 @@
         </div>
         <div class="mt-4">
           <h1 class="text-lg text-gray-700 font-semibold">
-            {{ board.name }}
+            {{ board.title }}
           </h1>
           <div class="flex justify-between items-center">
             <p class="mt-4 max-w-2xl text-sm text-gray-500">
@@ -55,23 +55,18 @@
 </template>
 
 <script lang="ts">
-import Board from "@/views/board/Board.vue"
 import { Vue, Options } from "vue-class-component"
 @Options({
   components: {},
   props: ["board"],
-  methods: {},
-  data() {
-    return {}
-  },
-  created() {
-    this.board.type = "design"
-    console.log(this.board)
-  },
 })
 export default class BoardCard extends Vue {
-  get board(): Board {
+  get board(): any {
     return this.board
+  }
+
+  mounted(): void {
+    this.board.type = "design"
   }
 
   public goToDetail(boardId: string): void {

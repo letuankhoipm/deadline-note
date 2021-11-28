@@ -19,6 +19,9 @@ import listService from "@/services/list.service"
 import calcPosition from "@/utils/calc-pos"
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue"
 import ticketService from "@/services/ticket.service"
+import ngvModalService from "@/services/ngv-modal.service"
+import ConfirmModal from "@/modals/confirm-modal/ConfirmModal.vue"
+import toastrService from "@/services/toastr.service"
 
 @Options({
   components: {
@@ -54,7 +57,7 @@ export default class Board extends Vue {
     id: "",
     lists: [],
     members: [],
-    name: "",
+    title: "",
   }
   public newListName = ""
   public enabled = true
@@ -81,6 +84,14 @@ export default class Board extends Vue {
   private _currTicketId = ""
 
   //=============================================================
+
+  mounted(): void {
+    // this._initRealtimeConnection()
+  }
+
+  private _initRealtimeConnection(): void {
+    listService.startConnection()
+  }
 
   public onMoveList(event: any): void {
     if (!this.boardDetail.lists) {
@@ -263,6 +274,25 @@ export default class Board extends Vue {
     } else {
       return ""
     }
+  }
+
+  public onRemoveBoard(): void {
+    const modalRef = ngvModalService.open(ConfirmModal, {
+      title: "Delete Board",
+      msg: "Are you sure you want to delete this board?",
+    })
+    modalRef.then((result) => {
+      result && this.onDelete()
+    })
+  }
+
+  public onDelete(): void {
+    boardService.delete(this.boardDetail.id).then((res) => {
+      if (!res) {
+        return
+      }
+      toastrService.success("Notification", "Delete board successfully!")
+    })
   }
 }
 </script>

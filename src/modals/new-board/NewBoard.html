@@ -1,49 +1,49 @@
 <div class="fixed z-10 inset-0 overflow-y-auto">
-    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true"></span>
-        <div
-            class="inline-block align-bottom bg-white overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div class="grid grid-cols-2">
-                    <div class="col-span text-left">
-                        <span class="btn-ps-text-icon p-0">
-                            <CreditCardIcon class="h-6 w-6 mr-2 leading-8 seft-center cursor-pointer" />
-                            Create new board
-                        </span>
-                    </div>
-                    <div class="col-span text-right">
-                        <XIcon @click="onCancel()" class="h-5 w-5 float-right leading-8 seft-center cursor-pointer" />
-                    </div>
-                    <div class="grid grid-cols-4">
-                        <div class="col-span-3">
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true"></span>
+    <div
+      class="inline-block align-bottom bg-white overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div class="grid grid-cols-2">
+          <div class="col-span text-left">
+            <span class="btn-ps-text-icon p-0">
+              <CreditCardIcon class="h-6 w-6 mr-2 leading-8 seft-center cursor-pointer" />
+              Create new board
+            </span>
+          </div>
+          <div class="col-span text-right">
+            <XIcon @click="onCancel()" class="h-5 w-5 float-right leading-8 seft-center cursor-pointer" />
+          </div>
+          <div class="grid grid-cols-4">
+            <div class="col-span-3">
 
-                        </div>
-                    </div>
+            </div>
+          </div>
 
-                    <div class="col-span-2">
-                        <form>
-                            <div class="form-group">
-                                <input class="form-control" v-model="newBoardForm.title" placeholder="Title" id="title"
-                                    name="title" type="text">
-                                <div class="card text-left my-2">
-                                    <h5 class="font-bold text-md">
-                                        This Workspace has 5 of 10 free boards
-                                    </h5>
-                                    <p class="text-sm">
-                                        This guide only exists as a reference for people who need to or would like to
-                                        integrate Tailwind with a preprocessor for one reason or another.
-                                    </p>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+          <div class="col-span-2">
+            <form>
+              <div class="form-group">
+                <input class="form-control" v-model="newBoardForm.title" placeholder="Title" id="title" name="title"
+                  type="text">
+                <div class="card text-left my-2">
+                  <h5 class="font-bold text-md">
+                    This Workspace has 5 of 10 free boards
+                  </h5>
+                  <p class="text-sm">
+                    This guide only exists as a reference for people who need to or would like to
+                    integrate Tailwind with a preprocessor for one reason or another.
+                  </p>
                 </div>
-            </div>
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button @click="onCreateBoard()" class="btn-ps btn-ps-raise btn my-2">create board</button>
-                <button class="btn-ps btn-ps-flat btn my-2">dismiss</button>
-            </div>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <button @click="onCreateBoard" class="btn-ps btn-ps-raise btn my-2">create board</button>
+        <button @click="onCancel" class="btn-ps btn-ps-flat btn my-2">dismiss</button>
+      </div>
     </div>
+  </div>
 </div>
