@@ -5,38 +5,38 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/home",
     name: "Home",
-    component: Home
+    component: Home,
   },
   {
     path: "/",
     name: "Login",
-    component: () =>
-      import("../views/login/Login.vue"),
+    component: () => import("../views/login/Login.vue"),
+  },
+  {
+    path: "/forgot-password",
+    name: "ForgotPassword",
+    component: () => import("../views/forgot-password/ForgotPassword.vue"),
   },
   {
     path: "/board-detail/:id",
     name: "Board",
-    component: () =>
-      import("../views/board/Board.vue"),
+    component: () => import("../views/board/Board.vue"),
   },
   {
     path: "/project-detail/:id",
     name: "Project Detail",
-    component: () =>
-      import("../views/project-detail/ProjectDetail.vue"),
+    component: () => import("../views/project-detail/ProjectDetail.vue"),
   },
   {
     path: "/about",
     name: "About",
-    component: () =>
-      import("../views/about/About.vue"),
+    component: () => import("../views/about/About.vue"),
   },
   {
     path: "/teamwork",
     name: "Teamwork",
-    component: () =>
-      import("../views/teamwork/Teamwork.vue"),
-  }
+    component: () => import("../views/teamwork/Teamwork.vue"),
+  },
 ];
 
 const router = createRouter({

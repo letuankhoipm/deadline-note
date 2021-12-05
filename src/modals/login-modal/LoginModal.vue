@@ -88,7 +88,12 @@
           <button @click="login" class="btn-ps btn-ps-raise btn my-2">
             next
           </button>
-          <button class="btn-ps btn-ps-flat btn my-2">forgot password</button>
+          <button
+            @click="goToForgotPassword"
+            class="btn-ps btn-ps-flat btn my-2"
+          >
+            forgot password
+          </button>
         </div>
       </div>
     </div>
@@ -96,15 +101,15 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component"
-import AuthService from "@/services/auth.service"
-import { LoginRequest } from "@/models/login-request.model"
-import Toastr from "@/components/toastr/Toastr.vue"
-import ToastrService from "@/services/toastr.service"
-import NgvModalService from "@/services/ngv-modal.service"
-import { mapActions, mapGetters, mapMutations } from "vuex"
-import { IUser } from "@/models/user.modal"
-import { XIcon } from "@heroicons/vue/outline"
+import { Options, Vue } from "vue-class-component";
+import AuthService from "@/services/auth.service";
+import { LoginRequest } from "@/models/login-request.model";
+import Toastr from "@/components/toastr/Toastr.vue";
+import ToastrService from "@/services/toastr.service";
+import NgvModalService from "@/services/ngv-modal.service";
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import { IUser } from "@/models/user.modal";
+import { XIcon } from "@heroicons/vue/outline";
 
 @Options({
   props: {},
@@ -120,49 +125,54 @@ import { XIcon } from "@heroicons/vue/outline"
         email: null,
         password: "",
       } as unknown as LoginRequest,
-    }
+    };
   },
 })
 export default class LoginModal extends Vue {
   get loginReq(): LoginRequest {
-    return this.loginReq
+    return this.loginReq;
   }
-  public g_user!: IUser
+  public g_user!: IUser;
 
-  public a_login!: (req: any) => Promise<void>
+  public a_login!: (req: any) => Promise<void>;
 
-  public a_setUser!: (user: IUser) => Promise<void>
+  public a_setUser!: (user: IUser) => Promise<void>;
 
   public login(): void {
     const req = {
       email: this.loginReq.email,
       password: this.loginReq.password,
-    }
+    };
     this.a_login(req).then(
       (res: any) => {
-        this._onLoginSuccess(res.data.user, res.data.token)
+        this._onLoginSuccess(res.data.user, res.data.token);
       },
       () => {
-        this._onLoginFailed(`Email or password incorrect!`)
+        this._onLoginFailed(`Email or password incorrect!`);
       }
-    )
+    );
   }
 
   private _onLoginSuccess(user: IUser, token: string): void {
-    ToastrService.success("Notification", "Login Successfully!")
-    NgvModalService.dismiss()
-    this.$router.push("/home")
-    this.a_setUser(user)
-    localStorage.setItem("ACCESS_TOKEN", token)
-    AuthService.routing()
+    ToastrService.success("Notification", "Login Successfully!");
+    NgvModalService.dismiss();
+    this.$router.push("/home");
+    this.a_setUser(user);
+    localStorage.setItem("ACCESS_TOKEN", token);
+    AuthService.routing();
   }
 
   private _onLoginFailed(msg: string): void {
-    ToastrService.error("Error", msg)
+    ToastrService.error("Error", msg);
+  }
+
+  public goToForgotPassword(): void {
+    NgvModalService.dismiss();
+    this.$router.push("/forgot-password");
   }
 
   public cancel(): void {
-    NgvModalService.close(true)
+    NgvModalService.close(true);
   }
 }
 </script>

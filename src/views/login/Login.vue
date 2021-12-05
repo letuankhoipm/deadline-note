@@ -37,11 +37,15 @@
             <button
               @click="openRegisterModal()"
               class="btn-ps btn-ps-raise btn m-4"
-            >get started!</button>
+            >
+              get started!
+            </button>
             <button
               @click="openLoginModal()"
               class="btn-ps btn-ps-outlined btn m-4"
-            >sign in!</button>
+            >
+              sign in!
+            </button>
           </p>
           <div class="grid grid-cols-7 mt-40">
             <div></div>

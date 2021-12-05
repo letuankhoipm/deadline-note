@@ -147,6 +147,7 @@
                     ]"
                     class="text-white mt-2"
                     to="/"
+                    @click="resetState"
                     >Log out</router-link
                   >
                 </MenuItem>
@@ -178,7 +179,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component"
+import { Options, Vue } from "vue-class-component";
 import {
   Disclosure,
   DisclosureButton,
@@ -187,7 +188,7 @@ import {
   MenuButton,
   MenuItem,
   MenuItems,
-} from "@headlessui/vue"
+} from "@headlessui/vue";
 import {
   BellIcon,
   MenuIcon,
@@ -197,8 +198,9 @@ import {
   HomeIcon,
   ViewBoardsIcon,
   UserIcon,
-} from "@heroicons/vue/outline"
-import { mapGetters } from "vuex"
+} from "@heroicons/vue/outline";
+import { mapGetters } from "vuex";
+import authService from "@/services/auth.service";
 @Options({
   // Module
   props: {}, // Input
@@ -224,9 +226,14 @@ import { mapGetters } from "vuex"
   },
 })
 export default class Navbar extends Vue {
-  public navigation = []
+  public navigation = [];
   get g_user(): any {
-    return this.g_user
+    return this.g_user;
+  }
+
+  public resetState(): void {
+    localStorage.clear();
+    authService.logout();
   }
 }
 </script>
