@@ -65,7 +65,6 @@
               :group="'col'"
               :sort="true"
               @change="onMoveList"
-              :move="checkMove"
             >
               <div
                 class="
@@ -149,14 +148,8 @@
                     :group="boardDetail.id"
                     :sort="true"
                     @change="
-                      onChangeTicket(
-                        $event,
-                        element.tickets,
-                        element.id,
-                        element
-                      )
+                      onChangeTicket($event, element.tickets, element.id)
                     "
-                    :move="checkMove"
                   >
                     <Ticket
                       v-for="ticket in element.tickets"
