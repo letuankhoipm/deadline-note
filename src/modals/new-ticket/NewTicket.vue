@@ -81,7 +81,6 @@
                             <div class="form-group">
                               <p class="text-sm text-gray-500">Assignment</p>
                               <Multiselect
-                                v-model="newTicketForm.memberIds"
                                 mode="tags"
                                 @search-change="onTyping($event)"
                                 :closeOnSelect="false"
@@ -125,6 +124,18 @@
                             name=""
                             id=""
                           />
+                          <p class="text-right">
+                            <span
+                              @click="onAddDescription"
+                              class="
+                                underline
+                                mx-2
+                                cursor-pointer
+                                text-green-400
+                              "
+                              >Add</span
+                            >
+                          </p>
                         </div>
                       </div>
                       <div class="comment-section overflow-auto">
@@ -339,7 +350,7 @@ import ConfirmModal from "../confirm-modal/ConfirmModal.vue";
   },
 })
 export default class NewTicket extends Vue {
-  get newTicketForm(): Ticket {
+  get newTicketForm(): ITicket {
     return this.newTicketForm;
   }
 
@@ -353,6 +364,7 @@ export default class NewTicket extends Vue {
     { label: "Cancel", value: 2 },
   ];
   public newComment = "";
+  public newDescription = "";
   public currentCommentContent = "";
   public currentCommentId = "";
 
@@ -467,6 +479,31 @@ export default class NewTicket extends Vue {
           });
       }
     });
+  }
+
+  public onAddDescription(): void {
+    if (!this.newTicketForm.description || !this.ticketDetail?.pos) {
+      return;
+    }
+    const req = {
+      title: this.ticketDetail.title,
+      description: this.newTicketForm.description,
+      pos: this.ticketDetail?.pos,
+    };
+    ticketService
+      .description(req, this.ticketDetail.id)
+      .then((res: any) => {
+        if (!res) {
+          return;
+        }
+        toastrService.success(
+          "Notification",
+          "Update description successfully!"
+        );
+      })
+      .catch(() => {
+        toastrService.error("Error", "Update description failed!");
+      });
   }
 
   // ================================================================
