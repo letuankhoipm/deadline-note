@@ -33,9 +33,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/about/About.vue"),
   },
   {
-    path: "/teamwork",
-    name: "Teamwork",
-    component: () => import("../views/teamwork/Teamwork.vue"),
+    path: "/profile",
+    name: "Profile",
+    component: () => import("../views/profile/Profile.vue"),
   },
 ];
 

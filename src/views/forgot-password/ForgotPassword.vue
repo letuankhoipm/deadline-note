@@ -41,14 +41,17 @@
               </div>
             </form>
             <p class="text-right w-full">
-              <button class="btn-ps btn-ps-outlined btn mr-4">
+              <button
+                @click="returnLogin"
+                class="btn-ps btn-ps-outlined btn mr-4"
+              >
                 return login
               </button>
               <button
                 @click="resetPassword()"
                 class="btn-ps btn-ps-raise btn ml-4"
               >
-                get started!
+                send request
               </button>
             </p>
           </div>
@@ -89,6 +92,10 @@ export default class ForgotPassword extends Vue {
     authService.forget(this.forgotPasswordForm).then((res: any) => {
       console.log(res);
     });
+  }
+
+  public returnLogin(): void {
+    this.$router.push("/");
   }
 }
 </script>

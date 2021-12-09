@@ -154,11 +154,13 @@ export default class LoginModal extends Vue {
   }
 
   private _onLoginSuccess(user: IUser, token: string): void {
+    const userStr = JSON.stringify(user);
     ToastrService.success("Notification", "Login Successfully!");
     NgvModalService.dismiss();
     this.$router.push("/home");
     this.a_setUser(user);
     localStorage.setItem("ACCESS_TOKEN", token);
+    localStorage.setItem("USER", userStr);
     AuthService.routing();
   }
 
