@@ -39,7 +39,7 @@
                 <div class="grid grid-cols-2">
                   <div class="col-span">
                     <CreditCardIcon
-                      class="h-5 w-5 leading-8 seft-center cursor-pointer"
+                      class="h-5 w-5 leading-8 self-center cursor-pointer"
                     />
                   </div>
                   <div class="col-span text-right">
@@ -69,6 +69,9 @@
                         name="title"
                         type="text"
                       />
+                      <p v-if="listDetail?.title">
+                        in list {{ listDetail?.title }}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -144,7 +147,7 @@
                           <div class="grid grid-cols-12">
                             <div class="col-span-1">
                               <PencilIcon
-                                class="h-5 w-5 leading-8 seft-center"
+                                class="h-5 w-5 leading-8 self-center"
                               />
                             </div>
                             <div class="col-span-11">
@@ -294,7 +297,6 @@ import ticketService from "@/services/ticket.service";
 import calcPosition from "@/utils/calc-pos";
 import { ITicket, ITicketRequest } from "@/models/board.model";
 import ngvModalService from "@/services/ngv-modal.service";
-import Ticket from "@/components/ticket/Ticket.vue";
 import commentService from "@/services/comment.service";
 import toastrService from "@/services/toastr.service";
 import { IComment } from "@/models/comment.model";
@@ -309,24 +311,6 @@ import ConfirmModal from "../confirm-modal/ConfirmModal.vue";
     PencilIcon,
   },
   props: ["input"],
-  methods: {
-    onCreate(): void {
-      const request: ITicketRequest = {
-        ...this.newTicketForm,
-        pos: this._onInitPosParams(),
-      };
-      ticketService
-        .create(request)
-        .then((res: any) => {
-          console.log(res);
-          ngvModalService.close(true);
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
-      console.log(request);
-    },
-  },
   created() {
     this.patchValue();
     this._parseUser();
@@ -354,7 +338,7 @@ export default class NewTicket extends Vue {
     return this.newTicketForm;
   }
 
-  get input(): ITicket {
+  get input(): any {
     return this.input;
   }
 
@@ -395,13 +379,33 @@ export default class NewTicket extends Vue {
     if (!this.input) {
       return;
     }
-    this.ticketDetail = this.input;
-    this.listComments = this.input.comments;
-    Object.assign(this.newTicketForm, this.input);
+    if (this.input.type === "create") {
+      this.listDetail = this.input;
+    }
+    if (this.input.type === "update") {
+      this.ticketDetail = this.input;
+      this.listComments = this.input.comments;
+      Object.assign(this.newTicketForm, this.input);
+    }
   }
 
   public onSave(): void {
-    console.log("abc");
+    if (this.input.type === "create") {
+      const request: ITicketRequest = {
+        ...this.newTicketForm,
+        pos: this._onInitPosParams(),
+        memberIds: [],
+      };
+      ticketService
+        .create(request)
+        .then((res: any) => {
+          console.log(res);
+          ngvModalService.close(true);
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    }
   }
 
   public onEditComment(comment: IComment): void {
@@ -537,18 +541,14 @@ export default class NewTicket extends Vue {
   }
 
   private _onInitPosParams(): string {
-    if (this.listDetail.tickets) {
-      let rs = "";
-      const listLen = this.listDetail.tickets.length;
-      if (listLen === 0) {
-        rs = calcPosition("", "");
-      } else {
-        rs = calcPosition(this.listDetail.tickets[listLen - 1].pos, "");
-      }
-      return rs;
+    let rs = "";
+    const listLen = this.listDetail.tickets.length;
+    if (listLen === 0) {
+      rs = calcPosition("", "");
     } else {
-      return "";
+      rs = calcPosition(this.listDetail.tickets[listLen - 1].pos, "");
     }
+    return rs;
   }
 }
 </script>
