@@ -1,12 +1,13 @@
 <template src="./NewBoard.html"></template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component"
-import { XIcon, CreditCardIcon } from "@heroicons/vue/outline"
-import ngvModalService from "@/services/ngv-modal.service"
-import boardService from "@/services/board.service"
-import { IBoardRequest } from "@/models/board.model"
-import toastrService from "@/services/toastr.service"
+import { Vue, Options } from "vue-class-component";
+import { XIcon, CreditCardIcon } from "@heroicons/vue/outline";
+import ngvModalService from "@/services/ngv-modal.service";
+import boardService from "@/services/board.service";
+import { IBoardRequest } from "@/models/board.model";
+import toastrService from "@/services/toastr.service";
+import execService from "@/services/exec.service";
 @Options({
   components: { XIcon, CreditCardIcon },
   props: ["input"],
@@ -16,27 +17,27 @@ import toastrService from "@/services/toastr.service"
         title: null,
         projectId: null,
       } as unknown as IBoardRequest,
-    }
+    };
   },
 })
 export default class NewBoard extends Vue {
   get input(): any {
-    return this.input
+    return this.input;
   }
 
   get newBoardForm(): IBoardRequest {
-    return this.newBoardForm
+    return this.newBoardForm;
   }
 
   mounted(): void {
     if (this.input) {
-      this.newBoardForm.projectId = this.input.projectId
+      this.newBoardForm.projectId = this.input.projectId;
     }
-    console.log(this.input.projectId)
+    console.log(this.input.projectId);
   }
 
   public onCancel(): void {
-    ngvModalService.dismiss()
+    ngvModalService.dismiss();
   }
 
   public onCreateBoard(): void {
@@ -44,12 +45,13 @@ export default class NewBoard extends Vue {
       .create(this.newBoardForm)
       .then((res: any) => {
         if (!res) {
-          return
+          return;
         }
-        toastrService.success("Notification", "Create board successfully!")
-        ngvModalService.close()
+        toastrService.success("Notification", "Create board successfully!");
+        execService.refetch();
+        ngvModalService.close();
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   }
 }
 </script>

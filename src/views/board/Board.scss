@@ -3,8 +3,6 @@
   width: 320px;
 }
 
-/* Unfortunately @apply cannot be setup in codesandbox, 
-  but you'd use "@apply border opacity-50 border-blue-500 bg-gray-200" here */
 .ghost-card {
   opacity: 0.5;
   background: #F7FAFC;
@@ -17,7 +15,7 @@
 
   .ps-board-card {
     width: 300px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 130px);
 
   }
 

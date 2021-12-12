@@ -26,14 +26,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component"
-import { PlusIcon } from "@heroicons/vue/outline"
+import { Vue, Options } from "vue-class-component";
+import { PlusIcon } from "@heroicons/vue/outline";
 @Options({
   components: { PlusIcon },
   props: {},
   methods: {},
   data() {
-    return {}
+    return {};
   },
 })
 export default class CreateBoardCard extends Vue {}

@@ -241,6 +241,7 @@ import ticketService from "@/services/ticket.service";
 import ngvModalService from "@/services/ngv-modal.service";
 import ConfirmModal from "@/modals/confirm-modal/ConfirmModal.vue";
 import toastrService from "@/services/toastr.service";
+import execService from "@/services/exec.service";
 
 @Options({
   components: {
@@ -432,15 +433,17 @@ export default class Board extends Vue {
 
   //=============================================================
   public onCreateTicket(listInfo: any): void {
-    NgvModalService.open(NewTicket, { ...listInfo }).then((res: any) => {
-      if (res) {
-        this.getBoardDetail(this.boardId);
+    NgvModalService.open(NewTicket, { ...listInfo, type: "create" }).then(
+      (res: any) => {
+        if (res) {
+          this.getBoardDetail(this.boardId);
+        }
       }
-    });
+    );
   }
 
-  public onTicketDetail(ticketDetail: Ticket): void {
-    NgvModalService.open(NewTicket, { ...ticketDetail });
+  public onTicketDetail(ticketDetail: ITicket): void {
+    NgvModalService.open(NewTicket, { ...ticketDetail, type: "update" });
   }
 
   public onCreateList(): void {
@@ -511,6 +514,8 @@ export default class Board extends Vue {
         return;
       }
       toastrService.success("Notification", "Delete board successfully!");
+      execService.refetch();
+      this.$router.push("/home");
     });
   }
 }

@@ -18,7 +18,7 @@
         <div class="text-right">
           <span
             v-bind:class="{
-              'bg-blue-500': board.type === 'design',
+              'bg-blue-500': board.type === 'project',
               'bg-yellow-500': board.type === 'programing',
             }"
             class="
@@ -55,22 +55,22 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component"
+import { Vue, Options } from "vue-class-component";
 @Options({
   components: {},
   props: ["board"],
 })
 export default class BoardCard extends Vue {
   get board(): any {
-    return this.board
+    return this.board;
   }
 
   mounted(): void {
-    this.board.type = "design"
+    this.board.type = "project";
   }
 
   public goToDetail(boardId: string): void {
-    this.$router.push(`/board-detail/${boardId}`)
+    this.$router.push(`/board-detail/${boardId}`);
   }
 }
 </script>
