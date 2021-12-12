@@ -22,7 +22,7 @@
         </div>
       </div>
       <hr class="my-4" />
-      <div class="ps-project-list">
+      <div class="ps-project-list overflow-auto h-500">
         <div class="grid grid-cols-4">
           <div
             v-for="(project, index) in listProject"
@@ -56,8 +56,8 @@ export default class Project extends Vue {
 
   public onListenFetch(): void {
     execService.refetch$.subscribe((res: any) => {
-      console.log('lóg');
-      
+      console.log("lóg");
+
       res && this.getProjects();
     });
   }

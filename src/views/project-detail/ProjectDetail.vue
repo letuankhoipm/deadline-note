@@ -69,19 +69,20 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component"
-import { ProjectTabs } from "@/models/tabs.model"
-import ProjectOverview from "@/components/project-overview/ProjectOverview.vue"
-import ProjectBoard from "@/components/project-board/ProjectBoard.vue"
-import ProjectSettings from "@/components/project-settings/ProjectSettings.vue"
-import projectService from "@/services/project.service"
+import { Vue, Options } from "vue-class-component";
+import { ProjectTabs } from "@/models/tabs.model";
+import ProjectOverview from "@/components/project-overview/ProjectOverview.vue";
+import ProjectBoard from "@/components/project-board/ProjectBoard.vue";
+import ProjectSettings from "@/components/project-settings/ProjectSettings.vue";
+import projectService from "@/services/project.service";
+import toastrService from "@/services/toastr.service";
 @Options({
   components: { ProjectOverview, ProjectBoard, ProjectSettings },
 })
 export default class ProjectDetail extends Vue {
-  public activeTab = 0
-  public projectId: any
-  public projectDetail: any = null
+  public activeTab = 0;
+  public projectId: any;
+  public projectDetail: any = null;
   public listTabs = [
     {
       id: 0,
@@ -99,40 +100,39 @@ export default class ProjectDetail extends Vue {
       id: 3,
       name: "Settings",
     },
-  ]
+  ];
 
   mounted(): void {
-    this._getDetail()
+    this._getDetail();
   }
 
   public onChangeTabs(tab: ProjectTabs) {
     switch (tab) {
       case ProjectTabs.OVERVIEW:
-        this.activeTab = ProjectTabs.OVERVIEW
-        break
+        this.activeTab = ProjectTabs.OVERVIEW;
+        break;
       case ProjectTabs.BOARDS:
-        this.activeTab = ProjectTabs.BOARDS
-        break
+        this.activeTab = ProjectTabs.BOARDS;
+        break;
       case ProjectTabs.WIKI:
-        this.activeTab = ProjectTabs.WIKI
-        break
+        this.activeTab = ProjectTabs.WIKI;
+        break;
       case ProjectTabs.SETTINGS:
-        this.activeTab = ProjectTabs.SETTINGS
-        break
+        this.activeTab = ProjectTabs.SETTINGS;
+        break;
       default:
-        break
+        break;
     }
   }
 
   private _getDetail(): void {
-    this.projectId = this.$route.params.id
+    this.projectId = this.$route.params.id;
     projectService
       .getById(this.projectId)
       .then((res: any) => {
-        console.log(res.data)
-        this.projectDetail = res.data
+        this.projectDetail = res.data;
       })
-      .catch((err) => console.log(err))
+      .catch((err) => toastrService.error("Error", err));
   }
 }
 </script>

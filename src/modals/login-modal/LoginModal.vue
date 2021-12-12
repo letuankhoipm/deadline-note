@@ -107,18 +107,13 @@ import { LoginRequest } from "@/models/login-request.model";
 import Toastr from "@/components/toastr/Toastr.vue";
 import ToastrService from "@/services/toastr.service";
 import NgvModalService from "@/services/ngv-modal.service";
-import { mapActions, mapGetters, mapMutations } from "vuex";
 import { IUser } from "@/models/user.modal";
 import { XIcon } from "@heroicons/vue/outline";
+import authService from "@/services/auth.service";
 
 @Options({
   props: {},
   components: { Toastr, XIcon },
-  computed: mapGetters(["g_user"]),
-  methods: {
-    ...mapActions(["a_login", "a_setUser"]),
-    ...mapMutations(["m_setUser"]),
-  },
   data() {
     return {
       loginReq: {
@@ -132,18 +127,13 @@ export default class LoginModal extends Vue {
   get loginReq(): LoginRequest {
     return this.loginReq;
   }
-  public g_user!: IUser;
-
-  public a_login!: (req: any) => Promise<void>;
-
-  public a_setUser!: (user: IUser) => Promise<void>;
 
   public login(): void {
     const req = {
       email: this.loginReq.email,
       password: this.loginReq.password,
     };
-    this.a_login(req).then(
+    authService.login(req).then(
       (res: any) => {
         this._onLoginSuccess(res.data.user, res.data.token);
       },
@@ -158,7 +148,6 @@ export default class LoginModal extends Vue {
     ToastrService.success("Notification", "Login Successfully!");
     NgvModalService.dismiss();
     this.$router.push("/home");
-    this.a_setUser(user);
     localStorage.setItem("ACCESS_TOKEN", token);
     localStorage.setItem("USER", userStr);
     AuthService.routing();
