@@ -3,18 +3,18 @@
     <div class="grid grid-cols-1">
       <div class="ps-project-list overflow-auto">
         <div class="grid grid-cols-4">
-          <div class="col-span-1">
+          <div class="col-span-1 ps-create-board">
             <CreateBoardCard
               @click="onCreateBoard(projectDetail.projectName)"
             />
           </div>
-          <divs
+          <div
             v-for="board in projectDetail.boards"
             :key="board.title"
             class="col-span-1"
           >
             <BoardCard :board="board" />
-          </divs>
+          </div>
         </div>
       </div>
     </div>
@@ -61,4 +61,8 @@ export default class ProjectBoard extends Vue {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.ps-create-board {
+  height: 186px;
+}
+</style>

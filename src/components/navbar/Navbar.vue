@@ -58,20 +58,20 @@
             sm:static sm:inset-auto sm:ml-6 sm:pr-0
           "
         >
-          <button class="btn-ps-icon mx-4">
+          <button @click="onNextVersion" class="btn-ps-icon mx-4">
             <span class="sr-only">Open Board</span>
             <ViewBoardsIcon class="h-6 w-6 text-white" />
           </button>
-          <button class="btn-ps-icon mx-4">
+          <button @click="goHome" class="btn-ps-icon mx-4">
             <span class="sr-only">Home</span>
             <HomeIcon class="h-6 w-6 text-white" />
           </button>
-          <button class="btn-ps-icon mx-4">
+          <button @click="onNextVersion" class="btn-ps-icon mx-4">
             <span class="sr-only">Information</span>
             <AnnotationIcon class="h-6 w-6 text-white" />
           </button>
-          <button class="btn-ps-icon mx-4">
-            <span class="sr-only">Notifcation</span>
+          <button @click="switchNewProjectModal" class="btn-ps-icon mx-4">
+            <span class="sr-only">Add project</span>
             <PlusIcon class="h-6 w-6 text-white" />
           </button>
 
@@ -212,6 +212,10 @@ import {
 } from "@heroicons/vue/outline";
 import { mapGetters } from "vuex";
 import authService from "@/services/auth.service";
+import ngvModalService from "@/services/ngv-modal.service";
+import NewProject from "@/modals/new-project/NewProject.vue";
+import execService from "@/services/exec.service";
+import NotifyModal from "@/modals/notify-modal/NotifyModal.vue";
 @Options({
   // Module
   props: {}, // Input
@@ -245,6 +249,26 @@ export default class Navbar extends Vue {
   public resetState(): void {
     localStorage.clear();
     authService.logout();
+  }
+
+  public switchNewProjectModal(): void {
+    const modalRef = ngvModalService.open(NewProject, {
+      name: "New Project",
+    });
+    modalRef.then((result) => {
+      result && execService.refetch();
+    });
+  }
+
+  public onNextVersion(): void {
+    ngvModalService.open(NotifyModal, {
+      title: "Version 1.0",
+      msg: "This feature will be update in the next version.",
+    });
+  }
+
+  public goHome(): void {
+    this.$router.push("/home");
   }
 }
 </script>
