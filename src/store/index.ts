@@ -1,15 +1,13 @@
 import { createStore } from "vuex";
-import actions from './actions';
-import state from './states';
-import getters from './getters';
-import mutations from './mutations';
-import modules from './modules';
+import state from "./states";
+import getters from "./getters";
+import mutations from "./mutations";
+import modules from "./modules";
 
 export default createStore({
   state,
   mutations,
   getters,
-  actions,
   modules,
 });
 
@@ -20,4 +18,4 @@ export default createStore({
 //  context: store ở thời điểm chạy cái hàm đang gọi (chua ham commit)/ chưá tất cả mọi thứ của store ở thời điểm đó
 //      updateUser({commit}): void {
 //          commit('ten ham' , payload)
-//        }        
+//        }

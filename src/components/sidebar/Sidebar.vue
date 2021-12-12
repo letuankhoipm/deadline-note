@@ -70,29 +70,29 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component"
-import { CubeIcon, CogIcon, UserAddIcon } from "@heroicons/vue/outline"
-import NewProject from "@/modals/new-project/NewProject.vue"
-import NgvModalService from "@/services/ngv-modal.service"
-import execService from "@/services/exec.service"
+import { Vue, Options } from "vue-class-component";
+import { CubeIcon, CogIcon, UserAddIcon } from "@heroicons/vue/outline";
+import NewProject from "@/modals/new-project/NewProject.vue";
+import NgvModalService from "@/services/ngv-modal.service";
+import execService from "@/services/exec.service";
 
 @Options({
   components: { CubeIcon, CogIcon, NewProject, UserAddIcon },
 })
 export default class Sidebar extends Vue {
-  public newProjectVisibility = false
+  public newProjectVisibility = false;
 
   public switchNewProjectModal(): void {
     const modalRef = NgvModalService.open(NewProject, {
       name: "New Project",
-    })
+    });
     modalRef.then((result) => {
-      result && execService.refetch()
-    })
+      result && execService.refetch();
+    });
   }
 
   public showList(): void {
-    this.$router.push("/home")
+    this.$router.push("/home");
   }
 }
 </script>

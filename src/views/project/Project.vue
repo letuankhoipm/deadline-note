@@ -16,8 +16,8 @@
             project
           </h2>
           <p class="mt-4 max-w-2xl text-sm text-gray-500">
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam
-            voluptatum cupiditate veritatis in accusamus quisquam.
+            Create projects for everyone to collaborate, resulting in more work
+            efficiency.
           </p>
         </div>
       </div>
@@ -38,26 +38,28 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component"
-import ProjectCard from "@/components/project-card/ProjectCard.vue"
-import { IProject } from "@/models/project.model"
-import projectService from "@/services/project.service"
-import execService from "@/services/exec.service"
+import { Vue, Options } from "vue-class-component";
+import ProjectCard from "@/components/project-card/ProjectCard.vue";
+import { IProject } from "@/models/project.model";
+import projectService from "@/services/project.service";
+import execService from "@/services/exec.service";
 @Options({
   components: { ProjectCard },
 })
 export default class Project extends Vue {
-  public listProject: IProject[] = []
+  public listProject: IProject[] = [];
 
   mounted(): void {
-    this.getProjects()
-    this.onListenFetch()
+    this.getProjects();
+    this.onListenFetch();
   }
 
   public onListenFetch(): void {
     execService.refetch$.subscribe((res: any) => {
-      res && this.getProjects()
-    })
+      console.log('lóg');
+      
+      res && this.getProjects();
+    });
   }
 
   public getProjects(): void {
@@ -65,11 +67,11 @@ export default class Project extends Vue {
       .getAll()
       .then((res: any): void => {
         if (!res?.data) {
-          return
+          return;
         }
-        this.listProject = res.data
+        this.listProject = res.data;
       })
-      .catch()
+      .catch();
   }
 }
 </script>

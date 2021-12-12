@@ -55,7 +55,7 @@
                       w-5
                       float-right
                       leading-8
-                      seft-center
+                      self-center
                       cursor-pointer
                     "
                   />
@@ -90,27 +90,17 @@
   </div>
 </template>
 <script lang="ts">
-import { Options, Vue } from "vue-class-component"
-import { RegisterRequest } from "@/models/login-request.model"
-import NgvModalService from "@/services/ngv-modal.service"
-import { XIcon } from "@heroicons/vue/outline"
-import { mapActions } from "vuex"
+import { Options, Vue } from "vue-class-component";
+import { RegisterRequest } from "@/models/login-request.model";
+import NgvModalService from "@/services/ngv-modal.service";
+import { XIcon } from "@heroicons/vue/outline";
+import authService from "@/services/auth.service";
+import toastrService from "@/services/toastr.service";
+import ngvModalService from "@/services/ngv-modal.service";
 
 @Options({
-  // Module
-  props: {}, // Input
+  props: {},
   components: { XIcon },
-  methods: {
-    ...mapActions(["a_register"]),
-    register(): void {
-      const req: RegisterRequest = {
-        fullname: this.regisForm.fullname,
-        email: this.regisForm.email,
-        password: this.regisForm.password,
-      }
-      this.a_register(req)
-    },
-  },
   data() {
     return {
       regisForm: {
@@ -118,20 +108,34 @@ import { mapActions } from "vuex"
         email: null,
         password: null,
       } as unknown as RegisterRequest,
-    }
+    };
   },
 })
 export default class RegisterModal extends Vue {
   get regisForm(): RegisterRequest {
-    return this.regisForm
+    return this.regisForm;
   }
 
   public cancel(): void {
-    NgvModalService.close()
+    NgvModalService.dismiss();
   }
 
   public register(): void {
-    return
+    const data = {
+      ...this.regisForm,
+    };
+    authService
+      .register(data)
+      .then((res) => {
+        if (!res) {
+          return;
+        }
+        ngvModalService.close(true);
+        toastrService.success("Notification", "Register Successfully!");
+      })
+      .catch((err: any) => {
+        toastrService.error("Error", err.message);
+      });
   }
 }
 </script>
