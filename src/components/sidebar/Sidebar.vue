@@ -57,7 +57,9 @@
           <li class="cursor-pointer pt-5 pb-3">
             <div class="flex items-center">
               <CogIcon class="h-6 w-6" />
-              <span class="text-sm ml-2">Project settings</span>
+              <span @click="onPersonalSetting" class="text-sm ml-2"
+                >Personal Settings</span
+              >
             </div>
           </li>
         </ul>
@@ -75,6 +77,7 @@ import { CubeIcon, CogIcon, UserAddIcon } from "@heroicons/vue/outline";
 import NewProject from "@/modals/new-project/NewProject.vue";
 import NgvModalService from "@/services/ngv-modal.service";
 import execService from "@/services/exec.service";
+import NotifyModal from "@/modals/notify-modal/NotifyModal.vue";
 
 @Options({
   components: { CubeIcon, CogIcon, NewProject, UserAddIcon },
@@ -93,6 +96,13 @@ export default class Sidebar extends Vue {
 
   public showList(): void {
     this.$router.push("/home");
+  }
+
+  public onPersonalSetting(): void {
+    NgvModalService.open(NotifyModal, {
+      title: "Version 1.0",
+      msg: "This feature will be update in the next version.",
+    });
   }
 }
 </script>
