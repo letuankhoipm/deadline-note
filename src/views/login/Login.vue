@@ -102,11 +102,11 @@ import NgvModalService from "@/services/ngv-modal.service";
 })
 export default class Login extends Vue {
   public openLoginModal(): void {
-    const modalRef = NgvModalService.open(LoginModal);
+    NgvModalService.open(LoginModal);
   }
 
   public openRegisterModal(): void {
-    const modalRef = NgvModalService.open(RegisterModal);
+    NgvModalService.open(RegisterModal);
   }
 }
 </script>
