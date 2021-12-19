@@ -514,6 +514,9 @@ export default class NewTicket extends Vue {
           "Notification",
           "Update description successfully!"
         );
+        setTimeout(() => {
+          location.reload();
+        }, 500);
       })
       .catch(() => {
         toastrService.error("Error", "Update description failed!");
@@ -536,6 +539,9 @@ export default class NewTicket extends Vue {
           return;
         }
         toastrService.success("Notification", "Update title successfully!");
+        setTimeout(() => {
+          location.reload();
+        }, 500);
       })
       .catch(() => {
         toastrService.error("Error", "Update title failed!");
