@@ -34,243 +34,251 @@
       >
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="w-full">
-            <form>
-              <div class="mt-3 text-center sm:mt-0 sm:text-left">
-                <div class="grid grid-cols-2">
-                  <div class="col-span">
-                    <CreditCardIcon
-                      class="h-5 w-5 leading-8 self-center cursor-pointer"
-                    />
-                  </div>
-                  <div class="col-span text-right">
-                    <XIcon
-                      @click="onCancel()"
-                      class="
-                        h-5
-                        w-5
-                        float-right
-                        leading-8
-                        self-center
-                        cursor-pointer
-                      "
-                    />
-                  </div>
-                  <div class="grid grid-cols-4">
-                    <div class="col-span-3"></div>
-                  </div>
-
-                  <div class="col-span-2">
-                    <div class="form-group">
-                      <input
-                        class="form-control"
-                        v-model="newTicketForm.title"
-                        placeholder="Title"
-                        id="title"
-                        name="title"
-                        type="text"
-                      />
-                      <p v-if="listDetail?.title">
-                        in list {{ listDetail?.title }}
-                      </p>
-                    </div>
-                  </div>
+            <div class="mt-3 text-center sm:mt-0 sm:text-left">
+              <div class="grid grid-cols-2">
+                <div class="col-span">
+                  <CreditCardIcon
+                    class="h-5 w-5 leading-8 self-center cursor-pointer"
+                  />
+                </div>
+                <div class="col-span text-right">
+                  <XIcon
+                    @click="onCancel()"
+                    class="
+                      h-5
+                      w-5
+                      float-right
+                      leading-8
+                      self-center
+                      cursor-pointer
+                    "
+                  />
                 </div>
                 <div class="grid grid-cols-4">
-                  <div class="col-span-3 mr-2">
-                    <div class="mt-2">
-                      <div class="main-info">
-                        <div class="grid grid-cols-2">
-                          <div class="col-span mr-2">
-                            <div class="form-group">
-                              <p class="text-sm text-gray-500">Assignment</p>
-                              <Multiselect
-                                mode="tags"
-                                @search-change="onTyping($event)"
-                                :closeOnSelect="false"
-                                :searchable="true"
-                                :options="users"
-                              />
-                            </div>
+                  <div class="col-span-3"></div>
+                </div>
+
+                <div class="col-span-2">
+                  <div class="form-group">
+                    <input
+                      @keyup.enter="updateTicketTitle()"
+                      class="form-control"
+                      v-model="newTicketForm.title"
+                      placeholder="Title"
+                      id="title"
+                      name="title"
+                      type="text"
+                    />
+                    <p v-if="listDetail?.title">
+                      in list {{ listDetail?.title }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-4">
+                <div class="col-span-3 mr-2">
+                  <div class="mt-2">
+                    <div class="main-info">
+                      <div class="grid grid-cols-2">
+                        <div class="col-span mr-2">
+                          <div class="form-group">
+                            <p class="text-sm text-gray-500">Assignment</p>
+                            <Multiselect
+                              mode="tags"
+                              @search-change="onTyping($event)"
+                              :closeOnSelect="false"
+                              :searchable="true"
+                              :options="users"
+                            />
                           </div>
-                          <div class="col-span ml-2">
-                            <div class="form-group">
-                              <p class="text-sm text-gray-500">Label</p>
-                              <div class="grid grid-cols-2">
-                                <div class="col-span flex mr-2 items-end">
-                                  <!-- <div
-                                    class="ps-badge"
-                                    v-bind:class="{
-                                      'bg-green-500': priority === 0,
-                                      'bg-blue-400': priority === 1,
-                                      'bg-red-500': priority === 2,
-                                    }"
-                                  ></div> -->
-                                </div>
-                                <div class="col-span ml-2">
-                                  <!-- <Multiselect
-                                    v-bind="value"
-                                    v-model="newTicketForm.priority"
-                                    placeholder="Choose"
-                                    :options="priorityLabel"
-                                  >
-                                  </Multiselect> -->
-                                </div>
+                        </div>
+                        <div class="col-span ml-2">
+                          <div class="form-group">
+                            <p class="text-sm text-gray-500">Label</p>
+                            <div class="grid grid-cols-2">
+                              <div class="col-span flex mr-2 items-end">
+                                <div
+                                  class="ps-badge"
+                                  v-bind:class="{
+                                    'bg-green-500': priority === 0,
+                                    'bg-blue-400': priority === 1,
+                                    'bg-red-500': priority === 2,
+                                  }"
+                                ></div>
+                              </div>
+                              <div class="col-span ml-2">
+                                <Multiselect
+                                  v-bind="value"
+                                  v-model="newTicketForm.priority"
+                                  placeholder="Choose"
+                                  :options="priorityLabel"
+                                >
+                                </Multiselect>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="w-full my-4">
-                          <p class="text-sm text-gray-500">Description</p>
-                          <input
-                            class="p-0"
-                            v-model="newTicketForm.description"
-                            name=""
-                            id=""
-                          />
-                          <p class="text-right">
-                            <span
-                              @click="onAddDescription"
-                              class="
-                                underline
-                                mx-2
-                                cursor-pointer
-                                text-green-400
-                              "
-                              >Add</span
-                            >
-                          </p>
+                      </div>
+                      <div class="w-full my-4">
+                        <p class="text-sm text-gray-500">Description</p>
+                        <input
+                          class="p-0"
+                          @keyup.enter="onAddDescription()"
+                          v-model="newTicketForm.description"
+                          name=""
+                          id=""
+                        />
+                        <p class="text-right">
+                          <span
+                            @click="onAddDescription"
+                            class="underline mx-2 cursor-pointer text-green-400"
+                            >Add</span
+                          >
+                        </p>
+                      </div>
+                    </div>
+                    <div class="comment-section overflow-auto">
+                      <p class="text-sm text-gray-500 mb-4">Activity</p>
+                      <div class="comment-content form-group">
+                        <div class="grid grid-cols-12">
+                          <div class="col-span-1">
+                            <PencilIcon class="h-5 w-5 leading-8 self-center" />
+                          </div>
+                          <div class="col-span-11">
+                            <input
+                              v-model="newComment"
+                              class="text-sm text-gray-400 form-control"
+                              type="text"
+                            />
+                            <p class="text-right">
+                              <span
+                                @click="onComment"
+                                class="
+                                  underline
+                                  mx-2
+                                  cursor-pointer
+                                  text-green-400
+                                "
+                                >Comment</span
+                              >
+                            </p>
+                          </div>
                         </div>
                       </div>
-                      <div class="comment-section overflow-auto">
-                        <p class="text-sm text-gray-500 mb-4">Activity</p>
-                        <div class="comment-content form-group">
-                          <div class="grid grid-cols-12">
-                            <div class="col-span-1">
-                              <PencilIcon
-                                class="h-5 w-5 leading-8 self-center"
-                              />
-                            </div>
-                            <div class="col-span-11">
-                              <input
-                                v-model="newComment"
-                                class="text-sm text-gray-400 form-control"
-                                type="text"
-                              />
-                              <p class="text-right">
-                                <span
-                                  @click="onComment"
-                                  class="
-                                    underline
-                                    mx-2
-                                    cursor-pointer
-                                    text-green-400
-                                  "
-                                  >Comment</span
-                                >
-                              </p>
-                            </div>
-                          </div>
-                        </div>
 
-                        <div
-                          v-for="(comment, index) of listComments"
-                          :key="index"
-                          class="comment-content form-group"
-                        >
-                          <div class="grid grid-cols-12">
-                            <div class="col-span-1">
-                              <UserIcon class="h-5 w-5 leading-8 self-center" />
-                            </div>
-                            <div class="col-span-11">
-                              <p class="text-md text-gray-700 font-bold">
-                                {{ comment.user?.username }}
-                              </p>
-                              <p>! {{ comment.content }}</p>
-                              <p
-                                v-if="comment.userId === userId"
-                                class="text-right"
+                      <div
+                        v-for="(comment, index) of listComments"
+                        :key="index"
+                        class="comment-content form-group"
+                      >
+                        <div class="grid grid-cols-12">
+                          <div class="col-span-1">
+                            <UserIcon class="h-5 w-5 leading-8 self-center" />
+                          </div>
+                          <div class="col-span-11">
+                            <p class="text-md text-gray-700 font-bold">
+                              {{ comment.user?.username }}
+                            </p>
+                            <p>! {{ comment.content }}</p>
+                            <p
+                              v-if="comment.userId === userId"
+                              class="text-right"
+                            >
+                              <span
+                                v-show="
+                                  !isEditComment && comment.userId === userId
+                                "
+                                @click="onEditComment(comment)"
+                                class="
+                                  underline
+                                  mx-2
+                                  cursor-pointer
+                                  text-gray-400
+                                "
+                                >Edit</span
                               >
-                                <span
-                                  v-show="
-                                    !isEditComment && comment.userId === userId
-                                  "
-                                  @click="onEditComment(comment)"
-                                  class="
-                                    underline
-                                    mx-2
-                                    cursor-pointer
-                                    text-gray-400
-                                  "
-                                  >Edit</span
-                                >
-                                <span
-                                  v-show="
-                                    !isEditComment && comment.userId === userId
-                                  "
-                                  @click="onDeleteComment(comment.id)"
-                                  class="
-                                    underline
-                                    mx-2
-                                    cursor-pointer
-                                    text-gray-400
-                                  "
-                                  >Delete</span
-                                >
-                              </p>
-                            </div>
+                              <span
+                                v-show="
+                                  !isEditComment && comment.userId === userId
+                                "
+                                @click="onDeleteComment(comment.id)"
+                                class="
+                                  underline
+                                  mx-2
+                                  cursor-pointer
+                                  text-gray-400
+                                "
+                                >Delete</span
+                              >
+                            </p>
                           </div>
                         </div>
-                        <div v-show="isEditComment" class="input-edit">
-                          <div class="grid grid-cols-12">
-                            <div class="col-span-1"></div>
-                            <div class="col-span-11">
-                              <input
-                                v-model="currentCommentContent"
-                                class="text-sm text-gray-400 form-control p-0"
-                                type="text"
-                              />
-                              <p class="text-right">
-                                <span
-                                  class="
-                                    underline
-                                    mx-2
-                                    cursor-pointer
-                                    text-gray-400
-                                  "
-                                  >Cancel</span
-                                >
-                                <span
-                                  @click="onUpdateComment"
-                                  class="
-                                    underline
-                                    mx-2
-                                    cursor-pointer
-                                    text-green-400
-                                  "
-                                  >Save</span
-                                >
-                              </p>
-                            </div>
+                      </div>
+                      <div v-show="isEditComment" class="input-edit">
+                        <div class="grid grid-cols-12">
+                          <div class="col-span-1"></div>
+                          <div class="col-span-11">
+                            <input
+                              v-model="currentCommentContent"
+                              class="text-sm text-gray-400 form-control p-0"
+                              type="text"
+                            />
+                            <p class="text-right">
+                              <span
+                                class="
+                                  underline
+                                  mx-2
+                                  cursor-pointer
+                                  text-gray-400
+                                "
+                                >Cancel</span
+                              >
+                              <span
+                                @click="onUpdateComment"
+                                class="
+                                  underline
+                                  mx-2
+                                  cursor-pointer
+                                  text-green-400
+                                "
+                                >Save</span
+                              >
+                            </p>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-span-1 ml-2">
-                    <button class="btn-ps btn-ps-outlined btn my-2 w-full">
-                      join card
-                    </button>
-                  </div>
+                </div>
+                <div class="col-span-1 ml-2">
+                  <button class="btn-ps btn-ps-outlined btn my-2 w-full">
+                    join card
+                  </button>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button @click="onSave()" class="btn-ps btn-ps-raise btn my-2">
+          <button
+            v-if="input.type === 'create'"
+            @click="onSave()"
+            class="btn-ps btn-ps-raise btn my-2"
+          >
             save
           </button>
-          <button @click="onCancel()" class="btn-ps btn-ps-flat btn my-2">
+          <button
+            v-if="input.type !== 'create'"
+            @click="onCancel()"
+            class="btn-ps btn-ps-flat btn my-2"
+          >
+            close
+          </button>
+          <button
+            v-if="input.type === 'create'"
+            @click="onCancel()"
+            class="btn-ps btn-ps-flat btn my-2"
+          >
             cancel
           </button>
         </div>
@@ -431,7 +439,9 @@ export default class NewTicket extends Vue {
           return;
         }
         this.newComment = "";
-        this.listComments.push(res);
+        this.listComments.push(res.data);
+        console.log(this.listComments);
+
         toastrService.success("Notification", "Add comment successfully!");
       })
       .catch(() => {
@@ -507,6 +517,28 @@ export default class NewTicket extends Vue {
       })
       .catch(() => {
         toastrService.error("Error", "Update description failed!");
+      });
+  }
+
+  public updateTicketTitle(): void {
+    if (!this.newTicketForm.title || !this.ticketDetail?.pos) {
+      return;
+    }
+    const req = {
+      title: this.newTicketForm.title,
+      description: this.ticketDetail?.description,
+      pos: this.ticketDetail?.pos,
+    };
+    ticketService
+      .title(this.ticketDetail.id, req)
+      .then((res: any) => {
+        if (!res) {
+          return;
+        }
+        toastrService.success("Notification", "Update title successfully!");
+      })
+      .catch(() => {
+        toastrService.error("Error", "Update title failed!");
       });
   }
 

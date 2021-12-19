@@ -74,7 +74,7 @@
                     <p class="text-sm text-gray-500">Project Name</p>
                     <input v-model="projectForm.name" type="text" />
                   </div>
-                  <!-- <div class="w-full my-4">
+                  <div class="w-full my-4">
                     <p class="text-sm text-gray-500">Description</p>
                     <textarea
                       v-model="projectForm.shortDescription"
@@ -82,7 +82,7 @@
                       cols="20"
                       rows="5"
                     ></textarea>
-                  </div> -->
+                  </div>
                 </form>
                 <p class="font-bold">
                   Create projects for everyone to collaborate, resulting in more

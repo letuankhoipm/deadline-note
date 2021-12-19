@@ -36,9 +36,6 @@ import ProjectDetail from "@/views/project-detail/ProjectDetail.vue";
   data() {
     return {};
   },
-  created() {
-    console.log(this.projectId);
-  },
 })
 export default class ProjectBoard extends Vue {
   public listBoard: IBoard[] = [];
@@ -56,7 +53,13 @@ export default class ProjectBoard extends Vue {
       projectName: projectName,
       projectId: this.projectId,
     };
-    ngvModalService.open(NewBoard, input);
+    ngvModalService.open(NewBoard, input).then((result) => {
+      if (result) {
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
+      }
+    });
   }
 }
 </script>

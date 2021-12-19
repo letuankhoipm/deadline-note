@@ -18,7 +18,7 @@
         <div class="text-right">
           <span
             v-bind:class="{
-              'bg-blue-500': board.type === 'project',
+              'bg-green-500': board.type === 'project',
               'bg-yellow-500': board.type === 'programing',
             }"
             class="
@@ -43,9 +43,7 @@
           </h1>
           <div class="flex justify-between items-center">
             <p class="mt-4 max-w-2xl text-sm text-gray-500">
-              {{ board.shortDescription }}
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
+              Collaborating with your colleague to make a project perfectly.
             </p>
           </div>
         </div>

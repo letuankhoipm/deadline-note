@@ -24,6 +24,10 @@ class TicketService {
   public description(data: any, ticketId: string): Promise<any> {
     return http.patch(`${this._ticketUrl}/${ticketId}/description`, data);
   }
+
+  public title(ticketId: string, data: any): Promise<any> {
+    return http.patch(`${this._ticketUrl}/${ticketId}/title`, data);
+  }
 }
 
 export default new TicketService();

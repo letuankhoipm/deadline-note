@@ -14,11 +14,23 @@
         "
       >
         <div class="text-left mb-1">
-          <!-- <span
-            v-bind:class="{'bg-blue-500': ticket.label.id === 0, 'bg-yellow-500': ticket.label.id === 1, 'bg-green-500': ticket.label.id === 2}"
-            class="w-14 inline-flex items-center uppercase justify-center px-2 py-1 text-xs font-bold leading-none text-white"
+          <span
+            class="
+              bg-blue-500
+              w-14
+              inline-flex
+              items-center
+              uppercase
+              justify-center
+              px-2
+              py-1
+              text-xs
+              font-bold
+              leading-none
+              text-white
+            "
           >
-          </span> -->
+          </span>
         </div>
         <div class="">
           <h1 class="text-sm text-gray-700">
@@ -45,15 +57,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component"
-import { ChatAltIcon } from "@heroicons/vue/outline"
+import { Vue, Options } from "vue-class-component";
+import { ChatAltIcon } from "@heroicons/vue/outline";
 @Options({
   components: { ChatAltIcon },
   props: ["ticket"],
 })
 export default class Ticket extends Vue {
   get ticket(): any {
-    return this.ticket
+    return this.ticket;
   }
 }
 </script>

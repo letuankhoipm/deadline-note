@@ -126,6 +126,7 @@
                         >
                           <MenuItem v-slot="{ active }">
                             <button
+                              @click="onRemoveList(element.id)"
                               class="btn-ps-text-icon p-2 w-full"
                               :class="[
                                 active ? 'bg-gray-100' : '',
@@ -264,6 +265,9 @@ import execService from "@/services/exec.service";
     getDetail(): void {
       this.boardId = this.$route.params.id;
       this.getBoardDetail(this.boardId);
+      execService.refetch$.subscribe((res: any) => {
+        res && this.getBoardDetail(this.boardId);
+      });
     },
   },
   created() {
@@ -304,14 +308,6 @@ export default class Board extends Vue {
   private _currTicketId = "";
 
   //=============================================================
-
-  mounted(): void {
-    // this._initRealtimeConnection()
-  }
-
-  private _initRealtimeConnection(): void {
-    listService.startConnection();
-  }
 
   public onMoveList(event: any): void {
     if (!this.boardDetail.lists) {
@@ -516,6 +512,24 @@ export default class Board extends Vue {
       toastrService.success("Notification", "Delete board successfully!");
       execService.refetch();
       this.$router.push("/home");
+    });
+  }
+
+  public onRemoveList(listId: string): void {
+    const modalRef = ngvModalService.open(ConfirmModal, {
+      title: "Remove List",
+      msg: "Are you sure you want to remove this list?",
+    });
+    modalRef.then((result) => {
+      if (result) {
+        listService.remove(listId).then((res) => {
+          if (!res) {
+            return;
+          }
+          toastrService.success("Notification", "Remove list successfully!");
+          execService.refetch();
+        });
+      }
     });
   }
 }

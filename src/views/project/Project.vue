@@ -56,8 +56,6 @@ export default class Project extends Vue {
 
   public onListenFetch(): void {
     execService.refetch$.subscribe((res: any) => {
-      console.log("lóg");
-
       res && this.getProjects();
     });
   }
@@ -70,6 +68,7 @@ export default class Project extends Vue {
           return;
         }
         this.listProject = res.data;
+        // location.reload();
       })
       .catch();
   }

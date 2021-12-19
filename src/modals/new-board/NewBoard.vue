@@ -49,7 +49,7 @@ export default class NewBoard extends Vue {
         }
         toastrService.success("Notification", "Create board successfully!");
         execService.refetch();
-        ngvModalService.close();
+        ngvModalService.close(true);
       })
       .catch((err) => console.log(err));
   }

@@ -64,8 +64,8 @@
               <div class="mt-2">
                 <form>
                   <div class="w-full my-4">
-                    <p class="text-sm text-gray-500">Full-name</p>
-                    <input v-model="regisForm.fullname" type="text" />
+                    <p class="text-sm text-gray-500">Username</p>
+                    <input v-model="regisForm.username" type="text" />
                   </div>
                   <div class="w-full my-4">
                     <p class="text-sm text-gray-500">Email</p>
@@ -104,7 +104,7 @@ import ngvModalService from "@/services/ngv-modal.service";
   data() {
     return {
       regisForm: {
-        fullname: null,
+        username: null,
         email: null,
         password: null,
       } as unknown as RegisterRequest,

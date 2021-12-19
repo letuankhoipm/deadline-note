@@ -151,6 +151,9 @@ export default class LoginModal extends Vue {
     localStorage.setItem("ACCESS_TOKEN", token);
     localStorage.setItem("USER", userStr);
     AuthService.routing();
+    setTimeout(() => {
+      location.reload();
+    }, 500);
   }
 
   private _onLoginFailed(msg: string): void {

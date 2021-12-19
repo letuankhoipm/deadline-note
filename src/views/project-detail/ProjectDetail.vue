@@ -16,8 +16,7 @@
             {{ projectDetail.name }}
           </h1>
           <p class="mt-4 max-w-2xl text-sm text-gray-500">
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam
-            voluptatum cupiditate veritatis in accusamus quisquam.
+            {{ projectDetail.shortDescription }}
           </p>
         </div>
       </div>
@@ -55,7 +54,10 @@
           </div>
         </div>
         <div class="ps-pd-body">
-          <ProjectOverview v-if="activeTab === 0" />
+          <ProjectOverview
+            :projectDetail="projectDetail"
+            v-if="activeTab === 0"
+          />
           <ProjectBoard
             :projectDetail="projectDetail"
             :projectId="projectId"
