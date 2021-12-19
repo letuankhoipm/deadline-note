@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "deadline-notes"
-  }
+    "default": "deadline-notes-v2",
+    "dnl\\": "deadline-notes-v2"
+  },
+  "targets": {}
 }
