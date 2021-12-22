@@ -19,6 +19,7 @@ export class CommentService {
   public delete(id: string): Promise<any> {
     return http.delete(`${this._commentUrl}/${id}`);
   }
+  //a
 }
 
 export default new CommentService();
