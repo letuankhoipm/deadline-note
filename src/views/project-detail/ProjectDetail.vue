@@ -95,10 +95,6 @@ export default class ProjectDetail extends Vue {
       name: "Boards",
     },
     {
-      id: 2,
-      name: "Wiki",
-    },
-    {
       id: 3,
       name: "Settings",
     },
