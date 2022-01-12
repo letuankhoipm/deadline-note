@@ -23,18 +23,7 @@
             leave-to-class="transform opacity-0 scale-95"
           >
             <MenuItems
-              class="
-                origin-top-right
-                absolute
-                right-0
-                my-2
-                w-48
-                shadow-lg
-                py-1
-                bg-white
-                ring-1 ring-black ring-opacity-5
-                focus:outline-none
-              "
+              class="origin-top-right absolute right-0 my-2 w-48 shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             >
               <MenuItem v-slot="{ active }">
                 <button
@@ -67,17 +56,7 @@
               @change="onMoveList"
             >
               <div
-                class="
-                  col-span
-                  ps-board-card
-                  shadow-md
-                  bg-gray-50
-                  rounded-none
-                  p-4
-                  mx-2
-                  border-t-4 border-green-600
-                  overflow-y-auto
-                "
+                class="col-span ps-board-card shadow-md bg-gray-50 rounded-none p-4 mx-2 border-t-4 border-green-600 overflow-y-auto"
                 v-for="element in boardDetail.lists"
                 :key="element.title"
               >
@@ -88,12 +67,7 @@
                     </h1>
                   </div>
                   <div
-                    class="
-                      col-span
-                      flex flex-row-reverse
-                      items-center
-                      cursor-pointer cursor-move
-                    "
+                    class="col-span flex flex-row-reverse items-center cursor-pointer cursor-move"
                   >
                     <Menu as="div" class="ml-3 relative z-10">
                       <div>
@@ -111,18 +85,7 @@
                         leave-to-class="transform opacity-0 scale-95"
                       >
                         <MenuItems
-                          class="
-                            origin-top-right
-                            absolute
-                            right-0
-                            my-2
-                            w-48
-                            shadow-lg
-                            py-1
-                            bg-white
-                            ring-1 ring-black ring-opacity-5
-                            focus:outline-none
-                          "
+                          class="origin-top-right absolute right-0 my-2 w-48 shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                         >
                           <MenuItem v-slot="{ active }">
                             <button
@@ -174,27 +137,12 @@
           </div>
           <div class="col-span">
             <div
-              class="
-                col-span
-                ps-new-list
-                shadow-md
-                bg-gray-50
-                rounded-none
-                p-4
-                mx-2
-                border-t-4
-                overflow-y-auto
-              "
+              class="col-span ps-new-list shadow-md bg-gray-50 rounded-none p-4 mx-2 border-t-4 overflow-y-auto"
             >
               <div class="mb-2 grid grid-cols-2">
                 <div class="col-span"></div>
                 <div
-                  class="
-                    col-span
-                    flex flex-row-reverse
-                    items-center
-                    cursor-pointer
-                  "
+                  class="col-span flex flex-row-reverse items-center cursor-pointer"
                 >
                   <PlusIcon
                     @click="onCreateList()"
@@ -221,28 +169,28 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
-import { VueDraggableNext } from "vue-draggable-next";
-import { DotsVerticalIcon, PlusIcon, TrashIcon } from "@heroicons/vue/outline";
-import Ticket from "@/components/ticket/Ticket.vue";
+import { Vue, Options } from 'vue-class-component';
+import { VueDraggableNext } from 'vue-draggable-next';
+import { DotsVerticalIcon, PlusIcon, TrashIcon } from '@heroicons/vue/outline';
+import Ticket from '@/components/ticket/Ticket.vue';
 import {
   IBoardDetail,
   IListRequest,
   ITicket,
   ITicketMoveRequest,
-} from "@/models/board.model";
-import { mapGetters } from "vuex";
-import NgvModalService from "@/services/ngv-modal.service";
-import NewTicket from "@/modals/new-ticket/NewTicket.vue";
-import boardService from "@/services/board.service";
-import listService from "@/services/list.service";
-import calcPosition from "@/utils/calc-pos";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import ticketService from "@/services/ticket.service";
-import ngvModalService from "@/services/ngv-modal.service";
-import ConfirmModal from "@/modals/confirm-modal/ConfirmModal.vue";
-import toastrService from "@/services/toastr.service";
-import execService from "@/services/exec.service";
+} from '@/models/board.model';
+import { mapGetters } from 'vuex';
+import NgvModalService from '@/services/ngv-modal.service';
+import NewTicket from '@/modals/new-ticket/NewTicket.vue';
+import boardService from '@/services/board.service';
+import listService from '@/services/list.service';
+import calcPosition from '@/utils/calc-pos';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import ticketService from '@/services/ticket.service';
+import ngvModalService from '@/services/ngv-modal.service';
+import ConfirmModal from '@/modals/confirm-modal/ConfirmModal.vue';
+import toastrService from '@/services/toastr.service';
+import execService from '@/services/exec.service';
 
 @Options({
   components: {
@@ -258,7 +206,7 @@ import execService from "@/services/exec.service";
     MenuButton,
   },
   computed: {
-    ...mapGetters(["g_user"]),
+    ...mapGetters(['g_user']),
   },
   props: {},
   methods: {
@@ -272,18 +220,21 @@ import execService from "@/services/exec.service";
   },
   created() {
     this.getDetail();
+    setInterval(() => {
+      this.getDetail();
+    }, 15000);
   },
 })
 export default class Board extends Vue {
-  public boardId = "";
+  public boardId = '';
   public boardDetail: IBoardDetail = {
-    createAt: "",
-    id: "",
+    createAt: '',
+    id: '',
     lists: [],
     members: [],
-    title: "",
+    title: '',
   };
-  public newListName = "";
+  public newListName = '';
   public enabled = true;
   public dragging = false;
 
@@ -291,21 +242,21 @@ export default class Board extends Vue {
   // List variables
   // ====================================================
 
-  private _imListBefore = "";
-  private _imListAfter = "";
+  private _imListBefore = '';
+  private _imListAfter = '';
   private _currListIndex = 0;
-  private _currListPos = "";
-  private _currListId = "";
+  private _currListPos = '';
+  private _currListId = '';
 
   // ====================================================
   // Ticket variables
   // ====================================================
 
-  private _imTicketBefore = "";
-  private _imTicketAfter = "";
+  private _imTicketBefore = '';
+  private _imTicketAfter = '';
   private _currTicketIndex = 0;
-  private _currTicketPos = "";
-  private _currTicketId = "";
+  private _currTicketPos = '';
+  private _currTicketId = '';
 
   //=============================================================
 
@@ -318,11 +269,11 @@ export default class Board extends Vue {
     this._currListIndex = event.moved.newIndex;
 
     if (this._currListIndex === 0) {
-      this._imListBefore = "";
+      this._imListBefore = '';
       this._imListAfter = this.boardDetail.lists[this._currListIndex + 1].pos;
     } else if (this._currListIndex === listLen - 1) {
       this._imListBefore = this.boardDetail.lists[this._currListIndex - 1].pos;
-      this._imListAfter = "";
+      this._imListAfter = '';
     } else {
       this._imListBefore = this.boardDetail.lists[this._currListIndex - 1].pos;
       this._imListAfter = this.boardDetail.lists[this._currListIndex + 1].pos;
@@ -349,12 +300,12 @@ export default class Board extends Vue {
 
       if (this._currTicketIndex === 0) {
         // Handle move to first position inside own list
-        this._imTicketBefore = "";
+        this._imTicketBefore = '';
         this._imTicketAfter = list[this._currTicketIndex + 1].pos;
       } else if (this._currTicketIndex === length - 1) {
         // Handle move to last position inside own list
         this._imTicketBefore = list[this._currTicketIndex - 1].pos;
-        this._imTicketAfter = "";
+        this._imTicketAfter = '';
       } else {
         // Handle move to last position inside own list
         this._imTicketBefore = list[this._currTicketIndex - 1].pos;
@@ -379,10 +330,10 @@ export default class Board extends Vue {
 
     if (added) {
       const _index = added.newIndex;
-      let _currPos = "";
+      let _currPos = '';
       if (list.length === 1) {
         // Moving to empty destination list from this deposition list
-        const pos = (this._currListPos = calcPosition("", ""));
+        const pos = (this._currListPos = calcPosition('', ''));
         const request: ITicketMoveRequest = {
           pos: pos,
           boardId: this.boardId,
@@ -398,13 +349,13 @@ export default class Board extends Vue {
         // Moving to unempty destination list
         if (_index === 0 && list.length > 1) {
           // Moving to destination list (on top position) from this deposition list
-          const _imBfPos = "";
+          const _imBfPos = '';
           const _imAtPos = list[_index + 1].pos;
           _currPos = calcPosition(_imBfPos, _imAtPos);
         } else if (_index === list.length - 1) {
           // Moving to destination list (on bottom position) from this deposition list
           const _imBfPos = list[_index - 1].pos;
-          const _imAtPos = "";
+          const _imAtPos = '';
           _currPos = calcPosition(_imBfPos, _imAtPos);
         } else {
           // Moving to destination list (on between position) from this deposition list
@@ -429,7 +380,7 @@ export default class Board extends Vue {
 
   //=============================================================
   public onCreateTicket(listInfo: any): void {
-    NgvModalService.open(NewTicket, { ...listInfo, type: "create" }).then(
+    NgvModalService.open(NewTicket, { ...listInfo, type: 'create' }).then(
       (res: any) => {
         if (res) {
           this.getBoardDetail(this.boardId);
@@ -439,7 +390,7 @@ export default class Board extends Vue {
   }
 
   public onTicketDetail(ticketDetail: ITicket): void {
-    NgvModalService.open(NewTicket, { ...ticketDetail, type: "update" });
+    NgvModalService.open(NewTicket, { ...ticketDetail, type: 'update' });
   }
 
   public onCreateList(): void {
@@ -452,7 +403,7 @@ export default class Board extends Vue {
       .create(listReq)
       .then(() => {
         this.getBoardDetail(this.boardId);
-        this.newListName = "";
+        this.newListName = '';
       })
       .catch((err) => {
         console.log(err);
@@ -481,23 +432,23 @@ export default class Board extends Vue {
 
   private _onInitPosParams(): string {
     if (this.boardDetail?.lists) {
-      let rs = "";
+      let rs = '';
       const listLen = this.boardDetail.lists.length;
       if (listLen === 0) {
-        rs = calcPosition("", "");
+        rs = calcPosition('', '');
       } else {
-        rs = calcPosition(this.boardDetail.lists[listLen - 1].pos, "");
+        rs = calcPosition(this.boardDetail.lists[listLen - 1].pos, '');
       }
       return rs;
     } else {
-      return "";
+      return '';
     }
   }
 
   public onRemoveBoard(): void {
     const modalRef = ngvModalService.open(ConfirmModal, {
-      title: "Delete Board",
-      msg: "Are you sure you want to delete this board?",
+      title: 'Delete Board',
+      msg: 'Are you sure you want to delete this board?',
     });
     modalRef.then((result) => {
       result && this.onDelete();
@@ -509,16 +460,16 @@ export default class Board extends Vue {
       if (!res) {
         return;
       }
-      toastrService.success("Notification", "Delete board successfully!");
+      toastrService.success('Notification', 'Delete board successfully!');
       execService.refetch();
-      this.$router.push("/home");
+      this.$router.push('/home');
     });
   }
 
   public onRemoveList(listId: string): void {
     const modalRef = ngvModalService.open(ConfirmModal, {
-      title: "Remove List",
-      msg: "Are you sure you want to remove this list?",
+      title: 'Remove List',
+      msg: 'Are you sure you want to remove this list?',
     });
     modalRef.then((result) => {
       if (result) {
@@ -526,7 +477,7 @@ export default class Board extends Vue {
           if (!res) {
             return;
           }
-          toastrService.success("Notification", "Remove list successfully!");
+          toastrService.success('Notification', 'Remove list successfully!');
           execService.refetch();
         });
       }
@@ -536,5 +487,5 @@ export default class Board extends Vue {
 </script>
 
 <style lang="scss">
-@import "./Board.scss";
+@import './Board.scss';
 </style>

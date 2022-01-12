@@ -62,8 +62,9 @@
 </template>
 
 <script lang="ts">
-import authService from "@/services/auth.service";
-import { Vue, Options } from "vue-class-component";
+import authService from '@/services/auth.service';
+import toastrService from '@/services/toastr.service';
+import { Vue, Options } from 'vue-class-component';
 @Options({
   components: {},
   props: {},
@@ -77,8 +78,8 @@ import { Vue, Options } from "vue-class-component";
 })
 export default class ForgotPassword extends Vue {
   public forgotPasswordForm = {
-    email: "",
-    domain: "",
+    email: '',
+    domain: '',
   };
 
   public initState(): void {
@@ -90,16 +91,18 @@ export default class ForgotPassword extends Vue {
       return;
     }
     authService.forget(this.forgotPasswordForm).then((res: any) => {
-      console.log(res);
+      if (res) {
+        toastrService.success('Notification', 'Add comment successfully!');
+      }
     });
   }
 
   public returnLogin(): void {
-    this.$router.push("/");
+    this.$router.push('/');
   }
 }
 </script>
 
 <style lang="scss">
-@import "./ForgotPassword.scss";
+@import './ForgotPassword.scss';
 </style>
