@@ -1,16 +1,16 @@
 <template src="./NewBoard.html"></template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
-import { XIcon, CreditCardIcon } from "@heroicons/vue/outline";
-import ngvModalService from "@/services/ngv-modal.service";
-import boardService from "@/services/board.service";
-import { IBoardRequest } from "@/models/board.model";
-import toastrService from "@/services/toastr.service";
-import execService from "@/services/exec.service";
+import { Vue, Options } from 'vue-class-component';
+import { XIcon, CreditCardIcon } from '@heroicons/vue/outline';
+import ngvModalService from '@/services/ngv-modal.service';
+import boardService from '@/services/board.service';
+import { IBoardRequest } from '@/models/board.model';
+import toastrService from '@/services/toastr.service';
+import execService from '@/services/exec.service';
 @Options({
   components: { XIcon, CreditCardIcon },
-  props: ["input"],
+  props: ['input'],
   data() {
     return {
       newBoardForm: {
@@ -33,7 +33,6 @@ export default class NewBoard extends Vue {
     if (this.input) {
       this.newBoardForm.projectId = this.input.projectId;
     }
-    console.log(this.input.projectId);
   }
 
   public onCancel(): void {
@@ -47,15 +46,15 @@ export default class NewBoard extends Vue {
         if (!res) {
           return;
         }
-        toastrService.success("Notification", "Create board successfully!");
+        toastrService.success('Notification', 'Create board successfully!');
         execService.refetch();
         ngvModalService.close(true);
       })
-      .catch((err) => console.log(err));
+      .catch();
   }
 }
 </script>
 
 <style lang="scss">
-@import "./NewBoard.scss";
+@import './NewBoard.scss';
 </style>

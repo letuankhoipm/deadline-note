@@ -126,7 +126,6 @@ export default class InviteModal extends Vue {
 
   private _onSearching(): void {
     this.onSearch$.pipe(debounceTime(500)).subscribe((key: string) => {
-      console.log(`search ${key}`);
       if (key.length !== 0) {
         searchService.searchUser(key).then((res: any) => {
           if (res.data) {

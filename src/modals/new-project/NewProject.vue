@@ -1,17 +1,7 @@
 <template>
   <div class="fixed z-10 inset-0 overflow-y-auto">
     <div
-      class="
-        flex
-        items-end
-        justify-center
-        min-h-screen
-        pt-4
-        px-4
-        pb-20
-        text-center
-        sm:block sm:p-0
-      "
+      class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
     >
       <div
         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
@@ -22,16 +12,7 @@
         >&#8203;</span
       >
       <div
-        class="
-          inline-block
-          align-bottom
-          bg-white
-          overflow-hidden
-          shadow-xl
-          transform
-          transition-all
-          sm:my-8 sm:align-middle sm:max-w-lg sm:w-full
-        "
+        class="inline-block align-bottom bg-white overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
       >
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="w-full">
@@ -105,19 +86,19 @@
   </div>
 </template>
 <style lang="scss">
-@import "./NewProject.scss";
+@import './NewProject.scss';
 </style>
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
-import NgvModalService from "@/services/ngv-modal.service";
-import { IProject } from "@/models/project.model";
-import { XIcon } from "@heroicons/vue/outline";
-import projectService from "@/services/project.service";
-import toastrService from "@/services/toastr.service";
+import { Vue, Options } from 'vue-class-component';
+import NgvModalService from '@/services/ngv-modal.service';
+import { IProject } from '@/models/project.model';
+import { XIcon } from '@heroicons/vue/outline';
+import projectService from '@/services/project.service';
+import toastrService from '@/services/toastr.service';
 
 @Options({
   components: { XIcon },
-  props: ["input"],
+  props: ['input'],
   data() {
     return {
       projectForm: {
@@ -149,9 +130,9 @@ export default class NewProject extends Vue {
           return;
         }
         NgvModalService.close(true);
-        toastrService.success("Notification", "Create Project Successfully!");
+        toastrService.success('Notification', 'Create Project Successfully!');
       })
-      .catch((err) => console.log(err));
+      .catch();
   }
 
   public cancel(): void {
@@ -159,7 +140,6 @@ export default class NewProject extends Vue {
   }
 
   public uploadImage(files: FileList): void {
-    console.log(files);
     const image = files[0];
     const reader = new FileReader();
     reader.readAsDataURL(image);

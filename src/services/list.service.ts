@@ -1,10 +1,10 @@
-import { IListMoveRequest, IListRequest } from "@/models/board.model";
-import { IResponse } from "@/models/http.model";
-import http from "./http.service";
-import * as signalR from "@microsoft/signalr";
+import { IListMoveRequest, IListRequest } from '@/models/board.model';
+import { IResponse } from '@/models/http.model';
+import http from './http.service';
+import * as signalR from '@microsoft/signalr';
 
 class ListService {
-  private _listUrl = "/api/v1/ListItem";
+  private _listUrl = '/api/v1/ListItem';
 
   private _connection = new signalR.HubConnectionBuilder()
     .configureLogging(signalR.LogLevel.Information)
@@ -14,10 +14,8 @@ class ListService {
   public startConnection(): void {
     this._connection
       .start()
-      .then(() => {
-        console.log("signal connected");
-      })
-      .catch((err) => console.log(err));
+      .then(() => {})
+      .catch();
   }
 
   public onSubscribeData(): void {

@@ -4,14 +4,7 @@
       <div class="col-span-1">
         <div>
           <h2
-            class="
-              text-base
-              mt-4
-              text-xl text-green-600
-              font-semibold
-              tracking-wide
-              uppercase
-            "
+            class="text-base mt-4 text-xl text-green-600 font-semibold tracking-wide uppercase"
           >
             Profile
           </h2>
@@ -59,8 +52,8 @@
 </template>
 
 <script lang="ts">
-import userService from "@/services/user.service";
-import { Vue, Options } from "vue-class-component";
+import userService from '@/services/user.service';
+import { Vue, Options } from 'vue-class-component';
 @Options({
   components: {},
   props: {},
@@ -76,11 +69,7 @@ export default class Profile extends Vue {
   public profile = {};
   public getProfile(): void {
     userService.getUser().then((res: any) => {
-      // if (!res) {
-      //   return;
-      // }
       this.profile = res.data;
-      console.log(this.profile);
     });
   }
 }

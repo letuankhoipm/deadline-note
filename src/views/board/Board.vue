@@ -286,7 +286,7 @@ export default class Board extends Vue {
       .then((res: any) => {
         this.boardDetail.lists[this._currListIndex].pos = res?.data;
       })
-      .catch((err) => console.log(err));
+      .catch();
   }
 
   public onChangeTicket(event: any, list: ITicket[], listId: string): void {
@@ -323,9 +323,7 @@ export default class Board extends Vue {
         boardId: this.boardId,
         listId: listId,
       };
-      ticketService.move(request, this._currTicketId).then((res: any) => {
-        console.log(res);
-      });
+      ticketService.move(request, this._currTicketId).then(() => {});
     }
 
     if (added) {
@@ -341,10 +339,8 @@ export default class Board extends Vue {
         };
         ticketService
           .move(request, added.element.id)
-          .then((res: any) => {
-            console.log(res);
-          })
-          .catch((err) => console.log(err));
+          .then(() => {})
+          .catch();
       } else {
         // Moving to unempty destination list
         if (_index === 0 && list.length > 1) {
@@ -370,10 +366,8 @@ export default class Board extends Vue {
         };
         ticketService
           .move(request, added.element.id)
-          .then((res: any) => {
-            console.log(res);
-          })
-          .catch((err) => console.log(err));
+          .then(() => {})
+          .catch();
       }
     }
   }
@@ -405,20 +399,11 @@ export default class Board extends Vue {
         this.getBoardDetail(this.boardId);
         this.newListName = '';
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch();
   }
 
   public getLists(): void {
-    listService
-      .get()
-      .then((res: any) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    listService.get().then().catch();
   }
 
   public getBoardDetail(boardId: string): void {
@@ -427,7 +412,7 @@ export default class Board extends Vue {
       .then((res: any) => {
         this.boardDetail = res.data;
       })
-      .catch((err) => console.log(err));
+      .catch();
   }
 
   private _onInitPosParams(): string {

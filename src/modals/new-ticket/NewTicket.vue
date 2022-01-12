@@ -355,13 +355,10 @@ export default class NewTicket extends Vue {
       };
       ticketService
         .create(request)
-        .then((res: any) => {
-          console.log(res);
+        .then(() => {
           ngvModalService.close(true);
         })
-        .catch((err: any) => {
-          console.log(err);
-        });
+        .catch(() => {});
     }
   }
 
@@ -509,7 +506,6 @@ export default class NewTicket extends Vue {
 
   private _onSearching(): void {
     this.onSearch$.pipe(debounceTime(500)).subscribe((key: string) => {
-      console.log(`search ${key}`);
       if (key.length !== 0) {
         searchService.searchUser(key).then((res: any) => {
           if (res.data) {
