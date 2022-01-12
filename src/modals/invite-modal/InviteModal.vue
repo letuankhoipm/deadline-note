@@ -1,17 +1,7 @@
 <template>
   <div class="fixed z-10 inset-0 overflow-y-auto">
     <div
-      class="
-        flex
-        items-end
-        justify-center
-        min-h-screen
-        pt-4
-        px-4
-        pb-20
-        text-center
-        sm:block sm:p-0
-      "
+      class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
     >
       <div
         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
@@ -21,16 +11,7 @@
         aria-hidden="true"
       ></span>
       <div
-        class="
-          inline-block
-          align-bottom
-          bg-white
-          overflow-hidden
-          shadow-xl
-          transform
-          transition-all
-          sm:my-8 sm:align-middle sm:max-w-xl sm:w-full
-        "
+        class="inline-block align-bottom bg-white overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full"
       >
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="w-full">
@@ -44,14 +25,7 @@
                 <div class="col-span text-right">
                   <XIcon
                     @click="onCancel()"
-                    class="
-                      h-5
-                      w-5
-                      float-right
-                      leading-8
-                      seft-center
-                      cursor-pointer
-                    "
+                    class="h-5 w-5 float-right leading-8 seft-center cursor-pointer"
                   />
                 </div>
               </div>
@@ -88,21 +62,21 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
-import { XIcon } from "@heroicons/vue/outline";
-import { IInvite } from "@/models/project.model";
-import { Subject } from "rxjs";
-import { debounceTime } from "rxjs/operators";
-import projectService from "@/services/project.service";
-import searchService from "@/services/search.service";
-import ngvModalService from "@/services/ngv-modal.service";
-import Multiselect from "@vueform/multiselect";
-import { IUser } from "@/models/user.modal";
-import toastrService from "@/services/toastr.service";
+import { Vue, Options } from 'vue-class-component';
+import { XIcon } from '@heroicons/vue/outline';
+import { IInvite } from '@/models/project.model';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import projectService from '@/services/project.service';
+import searchService from '@/services/search.service';
+import ngvModalService from '@/services/ngv-modal.service';
+import Multiselect from '@vueform/multiselect';
+import { IUser } from '@/models/user.modal';
+import toastrService from '@/services/toastr.service';
 
 @Options({
   components: { XIcon, Multiselect },
-  props: ["input"],
+  props: ['input'],
   methods: {},
   data() {
     return {};
@@ -114,13 +88,13 @@ import toastrService from "@/services/toastr.service";
 })
 export default class InviteModal extends Vue {
   public users = [];
-  public projectId = "";
+  public projectId = '';
 
   public onSearch$ = new Subject<any>();
 
   public userInvite = [];
 
-  public email = "";
+  public email = '';
 
   public onInvite(): void {
     const req: IInvite = {
@@ -133,10 +107,11 @@ export default class InviteModal extends Vue {
         if (!res) {
           return;
         }
-        toastrService.success("Notification", "Invite users successfully!");
+        toastrService.success('Notification', 'Invite users successfully!');
+        ngvModalService.close();
       })
       .catch(() => {
-        toastrService.error("Error", "Update description failed!");
+        toastrService.error('Error', 'Update description failed!');
       });
   }
 
@@ -172,5 +147,5 @@ export default class InviteModal extends Vue {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style lang="scss">
-@import "./InviteModal.scss";
+@import './InviteModal.scss';
 </style>

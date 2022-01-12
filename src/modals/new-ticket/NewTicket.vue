@@ -1,17 +1,7 @@
 <template>
   <div class="fixed z-10 inset-0 overflow-y-auto">
     <div
-      class="
-        flex
-        items-end
-        justify-center
-        min-h-screen
-        pt-4
-        px-4
-        pb-20
-        text-center
-        sm:block sm:p-0
-      "
+      class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
     >
       <div
         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
@@ -21,16 +11,7 @@
         aria-hidden="true"
       ></span>
       <div
-        class="
-          inline-block
-          align-bottom
-          bg-white
-          overflow-hidden
-          shadow-xl
-          transform
-          transition-all
-          sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full
-        "
+        class="inline-block align-bottom bg-white overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full"
       >
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="w-full">
@@ -44,14 +25,7 @@
                 <div class="col-span text-right">
                   <XIcon
                     @click="onCancel()"
-                    class="
-                      h-5
-                      w-5
-                      float-right
-                      leading-8
-                      self-center
-                      cursor-pointer
-                    "
+                    class="h-5 w-5 float-right leading-8 self-center cursor-pointer"
                   />
                 </div>
                 <div class="grid grid-cols-4">
@@ -153,12 +127,7 @@
                             <p class="text-right">
                               <span
                                 @click="onComment"
-                                class="
-                                  underline
-                                  mx-2
-                                  cursor-pointer
-                                  text-green-400
-                                "
+                                class="underline mx-2 cursor-pointer text-green-400"
                                 >Comment</span
                               >
                             </p>
@@ -189,12 +158,7 @@
                                   !isEditComment && comment.userId === userId
                                 "
                                 @click="onEditComment(comment)"
-                                class="
-                                  underline
-                                  mx-2
-                                  cursor-pointer
-                                  text-gray-400
-                                "
+                                class="underline mx-2 cursor-pointer text-gray-400"
                                 >Edit</span
                               >
                               <span
@@ -202,12 +166,7 @@
                                   !isEditComment && comment.userId === userId
                                 "
                                 @click="onDeleteComment(comment.id)"
-                                class="
-                                  underline
-                                  mx-2
-                                  cursor-pointer
-                                  text-gray-400
-                                "
+                                class="underline mx-2 cursor-pointer text-gray-400"
                                 >Delete</span
                               >
                             </p>
@@ -225,22 +184,12 @@
                             />
                             <p class="text-right">
                               <span
-                                class="
-                                  underline
-                                  mx-2
-                                  cursor-pointer
-                                  text-gray-400
-                                "
+                                class="underline mx-2 cursor-pointer text-gray-400"
                                 >Cancel</span
                               >
                               <span
                                 @click="onUpdateComment"
-                                class="
-                                  underline
-                                  mx-2
-                                  cursor-pointer
-                                  text-green-400
-                                "
+                                class="underline mx-2 cursor-pointer text-green-400"
                                 >Save</span
                               >
                             </p>
@@ -288,27 +237,27 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
+import { Vue, Options } from 'vue-class-component';
 import {
   XIcon,
   CreditCardIcon,
   UserIcon,
   PencilIcon,
-} from "@heroicons/vue/outline";
-import NgvModalService from "@/services/ngv-modal.service";
-import Multiselect from "@vueform/multiselect";
-import { Subject } from "rxjs";
-import { IUser } from "@/models/user.modal";
-import { debounceTime } from "rxjs/operators";
-import searchService from "@/services/search.service";
-import ticketService from "@/services/ticket.service";
-import calcPosition from "@/utils/calc-pos";
-import { ITicket, ITicketRequest } from "@/models/board.model";
-import ngvModalService from "@/services/ngv-modal.service";
-import commentService from "@/services/comment.service";
-import toastrService from "@/services/toastr.service";
-import { IComment } from "@/models/comment.model";
-import ConfirmModal from "../confirm-modal/ConfirmModal.vue";
+} from '@heroicons/vue/outline';
+import NgvModalService from '@/services/ngv-modal.service';
+import Multiselect from '@vueform/multiselect';
+import { Subject } from 'rxjs';
+import { IUser } from '@/models/user.modal';
+import { debounceTime } from 'rxjs/operators';
+import searchService from '@/services/search.service';
+import ticketService from '@/services/ticket.service';
+import calcPosition from '@/utils/calc-pos';
+import { ITicket, ITicketRequest } from '@/models/board.model';
+import ngvModalService from '@/services/ngv-modal.service';
+import commentService from '@/services/comment.service';
+import toastrService from '@/services/toastr.service';
+import { IComment } from '@/models/comment.model';
+import ConfirmModal from '../confirm-modal/ConfirmModal.vue';
 
 @Options({
   components: {
@@ -318,7 +267,7 @@ import ConfirmModal from "../confirm-modal/ConfirmModal.vue";
     UserIcon,
     PencilIcon,
   },
-  props: ["input"],
+  props: ['input'],
   created() {
     this.patchValue();
     this._parseUser();
@@ -328,10 +277,10 @@ import ConfirmModal from "../confirm-modal/ConfirmModal.vue";
   data() {
     return {
       newTicketForm: {
-        title: "",
-        description: "",
-        pos: "",
-        listId: "",
+        title: '',
+        description: '',
+        pos: '',
+        listId: '',
         memberIds: [],
         priority: 1,
       },
@@ -351,14 +300,14 @@ export default class NewTicket extends Vue {
   }
 
   public priorityLabel = [
-    { label: "Done", value: 0 },
-    { label: "Processing", value: 1 },
-    { label: "Cancel", value: 2 },
+    { label: 'Done', value: 0 },
+    { label: 'Processing', value: 1 },
+    { label: 'Cancel', value: 2 },
   ];
-  public newComment = "";
-  public newDescription = "";
-  public currentCommentContent = "";
-  public currentCommentId = "";
+  public newComment = '';
+  public newDescription = '';
+  public currentCommentContent = '';
+  public currentCommentId = '';
 
   public users = [];
   public listDetail: any;
@@ -367,12 +316,12 @@ export default class NewTicket extends Vue {
   public listComments: IComment[] = [];
   public isEditComment = false;
 
-  private _currListId = "";
-  private _currTicketId = "";
-  public userId = "";
+  private _currListId = '';
+  private _currTicketId = '';
+  public userId = '';
 
   public text =
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+    'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
 
   public onCancel(): void {
     NgvModalService.dismiss();
@@ -387,10 +336,10 @@ export default class NewTicket extends Vue {
     if (!this.input) {
       return;
     }
-    if (this.input.type === "create") {
+    if (this.input.type === 'create') {
       this.listDetail = this.input;
     }
-    if (this.input.type === "update") {
+    if (this.input.type === 'update') {
       this.ticketDetail = this.input;
       this.listComments = this.input.comments;
       Object.assign(this.newTicketForm, this.input);
@@ -398,7 +347,7 @@ export default class NewTicket extends Vue {
   }
 
   public onSave(): void {
-    if (this.input.type === "create") {
+    if (this.input.type === 'create') {
       const request: ITicketRequest = {
         ...this.newTicketForm,
         pos: this._onInitPosParams(),
@@ -429,7 +378,7 @@ export default class NewTicket extends Vue {
     }
     const req = {
       content: this.newComment,
-      ticketId: this.ticketDetail ? this.ticketDetail.id : "",
+      ticketId: this.ticketDetail ? this.ticketDetail.id : '',
       userId: this.userId,
     };
     commentService
@@ -438,21 +387,20 @@ export default class NewTicket extends Vue {
         if (!res) {
           return;
         }
-        this.newComment = "";
+        this.newComment = '';
         this.listComments.push(res.data);
-        console.log(this.listComments);
-
-        toastrService.success("Notification", "Add comment successfully!");
+        toastrService.success('Notification', 'Add comment successfully!');
+        location.reload();
       })
       .catch(() => {
-        toastrService.error("Error", "Add comment failed!");
+        toastrService.error('Error', 'Add comment failed!');
       });
   }
 
   public onUpdateComment(): void {
     const req = {
       content: this.currentCommentContent,
-      ticketId: this.ticketDetail ? this.ticketDetail.id : "",
+      ticketId: this.ticketDetail ? this.ticketDetail.id : '',
       userId: this.userId,
     };
     commentService
@@ -462,17 +410,17 @@ export default class NewTicket extends Vue {
           return;
         }
         this.isEditComment = false;
-        toastrService.success("Notification", "Update comment successfully!");
+        toastrService.success('Notification', 'Update comment successfully!');
       })
       .catch(() => {
-        toastrService.error("Error", "Update comment failed!");
+        toastrService.error('Error', 'Update comment failed!');
       });
   }
 
   public onDeleteComment(id: string): void {
     const modalRef = ngvModalService.open(ConfirmModal, {
-      title: "Delete comment",
-      msg: "Are you sure you want to delete this comment?",
+      title: 'Delete comment',
+      msg: 'Are you sure you want to delete this comment?',
     });
     modalRef.then((result) => {
       if (result) {
@@ -484,12 +432,12 @@ export default class NewTicket extends Vue {
             }
             this.isEditComment = false;
             toastrService.success(
-              "Notification",
-              "Delete comment successfully!"
+              'Notification',
+              'Delete comment successfully!'
             );
           })
           .catch(() => {
-            toastrService.error("Error", "Delete comment failed!");
+            toastrService.error('Error', 'Delete comment failed!');
           });
       }
     });
@@ -511,15 +459,15 @@ export default class NewTicket extends Vue {
           return;
         }
         toastrService.success(
-          "Notification",
-          "Update description successfully!"
+          'Notification',
+          'Update description successfully!'
         );
         setTimeout(() => {
           location.reload();
         }, 500);
       })
       .catch(() => {
-        toastrService.error("Error", "Update description failed!");
+        toastrService.error('Error', 'Update description failed!');
       });
   }
 
@@ -538,20 +486,20 @@ export default class NewTicket extends Vue {
         if (!res) {
           return;
         }
-        toastrService.success("Notification", "Update title successfully!");
+        toastrService.success('Notification', 'Update title successfully!');
         setTimeout(() => {
           location.reload();
         }, 500);
       })
       .catch(() => {
-        toastrService.error("Error", "Update title failed!");
+        toastrService.error('Error', 'Update title failed!');
       });
   }
 
   // ================================================================
 
   private _parseUser(): void {
-    const userStr = localStorage.getItem("USER");
+    const userStr = localStorage.getItem('USER');
     if (!userStr) {
       return;
     }
@@ -579,12 +527,12 @@ export default class NewTicket extends Vue {
   }
 
   private _onInitPosParams(): string {
-    let rs = "";
+    let rs = '';
     const listLen = this.listDetail.tickets.length;
     if (listLen === 0) {
-      rs = calcPosition("", "");
+      rs = calcPosition('', '');
     } else {
-      rs = calcPosition(this.listDetail.tickets[listLen - 1].pos, "");
+      rs = calcPosition(this.listDetail.tickets[listLen - 1].pos, '');
     }
     return rs;
   }
@@ -593,5 +541,5 @@ export default class NewTicket extends Vue {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style lang="scss">
-@import "./NewTicket.scss";
+@import './NewTicket.scss';
 </style>

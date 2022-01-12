@@ -1,10 +1,10 @@
 import { IInvite } from './../models/project.model';
 import { IBoard } from '@/models/project.model';
 import { IProject } from '@/models/project.model';
-import http from "./http.service";
+import http from './http.service';
 
 class ProjectService {
-  private _projectUrl = "/api/v1/Project";
+  private _projectUrl = '/api/v1/Project';
 
   public getAll(): Promise<IProject[]> {
     return http.get(this._projectUrl);
@@ -23,7 +23,10 @@ class ProjectService {
   }
 
   public invite(data: IInvite): Promise<any> {
-    return http.post(this._projectUrl, data);
+    const userIds = {
+      userIds: data.userIds,
+    };
+    return http.post(`${this._projectUrl}/${data.projectId}/invite`, userIds);
   }
 
   public delete(id: string): Promise<any> {
