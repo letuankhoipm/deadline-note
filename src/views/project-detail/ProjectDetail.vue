@@ -4,14 +4,7 @@
       <div class="col-span-1">
         <div>
           <h1
-            class="
-              text-base text-xl
-              mt-4
-              text-green-600
-              font-semibold
-              tracking-wide
-              uppercase
-            "
+            class="text-base text-xl mt-4 text-green-600 font-semibold tracking-wide uppercase"
           >
             {{ projectDetail.name }}
           </h1>
@@ -35,16 +28,7 @@
                       'text-green-500 duration-200 font-medium border-green-500':
                         activeTab === item.id,
                     }"
-                    class="
-                      rounded-none
-                      text-gray-600
-                      py-2
-                      px-6
-                      border-transparent border-b-2
-                      block
-                      hover:text-green-500
-                      focus:outline-none
-                    "
+                    class="rounded-none text-gray-600 py-2 px-6 border-transparent border-b-2 block hover:text-green-500 focus:outline-none"
                   >
                     {{ item.name }}
                   </button>
@@ -71,13 +55,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
-import { ProjectTabs } from "@/models/tabs.model";
-import ProjectOverview from "@/components/project-overview/ProjectOverview.vue";
-import ProjectBoard from "@/components/project-board/ProjectBoard.vue";
-import ProjectSettings from "@/components/project-settings/ProjectSettings.vue";
-import projectService from "@/services/project.service";
-import toastrService from "@/services/toastr.service";
+import { Vue, Options } from 'vue-class-component';
+import { ProjectTabs } from '@/models/tabs.model';
+import ProjectOverview from '@/components/project-overview/ProjectOverview.vue';
+import ProjectBoard from '@/components/project-board/ProjectBoard.vue';
+import ProjectSettings from '@/components/project-settings/ProjectSettings.vue';
+import projectService from '@/services/project.service';
+import toastrService from '@/services/toastr.service';
 @Options({
   components: { ProjectOverview, ProjectBoard, ProjectSettings },
 })
@@ -88,15 +72,15 @@ export default class ProjectDetail extends Vue {
   public listTabs = [
     {
       id: 0,
-      name: "Overview",
+      name: 'Overview',
     },
     {
       id: 1,
-      name: "Boards",
+      name: 'Boards',
     },
     {
       id: 3,
-      name: "Settings",
+      name: 'Settings',
     },
   ];
 
@@ -130,7 +114,7 @@ export default class ProjectDetail extends Vue {
       .then((res: any) => {
         this.projectDetail = res.data;
       })
-      .catch((err) => toastrService.error("Error", err));
+      .catch((err) => toastrService.error('Error', err));
   }
 }
 </script>

@@ -30,7 +30,7 @@
                   type="email"
                 />
               </div>
-              <div class="w-full my-4">
+              <!-- <div class="w-full my-4">
                 <p class="text-sm text-gray-500">Domain</p>
                 <input
                   id="domain"
@@ -38,7 +38,7 @@
                   name="domain"
                   type="domain"
                 />
-              </div>
+              </div> -->
             </form>
             <p class="text-right w-full">
               <button
@@ -79,7 +79,7 @@ import { Vue, Options } from 'vue-class-component';
 export default class ForgotPassword extends Vue {
   public forgotPasswordForm = {
     email: '',
-    domain: '',
+    domain: 'localhost:8080',
   };
 
   public initState(): void {

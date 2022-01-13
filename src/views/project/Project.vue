@@ -4,14 +4,7 @@
       <div class="col-span-1">
         <div>
           <h2
-            class="
-              text-base
-              mt-4
-              text-xl text-green-600
-              font-semibold
-              tracking-wide
-              uppercase
-            "
+            class="text-base mt-4 text-xl text-green-600 font-semibold tracking-wide uppercase"
           >
             project
           </h2>
@@ -38,19 +31,20 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
-import ProjectCard from "@/components/project-card/ProjectCard.vue";
-import { IProject } from "@/models/project.model";
-import projectService from "@/services/project.service";
-import execService from "@/services/exec.service";
+import { Vue, Options } from 'vue-class-component';
+import ProjectCard from '@/components/project-card/ProjectCard.vue';
+import { IProject } from '@/models/project.model';
+import projectService from '@/services/project.service';
+import execService from '@/services/exec.service';
 @Options({
   components: { ProjectCard },
 })
 export default class Project extends Vue {
   public listProject: IProject[] = [];
 
-  mounted(): void {
+  created(): void {
     this.getProjects();
+    this.getProjectGuest();
     this.onListenFetch();
   }
 
@@ -67,8 +61,25 @@ export default class Project extends Vue {
         if (!res?.data) {
           return;
         }
-        this.listProject = res.data;
-        // location.reload();
+        const { data } = res;
+        data.forEach((project: any) => {
+          this.listProject.push(project);
+        });
+      })
+      .catch();
+  }
+
+  public getProjectGuest(): void {
+    projectService
+      .getAllGuest()
+      .then((res: any): void => {
+        if (!res?.data) {
+          return;
+        }
+        const { data } = res;
+        data.forEach((project: any) => {
+          this.listProject.push(project);
+        });
       })
       .catch();
   }
@@ -76,5 +87,5 @@ export default class Project extends Vue {
 </script>
 
 <style lang="scss">
-@import "./Project.scss";
+@import './Project.scss';
 </style>

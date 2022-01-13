@@ -222,7 +222,7 @@ import execService from '@/services/exec.service';
     this.getDetail();
     setInterval(() => {
       this.getDetail();
-    }, 15000);
+    }, 3000);
   },
 })
 export default class Board extends Vue {
@@ -323,7 +323,7 @@ export default class Board extends Vue {
         boardId: this.boardId,
         listId: listId,
       };
-      ticketService.move(request, this._currTicketId).then(() => {});
+      ticketService.move(request, this._currTicketId).then();
     }
 
     if (added) {
@@ -339,7 +339,7 @@ export default class Board extends Vue {
         };
         ticketService
           .move(request, added.element.id)
-          .then(() => {})
+          .then()
           .catch();
       } else {
         // Moving to unempty destination list
@@ -366,7 +366,7 @@ export default class Board extends Vue {
         };
         ticketService
           .move(request, added.element.id)
-          .then(() => {})
+          .then()
           .catch();
       }
     }

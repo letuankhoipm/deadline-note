@@ -358,7 +358,7 @@ export default class NewTicket extends Vue {
         .then(() => {
           ngvModalService.close(true);
         })
-        .catch(() => {});
+        .catch();
     }
   }
 

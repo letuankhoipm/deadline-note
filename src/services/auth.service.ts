@@ -24,7 +24,7 @@ class AuthService {
   }
 
   public forget(forgotReq: any): Promise<any> {
-    return http.post(`${this._authUrl}/forgot-password`, forgotReq);
+    return http.post(`${this._authUrl}/forget-password`, forgotReq);
   }
 }
 

@@ -14,7 +14,7 @@ class ListService {
   public startConnection(): void {
     this._connection
       .start()
-      .then(() => {})
+      .then()
       .catch();
   }
 

@@ -10,6 +10,10 @@ class ProjectService {
     return http.get(this._projectUrl);
   }
 
+  public getAllGuest(): Promise<IProject[]> {
+    return http.get(`${this._projectUrl}/guest`);
+  }
+
   public getById(projectId: string): Promise<IProject> {
     return http.get(`${this._projectUrl}/${projectId}`);
   }
